@@ -1,0 +1,99 @@
+#app { height: 100% }
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+:root {
+  --black: #070406;
+  --white: #fff;
+  --grey: #AFAFAF;
+}
+
+@font-face {
+  font-family: "GeosansLight";
+  src: local("GeosansLight"),
+    url("./fonts/GeosansLight.ttf") format("truetype");
+  font-weight: normal;
+}
+
+body {
+  background: var(--black);
+  font-family: GeosansLight;
+  font-size: 18px;
+  color: var(--black);
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5px;
+}
+
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+.first-row {
+  padding-top: 60px;
+}
+
+.swiper-top {
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.swiper-lazy {
+  aspect-ratio: 1;
+}
+
+.swiper-artist {
+  margin-top: 6px;
+  margin-bottom: -3px;
+}
+
+
+@media (max-aspect-ratio: 3/4) {
+  img.img-top {
+    width: 100vw;
+    aspect-ratio: 1;
+	  border-radius: 0px;
+	  background: var(--black);
+  }
+}
+
+
+@media (min-aspect-ratio: 5/4) {
+  img.img-top {
+    width: 33vw;
+    aspect-ratio: 1;
+	  border-radius: 0px;
+  }  
+}
+ 
+.main-header {
+  color: var(--grey);
+  margin-top: 10px;
+  margin-bottom: 7px;
+  text-align: center;
+  font-size: 18px;
+  font-family: GeosansLight;
+}
+
+.top-header {
+  color: var(--grey);
+  margin-top: 10px;
+  margin-bottom: 7px;
+  text-align: center;
+  font-size: 18px;
+  font-family: GeosansLight;
+}
+

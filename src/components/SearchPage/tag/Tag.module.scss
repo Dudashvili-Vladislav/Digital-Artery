@@ -1,0 +1,17 @@
+.title{
+    color: white;
+    padding: 10px 10px;
+    border-radius: 40px;
+    cursor: pointer;
+   font-size: 20px;
+   margin-top: 10px;
+   transition: all .3s;
+    .active{
+        font-size: 30px;
+        color: green;
+    }
+
+   
+}
+
+
