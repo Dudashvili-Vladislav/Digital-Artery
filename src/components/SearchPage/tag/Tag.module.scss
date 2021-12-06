@@ -1,17 +1,23 @@
-.title{
-    color: white;
-    padding: 10px 10px;
-    border-radius: 40px;
-    cursor: pointer;
-   font-size: 20px;
-   margin-top: 10px;
-   transition: all .3s;
-    .active{
-        font-size: 30px;
-        color: green;
-    }
-
-   
+.title {
+  color: white;
+  padding: 10px 10px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 10px;
+  transition: all 0.3s;
+  animation: tag 0.3s forwards;
+  .active {
+    font-size: 30px;
+    color: green;
+  }
 }
 
-
+@keyframes tag {
+  0% {
+    margin-top: 50px;
+  }
+  100% {
+    margin-top: 10px;
+  }
+}

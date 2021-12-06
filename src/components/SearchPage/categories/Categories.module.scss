@@ -6,8 +6,15 @@
     
 }
 
+@media (min-width: 320px) {
+    .categories{
+        grid-gap: 10px;
+        grid-template-columns: 1fr;
+    }
+}
 
-@media (max-width: 500px) {
+
+@media (min-width: 375px) {
     .categories{
         grid-gap: 10px;
         grid-template-columns: repeat(2, 1fr);
@@ -16,14 +23,9 @@
 
 
 
-@media (max-width: 320px) {
-    .categories{
-        grid-gap: 10px;
-        grid-template-columns: 1fr;
-    }
-}
 
-@media (max-width: 768px) {
+
+@media (min-width: 768px) {
     .categories{
         grid-gap: 10px;
         grid-template-columns: repeat(3, 1fr);
