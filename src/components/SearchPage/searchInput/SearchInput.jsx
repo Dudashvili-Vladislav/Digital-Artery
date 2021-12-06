@@ -47,6 +47,7 @@ const SearchInput = () => {
   
   return (
   <StyledDiv className="filter-list">
+    
     <input type="search" placeholder="Search Artist, Style or Collection"/>
   </StyledDiv>
   );

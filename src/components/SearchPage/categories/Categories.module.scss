@@ -1,0 +1,39 @@
+.categories{
+    padding: 20px;
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    
+}
+
+
+@media (max-width: 500px) {
+    .categories{
+        grid-gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+
+@media (max-width: 320px) {
+    .categories{
+        grid-gap: 10px;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .categories{
+        grid-gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+@media (min-width: 1400px) {
+    .categories{
+        grid-template-columns: repeat(5, 1fr);
+
+    }
+}

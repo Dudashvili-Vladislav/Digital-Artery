@@ -7,6 +7,7 @@ import { colors } from "../../../assets/tags/colors";
 import classes from "./Search.module.scss";
 import "./index.scss";
 import SearchInput from "./searchInput/SearchInput";
+import { Categories } from "./categories/Categories";
 
 const SearchPage = () => {
   const [tags, setTags] = useState([]);
@@ -47,9 +48,9 @@ const SearchPage = () => {
     <div>
       <SearchInput />
       <div className={classes.tags} onClick={clickOnTag}>
-        {renderedTag}
+        {renderedTag}   
       </div>
-      ;
+      <Categories />
     </div>
   );
 };
