@@ -1,5 +1,5 @@
 import React from "react";
-import { generateCategories } from "../../../../assets/categories/categories";
+import { generateCategories } from "../../../../../assets/categories/categories";
 import { Card } from "./card/Card";
 import classes from "./Categories.module.scss";
 

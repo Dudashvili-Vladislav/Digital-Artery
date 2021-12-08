@@ -11,8 +11,9 @@ export const Chat = ({ lastMessage, user }) => {
         <div className={classes.owner}>
           {lastMessage.owner === user ? userData.name : "Вы"}
         </div>{" "}
-        {lastMessage.text}
-        
+        {lastMessage.text.length > 20
+          ? lastMessage.text.substr(0, 100) + "..."
+          : lastMessage.text}
       </div>
     </div>
   );

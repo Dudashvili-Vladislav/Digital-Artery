@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import SwiperTrending from '../Home/SwiperTrending';
-import SwiperTop from '../Home/SwiperTop';
-import ImgArray from '../Home/ImgArray';
-import SwiperArtist from '../Home/SwiperArtist';
-import Indices from '../Home/Indices';
+import SwiperTrending from './Home/SwiperTrending';
+import SwiperTop from './Home/SwiperTop';
+import ImgArray from './Home/ImgArray';
+import SwiperArtist from './Home/SwiperArtist';
+import Indices from './Home/Indices';
 import Marquee from "react-fast-marquee";
 
 

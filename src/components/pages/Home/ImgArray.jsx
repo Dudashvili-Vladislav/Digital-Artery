@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { format } from 'react-string-format';
 import styled from 'styled-components';
 
-import img_json from '../../../assets/img_arr.json';
+import img_json from '../../../../assets/img_arr.json';
 
 
 const ImageList = styled.ul`

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
+import { Provider } from "react-redux";
 import Navbar from "./components/Nav/Navbar";
-import SearchPage from "./components/SearchPage/SearchPage";
+import SearchPage from "./components/pages/SearchPage/SearchPage";
 import { Chats } from "./components/pages/Chats/Chats";
 import Home from "./components/pages/Home";
 import Actions from "./components/pages/Actions";
@@ -15,6 +16,7 @@ import CacheRoute, { CacheSwitch } from "react-router-cache-route";
 import styled from "styled-components";
 
 import "./styles.css";
+import { store } from "./redux/store";
 
 const Tabs = styled.ul`
 
@@ -68,69 +70,72 @@ function App() {
   let msg_qty = getRandomInt(10) + 1;
 
   return (
-    <div>
-      <Navbar />
-      <div className="first-row" />
-      <Router>
-        <div>
-          <Tabs className="navbar-tabs">
-            <li>
-              <NavLink
-                to={"/search"}
-                className="nav-tab-link"
-                activeClassName="nav-tab-link-active"
-              >
-                search
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={"/chat"}
-                className="nav-tab-link"
-                activeClassName="nav-tab-link-active"
-              >
-                chat<sup> {msg_qty}</sup>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                exact
-                to={"/"}
-                className="nav-tab-link"
-                activeClassName="nav-tab-link-active"
-              >
-                home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={"/actions"}
-                className="nav-tab-link"
-                activeClassName="nav-tab-link-active"
-              >
-                actions
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={"/stats"}
-                className="nav-tab-link"
-                activeClassName="nav-tab-link-active"
-              >
-                stats
-              </NavLink>
-            </li>
-          </Tabs>
-          <CacheSwitch>
-            <Route path="/search" component={SearchPage} />
-            <Route path="/chat" component={Chats} />
-            <CacheRoute exact path="/" component={Home} />
-            <Route path="/actions" component={Actions} />
-            <Route path="/stats" component={Stats} />
-          </CacheSwitch>
-        </div>
-      </Router>
-    </div>
+    
+    <Provider store={store}>
+      <div>
+        <Navbar />
+        <div className="first-row" />
+        <Router>
+          <div>
+            <Tabs className="navbar-tabs">
+              <li>
+                <NavLink
+                  to={"/search"}
+                  className="nav-tab-link"
+                  activeClassName="nav-tab-link-active"
+                >
+                  search
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/chat"}
+                  className="nav-tab-link"
+                  activeClassName="nav-tab-link-active"
+                >
+                  chat<sup> {msg_qty}</sup>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  exact
+                  to={"/"}
+                  className="nav-tab-link"
+                  activeClassName="nav-tab-link-active"
+                >
+                  home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/actions"}
+                  className="nav-tab-link"
+                  activeClassName="nav-tab-link-active"
+                >
+                  actions
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/stats"}
+                  className="nav-tab-link"
+                  activeClassName="nav-tab-link-active"
+                >
+                  stats
+                </NavLink>
+              </li>
+            </Tabs>
+            <CacheSwitch>
+              <Route path="/search" component={SearchPage} />
+              <Route path="/chat" component={Chats} />
+              <CacheRoute exact path="/" component={Home} />
+              <Route path="/actions" component={Actions} />
+              <Route path="/stats" component={Stats} />
+            </CacheSwitch>
+          </div>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { tags as TagsImported } from "../../../assets/tags/tags";
+import { tags as TagsImported } from "../../../../assets/tags/tags";
 import { Tag } from "./tag/Tag";
-import { colors } from "../../../assets/tags/colors";
+import { colors } from "../../../../assets/tags/colors";
 
 import classes from "./Search.module.scss";
 import "./index.scss";

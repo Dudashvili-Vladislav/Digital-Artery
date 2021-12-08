@@ -5,27 +5,27 @@ const createChat = (userId, ourId) => {
         user: userId,
         messages: [
             {
-                text: 'message text',
+                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, libero. Voluptatem, labore! Mollitia earum, odio esse dolore repudiandae libero enim a modi iste voluptatibus molestiae fuga molestias inventore quae natus.',
                 time: '13:00',
                 owner: ourId
             },
             {
-                text: 'message text',
+                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, libero. Voluptatem, labore! Mollitia earum, odio esse dolore repudiandae libero enim a modi iste voluptatibus molestiae fuga molestias inventore quae natus.',
                 time: '13:00',
                 owner: userId
             },
             {
-                text: 'message text',
+                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, libero. Voluptatem, labore! Mollitia earum, odio esse dolore repudiandae libero enim a modi iste voluptatibus molestiae fuga molestias inventore quae natus.',
                 time: '13:00',
                 owner: ourId
             },
             {
-                text: 'message text',
+                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, libero. Voluptatem, labore! Mollitia earum, odio esse dolore repudiandae libero enim a modi iste voluptatibus molestiae fuga molestias inventore quae natus.',
                 time: '13:00',
                 owner: userId
             },
             {
-                text: 'message text',
+                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, libero. Voluptatem, labore! Mollitia earum, odio esse dolore repudiandae libero enim a modi iste voluptatibus molestiae fuga molestias inventore quae natus.',
                 time: '13:00',
                 owner: userId
             }
