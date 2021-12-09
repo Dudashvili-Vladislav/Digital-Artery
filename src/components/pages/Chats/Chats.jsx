@@ -11,7 +11,7 @@ export const Chats = () => {
   useEffect(() => {
     dispatch(actions().setUser(1));
   }, []);
-
+  const changeChat = (e) => setUser(e.target)
   const [currentUser, setCurrentUser] = useState(0);
   const chatsRendered = chats.map(({ messages, user }, i) => (
     <Chat lastMessage={messages[messages.length - 1]} user={user} key={i} />
