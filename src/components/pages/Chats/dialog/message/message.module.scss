@@ -4,7 +4,7 @@
 
   position: relative;
   justify-content: space-around;
-
+  
   margin-bottom: 20px;
   box-sizing: border-box;
   padding: 20px;
@@ -32,5 +32,20 @@
     position: relative;
     
     display: inline;
+  }
+}
+
+
+
+@media (max-width: 1400px){
+  .message{
+    &__img{
+      display: none;
+    }
+    &__title {
+      margin-left: 0;
+    }
+
+    padding: 20px;
   }
 }
