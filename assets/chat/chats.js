@@ -5,7 +5,7 @@ const createChat = (userId, ourId) => {
         user: userId,
         messages: [
             {
-                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, libero. Voluptatem, labore! Mollitia earum, odio esse dolore repudiandae libero enim a modi iste voluptatibus molestiae fuga molestias inventore quae natus.',
+                text: '2',
                 time: '13:00',
                 owner: ourId
             },

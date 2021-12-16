@@ -1,5 +1,5 @@
 const initialState = {
-    id: 0
+    id: 1
 }
 
 export const setUser = (state = initialState, { id, type }) => {

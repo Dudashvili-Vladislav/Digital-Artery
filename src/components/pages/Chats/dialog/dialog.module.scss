@@ -4,6 +4,12 @@
 }
 
 
+a{
+    color: white;
+    text-decoration: none;
+}
+
+
 @media (max-width: 1400px) {
     .dialog{
         width: 100%;
@@ -26,4 +32,6 @@
             }
         }
     }
+    
+
 }

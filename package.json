@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "vite --host",
+    "start": "vite --host --open",
     "dev": "vite --host",
     "build": "vite build"
   },
@@ -36,6 +36,7 @@
     "react-remove-scroll": "^2.4.3",
     "react-router-cache-route": "^1.12.1",
     "react-router-dom": "^5.3.0",
+    "react-select": "^5.2.1",
     "react-string-format": "^1.0.0",
     "redux": "^4.1.2",
     "sass": "^1.44.0",

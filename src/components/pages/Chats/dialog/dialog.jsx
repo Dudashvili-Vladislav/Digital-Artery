@@ -22,17 +22,25 @@ export const Dialog = (props) => {
       </div>
     );
   }
-  const renderedChats = chats[props.match.params.id].messages.map(
-    ({ owner, text, time }, i) => (
-      <Message
-        owner={owner}
-        time={time}
-        text={text}
-        key={i}
-        ourMessage={chats[props.match.params.id].user === owner}
-      />
-    )
+  const currentChat = chats[props.match.params.id]; // Находим текущий чат
+
+  const renderedChats = currentChat.messages.map(({ owner, text, time }, i) => (
+    <Message
+      owner={owner}
+      time={time}
+      text={text}
+      key={i}
+      ourMessage={currentChat.user === owner}
+    />
+  ));
+  const user = users[currentChat.user];
+  return (
+    <div className={classes.dialog}>
+      <div className={classes.dialog__title}>
+        <img src={user.image} alt="" className={classes.dialog__title_img} />
+        {user.name}
+      </div>{" "}
+      {renderedChats}
+    </div>
   );
-  const user = users[chats[props.match.params.id].user]
-  return <div className={classes.dialog}><div className={classes.dialog__title}> <img src={user.image} alt="" className={classes.dialog__title_img} />{user.name}</div> {renderedChats}</div>;
 };

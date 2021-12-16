@@ -6,21 +6,24 @@ import classes from "./Chats.module.scss";
 import { useDispatch } from "react-redux";
 import { actions } from "../../../redux/actions";
 import { NavLink } from "react-router-dom";
-
 import { useSelector } from "react-redux";
-export const chats = createChats();
+export const chats = createChats(); // Создаем все чаты кастомной функцией
+
 export const Chats = () => {
   const dispatch = useDispatch();
-  const [currentUser, setCurrentUser] = useState(0);
-  useEffect(() => {
-    dispatch(actions().setUser(5));
-  }, []);
-  const userId = useSelector((state) => state.user.id);
+  const [currentUser, setCurrentUser] = useState(3); // id пользователя, с которым переписка
 
-  const isPC = matchMedia("(min-width: 1400px)").matches;
+  useEffect(() => {
+    dispatch(actions.setUser(5)); // Устанавливаем пользователя, который сейчас авторизован на страничке
+  }, []);
+
+  const userId = useSelector((state) => state.user.id); // Получаем id текущего пользователя(авторизованного)
+
   const changeChat = (id) => {
     setCurrentUser(id);
   };
+
+  const isPC = matchMedia("(min-width: 1400px)").matches;
 
   const chatsRendered = chats.map(({ messages, user }, i) =>
     isPC ? (
@@ -42,7 +45,7 @@ export const Chats = () => {
 
   return (
     <div>
-      {userId ? (
+      {userId || userId === 0 ? (
         <div className={classes.chats}>
           <div
             className={classes.chatsTitles}

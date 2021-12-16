@@ -13,6 +13,8 @@ import {
   NavLink,
 } from "react-router-dom";
 import CacheRoute, { CacheSwitch } from "react-router-cache-route";
+
+
 import styled from "styled-components";
 
 import "./styles.css";
@@ -69,13 +71,14 @@ function App() {
   }
 
   let msg_qty = getRandomInt(10) + 1;
-
+  
   return (
     <Provider store={store}>
-      <div>
-        <Navbar />
-        <div className="first-row" />
-        <Router>
+      <Router>
+        <div>
+          <Navbar />
+          <div className="first-row" />
+
           <div>
             <Tabs className="navbar-tabs">
               <li>
@@ -128,14 +131,14 @@ function App() {
             <CacheSwitch>
               <Route path="/search" component={SearchPage} />
               <Route path="/chat" component={Chats} />
-              <CacheRoute exact path="/" component={Home} />
+              <CacheRoute exact path="/" render={Home} />
               <Route path="/actions" component={Actions} />
               <Route path="/stats" component={Stats} />
               <Route path="/chats/:id/" component={Dialog} />
             </CacheSwitch>
           </div>
-        </Router>
-      </div>
+        </div>
+      </Router>
     </Provider>
   );
 }

@@ -5,14 +5,12 @@ export const Message = ({ time, owner, text, ourMessage }) => {
   const { image } = users.filter(({ id }) => id === owner)[0];
   const isPC = matchMedia("(min-width: 1400px)").matches;
 
-  
   return (
     <div
       className={classes.message}
       style={{
         width: isPC ? "100%" : "80%",
-        left: ourMessage  ? isPC ?  "40%" : '15%' : isPC ? "10%" : '5%',
-        
+        left: ourMessage ? (isPC ? "40%" : "15%") : isPC ? "10%" : "5%",
       }}
     >
       {!ourMessage ? (

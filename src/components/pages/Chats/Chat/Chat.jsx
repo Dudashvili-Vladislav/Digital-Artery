@@ -2,18 +2,16 @@ import classes from "./Chat.module.scss";
 import React from "react";
 import { users } from "../../../../../assets/chat/users";
 export const Chat = ({ lastMessage, user }) => {
-  const userData = users.filter(({ id }) => id === user)[0];
-
+  const { image, name } = users.filter(({ id }) => id === user)[0]; // Находим пользователя, с которым диалог
+  const isPC = matchMedia("(min-width: 1400px)").matches;
   return (
     <div className={classes.chat}>
-      <img src={userData.image} className={classes.chat__img} />
+      <img src={image} className={classes.chat__img} />
       <div className={classes.lastMessage}>
-        <div className={classes.owner}>
-          {lastMessage.owner === user ? userData.name : "Вы"}
-        </div>{" "}
-        {lastMessage.text.length > 20
+        <div className={classes.owner}>{name}</div>
+        {lastMessage.text.length > 100 && isPC
           ? lastMessage.text.substr(0, 100) + "..."
-          : lastMessage.text}
+          : lastMessage.text.substr(0, 30) + "..."}
       </div>
     </div>
   );

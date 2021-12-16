@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import { format } from 'react-string-format';
-import styled from 'styled-components';
-
-import img_json from '../../../../assets/img_arr.json';
-
+import { NavLink } from "react-router-dom";
+import { format } from "react-string-format";
+import styled from "styled-components";
+import { withRouter } from "react-router-dom";
+import img_json from "../../../../assets/img_arr.json";
 
 const ImageList = styled.ul`
   background-color: #070406;
@@ -71,8 +71,6 @@ const ImageList = styled.ul`
       grid-column-end: span 1;
     }
   }
-
-
 `;
 
 const ImageListItem = styled.li`
@@ -80,7 +78,7 @@ const ImageListItem = styled.li`
   height: auto;
   display: flex;
   position: relative;
-
+  cursor: pointer;
   .text {
     text-align: right;
     padding: 1px 3px;
@@ -94,7 +92,7 @@ const ImageListItem = styled.li`
     background-size: cover;
     font-size: 14px;
     font-family: GeosansLight;
-    color: #C5C5C5;
+    color: #c5c5c5;
     background-image: url("../assets/icons/heart_background_black.png");
   }
 
@@ -102,33 +100,56 @@ const ImageListItem = styled.li`
     position: absolute;
     top: 25%;
     left: 25%;
-    opacity: 0.0;
+    opacity: 0;
     width: 50%;
     height: 50%;
   }
 
   @keyframes pulse {
-    0%   {opacity: 0.0;}
-    10%  {opacity: 0.25;}
-    20%  {opacity: 0.5;}
-    30% {opacity: 0.65;}
-    40% {opacity: 0.75;}
-    50% {opacity: 0.85;}
-    60%  {opacity: 0.75;}
-    70%  {opacity: 0.65;}
-    80%  {opacity: 0.5;}
-    90%  {opacity: 0.25;}
-    100% {opacity: 0.0;}
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.25;
+    }
+    20% {
+      opacity: 0.5;
+    }
+    30% {
+      opacity: 0.65;
+    }
+    40% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 0.85;
+    }
+    60% {
+      opacity: 0.75;
+    }
+    70% {
+      opacity: 0.65;
+    }
+    80% {
+      opacity: 0.5;
+    }
+    90% {
+      opacity: 0.25;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
   }
 `;
-
 
 const Image = styled.img`
   object-fit: cover;
   width: 100%;
   height: auto;
   flex-grow: 1;
-`
+`;
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -143,55 +164,71 @@ function srcset(image, size, rows = 1, cols = 1) {
   };
 }
 
-
 class ImgArray extends React.Component {
- 
-  setLike(event) {
-    let opacity = event.currentTarget.style.opacity;
-    if (opacity != 0.0) {
-      event.currentTarget.style.opacity = 0.0;
+  constructor() {
+    super();
+    this.timeout = 0;
+  }
+  handleClick(e) {
+    if (this.timeout === 0) {
+      this.timeout = setTimeout(
+        function () {
+          this.props.history.push(
+            `/images/${e.target.getAttribute("data-id")}`
+          );
+          this.timeout = 0;
+        }.bind(this),
+        200
+      );
     } else {
-      event.currentTarget.style.animationName = "pulse";
-      event.currentTarget.style.animationDuration = "0.75s";
-      event.currentTarget.offsetParent.children[0].style.backgroundImage = 'url("../assets/icons/heart_background_white.png")';
+      this.setLike(e);
+      clearTimeout(this.timeout);
+      this.timeout = 0;
+    }
+  }
+  setLike(event) {
+    const parent = event.currentTarget.parentNode;
+    parent.querySelector(".text").innerHTML =
+      parseInt(parent.querySelector(".text").innerHTML) + 1;
+    const elem = event.currentTarget.parentNode.querySelector(".sub-image");
+    const opacity = elem.style.opacity;
+
+    if (opacity != 0.0) {
+      elem.style.opacity = 0.0;
+    } else {
+      elem.style.animationName = "pulse";
+      elem.style.animationDuration = "0.75s";
+      elem.offsetParent.children[0].style.backgroundImage =
+        'url("../assets/icons/heart_background_white.png")';
     }
   }
 
   render() {
-
     const itemData = img_json.map((item, index) => {
-      return (
-        {
-          img: format("../assets/img_arr/{0}", item["name"]),
-          title: "title"
-        }
-      )
-    })
-    
+      return {
+        img: format("../assets/img_arr/{0}", item["name"]),
+        title: "title",
+      };
+    });
+
     return (
-    <ImageList>
-      {itemData.map((item, index) => (
-        <ImageListItem
-          className={format("item{0}", index % 6)} 
-          key={index}
-        >          
-          <div className="text">{getRandomInt(1000)+1}</div>
-          <Image
-            {...srcset(item.img, 121)}
-            alt={item.title}
-            loading="lazy"
-          />
-          <img
-            {...srcset('../assets/icons/heart-icon.png', 121)}
-            className="sub-image"
-            onDoubleClick={this.setLike.bind(this)}
-          />
-        </ImageListItem>
-      ))}
-    </ImageList>
+      <ImageList>
+        {itemData.map((item, index) => (
+          <ImageListItem className={format("item{0}", index % 6)} key={index}>
+            <div className="text">{getRandomInt(1000) + 1}</div>
+            <Image {...srcset(item.img, 121)} alt={item.title} loading="lazy" />
+
+            <img
+              {...srcset("../assets/icons/heart-icon.png", 121)}
+              className="sub-image"
+              onClick={this.handleClick.bind(this)}
+              data-id={index}
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
     );
-  };
+  }
 }
 
-
-export default ImgArray
+export default withRouter(ImgArray);
