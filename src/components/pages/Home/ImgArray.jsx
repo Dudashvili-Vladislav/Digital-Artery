@@ -178,7 +178,7 @@ class ImgArray extends React.Component {
           );
           this.timeout = 0;
         }.bind(this),
-        200
+        250
       );
     } else {
       this.setLike(e);
@@ -186,18 +186,39 @@ class ImgArray extends React.Component {
       this.timeout = 0;
     }
   }
+  cleanAnimate(e) {
+    const elem = e.currentTarget.parentNode.querySelector(".sub-image");
+    elem.style.animationName = "";
+    elem.style.animationDirection = "";
+  }
   setLike(event) {
     const parent = event.currentTarget.parentNode;
-    parent.querySelector(".text").innerHTML =
-      parseInt(parent.querySelector(".text").innerHTML) + 1;
+
+    const text = parent.querySelector(".text");
+
+    text.innerText = parseInt(text.innerText) + 1;
+
     const elem = event.currentTarget.parentNode.querySelector(".sub-image");
+
+    function toggleLike(direction) {
+      elem.style.animationName = "pulse";
+      elem.style.animationDuration = "0.75s";
+      elem.style.animationDirection = direction;
+    }
+    if (JSON.parse(elem.getAttribute("is-liked"))) {
+      text.innerText = text.innerText - 1;
+      toggleLike("reverse");
+      elem.setAttribute("is-liked", false);
+      return;
+    }
+
     const opacity = elem.style.opacity;
 
     if (opacity != 0.0) {
       elem.style.opacity = 0.0;
     } else {
-      elem.style.animationName = "pulse";
-      elem.style.animationDuration = "0.75s";
+      toggleLike();
+      elem.setAttribute("is-liked", true);
       elem.offsetParent.children[0].style.backgroundImage =
         'url("../assets/icons/heart_background_white.png")';
     }
@@ -221,6 +242,8 @@ class ImgArray extends React.Component {
             <img
               {...srcset("../assets/icons/heart-icon.png", 121)}
               className="sub-image"
+              onAnimationEnd={this.cleanAnimate}
+              is-liked="false"
               onClick={this.handleClick.bind(this)}
               data-id={index}
             />
