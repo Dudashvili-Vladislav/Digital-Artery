@@ -14,12 +14,12 @@ import {
 } from "react-router-dom";
 import CacheRoute, { CacheSwitch } from "react-router-cache-route";
 
-
 import styled from "styled-components";
 
 import "./styles.css";
 import { store } from "./redux/store";
 import { Dialog } from "./components/pages/Chats/dialog/dialog";
+import { AuthPage } from "./components/pages/auth/authorisation";
 
 const Tabs = styled.ul`
 
@@ -71,7 +71,7 @@ function App() {
   }
 
   let msg_qty = getRandomInt(10) + 1;
-  
+
   return (
     <Provider store={store}>
       <Router>
@@ -135,6 +135,7 @@ function App() {
               <Route path="/actions" component={Actions} />
               <Route path="/stats" component={Stats} />
               <Route path="/chats/:id/" component={Dialog} />
+              <Route path="/auth/authorisation" component={AuthPage} />
             </CacheSwitch>
           </div>
         </div>

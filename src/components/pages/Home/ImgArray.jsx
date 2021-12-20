@@ -196,8 +196,6 @@ class ImgArray extends React.Component {
 
     const text = parent.querySelector(".text");
 
-    text.innerText = parseInt(text.innerText) + 1;
-
     const elem = event.currentTarget.parentNode.querySelector(".sub-image");
 
     function toggleLike(direction) {
@@ -205,12 +203,14 @@ class ImgArray extends React.Component {
       elem.style.animationDuration = "0.75s";
       elem.style.animationDirection = direction;
     }
+
     if (JSON.parse(elem.getAttribute("is-liked"))) {
       text.innerText = text.innerText - 1;
       toggleLike("reverse");
       elem.setAttribute("is-liked", false);
       return;
     }
+    text.innerText = parseInt(text.innerText) + 1;
 
     const opacity = elem.style.opacity;
 
