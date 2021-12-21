@@ -6,6 +6,7 @@ import { Chats } from "./components/pages/Chats/Chats";
 import Home from "./components/pages/Home";
 import Actions from "./components/pages/Actions";
 import Stats from "./components/pages/Stats";
+
 import {
   BrowserRouter as Router,
   Switch,

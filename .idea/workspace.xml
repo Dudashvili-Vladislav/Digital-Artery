@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb414388-8c8d-4f43-a47c-52a59b82555b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/chat/chats.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/chat/chats.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Chats/Chat/Chat.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Chats/Chat/Chat.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Chats/Chats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Chats/Chats.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Chats/Chats.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Chats/Chats.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Chats/dialog/dialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Chats/dialog/dialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Chats/dialog/dialog.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Chats/dialog/dialog.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Chats/dialog/message/message.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Chats/dialog/message/message.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/setUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/setUser.js" afterDir="false" />
-    </list>
+    <list default="true" id="bb414388-8c8d-4f43-a47c-52a59b82555b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

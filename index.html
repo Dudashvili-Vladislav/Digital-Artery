@@ -1,52 +1,54 @@
 <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Digital Artery</title>
-        <style>
-          .preloader {
-            background-color: black;
-            position:absolute; 
-            display:block;
-            margin: -10px;
-            text-align: center;
-          }
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Artery</title>
+    <style>
+      .preloader {
+        background-color: black;
+        position: absolute;
+        display: block;
+        margin: -10px;
+        text-align: center;
+      }
 
-          @media (max-aspect-ratio: 3/4) {
-            .preloader {
-              height: 100%;
-            }
-            .rotate {
-              width: 90%;
-              height: auto;
-              margin-top: 35%;
-            }
-          }
+      @media (max-aspect-ratio: 3/4) {
+        .preloader {
+          height: 100%;
+        }
+        .rotate {
+          width: 90%;
+          height: auto;
+          margin-top: 35%;
+        }
+      }
 
-          @media (min-aspect-ratio: 5/4) {
-            .preloader {
-              width: 100%;
-            }
-            .rotate {
-              width: 50%;
-              height: 50%;
-              margin-top: -5%;
-            }
-          }
+      @media (min-aspect-ratio: 5/4) {
+        .preloader {
+          width: 100%;
+        }
+        .rotate {
+          width: 50%;
+          height: 50%;
+          margin-top: -5%;
+        }
+      }
+
+      .loader-hide {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preloader">
+      <img src="assets/logo/logo.gif" class="rotate" />
+    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.global = window;
       
-          .loader-hide {
-            display: none;
-          }
-      
-        </style>
-      </head>
-      <body>
-        <div class="preloader">
-          <img src="assets/logo/logo.gif" class="rotate"/>
-        </div>
-        <div id="app"></div>
-        <script type="module" src="/src/main.jsx"></script>
-      </body>
-    </html>
-    
+    </script>
+  </body>
+</html>

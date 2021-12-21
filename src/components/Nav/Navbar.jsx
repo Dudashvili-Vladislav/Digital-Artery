@@ -8,6 +8,7 @@ import classes from "./Navbar.module.scss";
 import img from "../../../assets/notUser.png";
 import { useDispatch } from "react-redux";
 import { actions } from "../../redux/actions";
+import { Account } from "./account/account";
 const Nav = styled.nav`
   width: 100%;
   height: 67px;
@@ -62,6 +63,7 @@ const Navbar = () => {
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const dispatch = useDispatch();
   const logOut = () => {
+    
     dispatch(actions.setUser(""));
     setOpenAuthModal(false);
     localStorage.removeItem("token");
@@ -80,18 +82,14 @@ const Navbar = () => {
                   className={classes.modal__link}
                   to="/auth/authorisation"
                 >
-                  Авторизация
-                </NavLink>
-                <NavLink
-                  className={classes.modal__link}
-                  to="/auth/registration"
-                >
-                  Регистрация
+                  Sign in
                 </NavLink>
               </div>
             ) : (
+              
               <div className={classes.modal__link} onClick={logOut}>
-                Выйти
+                <Account id={isAuth}/>
+                Log out
               </div>
             )}
           </div>

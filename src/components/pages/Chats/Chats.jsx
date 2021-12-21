@@ -12,11 +12,6 @@ export const chats = createChats(); // Создаем все чаты касто
 export const Chats = () => {
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState(3); // id пользователя, с которым переписка
-
-  useEffect(() => {
-    dispatch(actions.setUser(5)); // Устанавливаем пользователя, который сейчас авторизован на страничке
-  }, []);
-
   const userId = useSelector((state) => state.user.id); // Получаем id текущего пользователя(авторизованного)
 
   const changeChat = (id) => {
