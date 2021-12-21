@@ -88,7 +88,7 @@ const Navbar = () => {
             ) : (
               
               <div className={classes.modal__link} onClick={logOut}>
-                <Account id={isAuth}/>
+                
                 Log out
               </div>
             )}
