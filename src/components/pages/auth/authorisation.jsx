@@ -6,7 +6,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { actions } from "../../../redux/actions";
 import { useHistory } from "react-router-dom";
+import img from "../../../../assets/wallets icons/meta.svg";
 export const AuthPage = () => {
+  console.log(img);
   const dispatch = useDispatch();
   const history = useHistory();
   const isMetaMaskInstalled = () => {
@@ -15,28 +17,20 @@ export const AuthPage = () => {
     return Boolean(ethereum && ethereum.isMetaMask);
   };
 
-  useEffect(async () => {
-    const provider = await detectEthereumProvider();
-
-    if (provider) {
-      console.log(provider);
-      window.ethereum;
-      ethereum.enable();
-      console.log(ethereum.enable());
-    } else {
-      console.log("Please install MetaMask!");
-    }
-  }, []);
-
   const onClickConnect = async () => {
     const { ethereum } = window;
 
+    const account = (
+      await ethereum.request({ method: "eth_requestAccounts" })
+    )[0];
     try {
-      dispatch(
-        actions.setUser(
-          (await ethereum.request({ method: "eth_requestAccounts" }))[0]
-        )
-      );
+      dispatch(actions.setUser(account));
+      localStorage.setItem("token", account);
+      const provider = await detectEthereumProvider();
+      if (provider) {
+        ethereum.enable();
+      }
+
       history.push("/");
     } catch (error) {
       console.error(error);
@@ -44,16 +38,25 @@ export const AuthPage = () => {
   };
 
   return (
-    <div className={classes.buttons}>
-      <button className={classes.button}>
-        {isMetaMaskInstalled() ? (
-          <div onClick={onClickConnect}>MetaMask</div>
-        ) : (
-          <a href="https://metamask.io/download.html" target="_blank">
-            Установить MetaMask
-          </a>
-        )}
-      </button>
+    <div className={classes.AuthPage}>
+      <div className={classes.AuthPage__title}>Sign in with your wallet</div>
+      <div className={classes.AuthPage__subtitle}>
+        Sign in with one of available wallet providers or create a new wallet.
+        What is a wallet?
+      </div>
+      <div className={classes.buttons}>
+        <button className={classes.button}>
+          {isMetaMaskInstalled() ? (
+            <div onClick={onClickConnect}>
+              <img src={img} alt="" /> MetaMask
+            </div>
+          ) : (
+            <a href="https://metamask.io/download.html" target="_blank">
+              Install MetaMask
+            </a>
+          )}
+        </button>
+      </div>
     </div>
   );
 };

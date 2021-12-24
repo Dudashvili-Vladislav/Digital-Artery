@@ -22,11 +22,11 @@ export const Chats = () => {
 
   const chatsRendered = chats.map(({ messages, user }, i) =>
     isPC ? (
-      <div onClick={() => changeChat(i)}>
+      <div onClick={() => changeChat(i)} key={i}>
         <Chat lastMessage={messages[messages.length - 1]} user={user} key={i} />
       </div>
     ) : (
-      <NavLink to={`chats/${i}`}>
+      <NavLink to={`chats/${i}`} key = {i}>
         <div onClick={() => changeChat(i)}>
           <Chat
             lastMessage={messages[messages.length - 1]}

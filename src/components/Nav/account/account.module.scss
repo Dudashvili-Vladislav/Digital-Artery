@@ -1,0 +1,27 @@
+.userAccount {
+    opacity: .8;
+  font-size: 15px;
+  color: white;
+  margin-top: -18px;
+  position: absolute;
+  right: 6%;
+  justify-content: end;
+
+  &__balance {
+    margin-right: 10px;
+  }
+
+  &__open {
+    animation: openMenu 0.5s forwards;
+  }
+}
+
+@keyframes openMenu {
+  from {
+    right: 7%;
+  }
+  to {
+    opacity: 0.7;
+    right: 15%;
+  }
+}

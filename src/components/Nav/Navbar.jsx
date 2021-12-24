@@ -1,4 +1,3 @@
-import { Modal } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -59,43 +58,47 @@ function scrollToTop() {
 }
 
 const Navbar = () => {
-  const isAuth = useSelector((state) => state.user.id);
+  const userId = useSelector((state) => state.user.id);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const dispatch = useDispatch();
   const logOut = () => {
-    
     dispatch(actions.setUser(""));
     setOpenAuthModal(false);
     localStorage.removeItem("token");
   };
+
   return (
     <Nav>
       <div onClick={() => scrollToTop()}>
         <img className="logo" src="../assets/logo/logo.jpg" />
       </div>
+
       {openAuthModal && (
         <div className={classes.modal__wrapper}>
           <div className={classes.modal}>
-            {!isAuth ? (
+            {!userId ? (
               <div className={classes.modal__links}>
                 <NavLink
                   className={classes.modal__link}
                   to="/auth/authorisation"
+                  onClick={() => setOpenAuthModal(false)}
                 >
                   Sign in
                 </NavLink>
               </div>
             ) : (
-              
               <div className={classes.modal__link} onClick={logOut}>
-                
                 Log out
               </div>
             )}
           </div>
         </div>
       )}
-
+      {userId && (
+        <div className={classes.userAccount}>
+          <Account id={userId} isOpenModal={openAuthModal} />
+        </div>
+      )}
       <div className="user__wrapper">
         <img
           src={img}

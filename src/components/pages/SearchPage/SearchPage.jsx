@@ -48,7 +48,7 @@ const SearchPage = () => {
     <div>
       <SearchInput />
       <div className={classes.tags} onClick={clickOnTag}>
-        {renderedTag}   
+        {renderedTag}
       </div>
       <Categories />
     </div>

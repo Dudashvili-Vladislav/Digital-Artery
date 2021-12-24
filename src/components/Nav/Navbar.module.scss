@@ -10,7 +10,7 @@
     animation: openMenu 0.4s forwards;
 
     &__link {
-      opacity: 0.7;
+      opacity: 0.9;
       display: inline;
       font-size: 16px;
       padding: 10px;
@@ -18,7 +18,7 @@
       background-color: rgb(19, 19, 19);
       margin-left: 10px;
       color: white;
-        cursor: pointer;
+      cursor: pointer;
       &:hover {
         transition: all 0.3s;
         opacity: 1;
@@ -26,6 +26,8 @@
     }
   }
 }
+
+
 
 @keyframes openMenu {
   from {

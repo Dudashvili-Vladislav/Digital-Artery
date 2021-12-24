@@ -1,11 +1,31 @@
-
-
-export const Account = ({ id }) => {
-  
-//   const balance = new web3.eth.Contract([], id, {
-//     from: "0x1234567890123456789012345678901234567891", // default from address
-//     gasPrice: "20000000000", // default gas price in wei, 20 gwei in this case
-//   });
-  
-  return <div>test</div>;
+import { ethers } from "ethers";
+import React, { useState } from "react";
+import classes from "./account.module.scss";
+export const Account = ({ id, isOpenModal }) => {
+  const [userBalance, setUserBalance] = useState();
+  const getAccountBalance = (account) => {
+    window.ethereum
+      .request({ method: "eth_getBalance", params: [account, "latest"] })
+      .then((balance) => {
+        setUserBalance(ethers.utils.formatEther(balance));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  if (id) {
+    getAccountBalance(id);
+  }
+  return (
+    <div
+      className={`${classes.userAccount} ${
+        isOpenModal ? classes.userAccount__open : ""
+      } `}
+    >
+      <div className={classes.userAccount__token}>
+        Wallet: {id.substring(0, 15)}...
+      </div>
+      <div className={classes.userAccount__balance}>Balance: {userBalance}</div>
+    </div>
+  );
 };
