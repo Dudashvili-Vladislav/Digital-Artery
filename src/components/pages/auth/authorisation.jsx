@@ -17,13 +17,12 @@ export const AuthPage = () => {
 
   useEffect(async () => {
     const provider = await detectEthereumProvider();
-    
 
     if (provider) {
       console.log(provider);
       window.ethereum;
-      ethereum.enable()
-      console.log(ethereum.enable())
+      ethereum.enable();
+      console.log(ethereum.enable());
     } else {
       console.log("Please install MetaMask!");
     }

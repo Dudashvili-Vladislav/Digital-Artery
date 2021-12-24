@@ -21,6 +21,7 @@ import "./styles.css";
 import { store } from "./redux/store";
 import { Dialog } from "./components/pages/Chats/dialog/dialog";
 import { AuthPage } from "./components/pages/auth/authorisation";
+import { WalletCard } from "./components/pages/auth/WalletCard";
 
 const Tabs = styled.ul`
 
@@ -137,6 +138,7 @@ function App() {
               <Route path="/stats" component={Stats} />
               <Route path="/chats/:id/" component={Dialog} />
               <Route path="/auth/authorisation" component={AuthPage} />
+              <Route path="/auth/WalletCard" component={WalletCard} />
             </CacheSwitch>
           </div>
         </div>
