@@ -27,6 +27,7 @@ export const AuthPage = () => {
       dispatch(actions.setUser(account));
       localStorage.setItem("token", account);
       const provider = await detectEthereumProvider();
+      M.toast({html : 'auth succes', classes: 'succes'})
       if (provider) {
         ethereum.enable();
       }

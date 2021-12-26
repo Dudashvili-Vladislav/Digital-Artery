@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import detectEthereumProvider from "@metamask/detect-provider";
+
 import Navbar from "./components/Nav/Navbar";
 import SearchPage from "./components/pages/SearchPage/SearchPage";
 import { Chats } from "./components/pages/Chats/Chats";
 import Home from "./components/pages/Home";
 import Actions from "./components/pages/Actions";
 import Stats from "./components/pages/Stats";
-
+import requests from "./api/requests/index";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import CacheRoute, { CacheSwitch } from "react-router-cache-route";
 
@@ -16,6 +16,7 @@ import { Dialog } from "./components/pages/Chats/dialog/dialog";
 import { AuthPage } from "./components/pages/auth/authorisation";
 import { useDispatch } from "react-redux";
 import { actions } from "./redux/actions";
+import "materialize-css";
 
 const Tabs = styled.ul`
 
@@ -55,23 +56,31 @@ const Tabs = styled.ul`
 const loader = document.querySelector(".preloader");
 const showLoader = () => loader.classList.remove("preloader");
 const addClass = () => loader.classList.add("loader-hide");
-const checkToken = (dispatch) => {
-  const token = localStorage.getItem("token");
-  if (!token) return;
-  dispatch(actions.setUser(token));
-};
 
 function App() {
+  const checkToken = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    try {
+      const response = await requests.auth.create(token);
+      console.log(response);
+    } catch (e) {
+      M.toast({ html: e.toString() });
+    }
+
+    dispatch(actions.setUser(token));
+  };
   const dispatch = useDispatch();
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
   useEffect(() => {
     showLoader();
     addClass();
     checkToken(dispatch);
   }, []);
-
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
 
   let msg_qty = getRandomInt(10) + 1;
 

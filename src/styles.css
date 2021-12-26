@@ -1,23 +1,16 @@
-#app { height: 100% }
-html,
-body {
-  position: relative;
+#app {
   height: 100%;
 }
-
-
-
 
 :root {
   --black: #070406;
   --white: #fff;
-  --grey: #AFAFAF;
+  --grey: #afafaf;
 }
 
 @font-face {
   font-family: "GeosansLight";
-  src: local("GeosansLight"),
-    url("./fonts/GeosansLight.ttf") format("truetype");
+  src: local("GeosansLight"), url("./fonts/GeosansLight.ttf") format("truetype");
   font-weight: normal;
 }
 
@@ -25,7 +18,7 @@ body {
   background: var(--black);
   font-family: GeosansLight;
   font-size: 18px;
-  color: var(--black);
+
   margin: 0;
   padding: 0;
 }
@@ -35,7 +28,6 @@ body {
   height: 100%;
   margin-bottom: 5px;
 }
-
 
 .swiper-slide img {
   display: block;
@@ -63,25 +55,23 @@ body {
   margin-bottom: -3px;
 }
 
-
 @media (max-aspect-ratio: 3/4) {
   img.img-top {
     width: 100vw;
     aspect-ratio: 1;
-	  border-radius: 0px;
-	  background: var(--black);
+    border-radius: 0px;
+    background: var(--black);
   }
 }
-
 
 @media (min-aspect-ratio: 5/4) {
   img.img-top {
     width: 33vw;
     aspect-ratio: 1;
-	  border-radius: 0px;
-  }  
+    border-radius: 0px;
+  }
 }
- 
+
 .main-header {
   color: var(--grey);
   margin-top: 10px;
@@ -100,3 +90,24 @@ body {
   font-family: GeosansLight;
 }
 
+#toast-container {
+  width: 100%;
+  position: fixed;
+  top: 0;
+
+  z-index: 100;
+}
+
+#toast-container div {
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+  width: 20%;
+  border-radius: 3px;
+  background-color: #d84646;
+  color: white !important;
+}
+
+#toast-container div.succes {
+  background-color: #4e9a51;
+}
