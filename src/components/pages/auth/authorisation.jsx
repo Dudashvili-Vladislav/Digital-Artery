@@ -1,12 +1,11 @@
 import React from "react";
 import classes from "./authorisation.module.scss";
 import detectEthereumProvider from "@metamask/detect-provider";
-import { useEffect } from "react";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { actions } from "../../../redux/actions";
 import { useHistory } from "react-router-dom";
 import img from "../../../../assets/wallets icons/meta.svg";
+import requests from "../../../api/requests";
 export const AuthPage = () => {
   console.log(img);
   const dispatch = useDispatch();
@@ -24,17 +23,18 @@ export const AuthPage = () => {
       await ethereum.request({ method: "eth_requestAccounts" })
     )[0];
     try {
+      // const token = await requests.auth.create(account);
+      // dispatch(actions.setUser(token));
+      // localStorage.setItem("token", token);
       dispatch(actions.setUser(account));
       localStorage.setItem("token", account);
       const provider = await detectEthereumProvider();
-      M.toast({html : 'auth succes', classes: 'succes'})
-      if (provider) {
-        ethereum.enable();
-      }
+      M.toast({ html: "auth succes", classes: "succes" });
+      if (provider) ethereum.enable();
 
       history.push("/");
     } catch (error) {
-      console.error(error);
+      M.toast({ html: error });
     }
   };
 

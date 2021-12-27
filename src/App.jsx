@@ -6,10 +6,10 @@ import { Chats } from "./components/pages/Chats/Chats";
 import Home from "./components/pages/Home";
 import Actions from "./components/pages/Actions";
 import Stats from "./components/pages/Stats";
-import requests from "./api/requests/index";
+
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import CacheRoute, { CacheSwitch } from "react-router-cache-route";
-
+import { setDefaultHeaders } from "./api/instanse";
 import styled from "styled-components";
 
 import { Dialog } from "./components/pages/Chats/dialog/dialog";
@@ -61,12 +61,8 @@ function App() {
   const checkToken = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    try {
-      const response = await requests.auth.create(token);
-      console.log(response);
-    } catch (e) {
-      M.toast({ html: e.toString() });
-    }
+
+    setDefaultHeaders(token);
 
     dispatch(actions.setUser(token));
   };

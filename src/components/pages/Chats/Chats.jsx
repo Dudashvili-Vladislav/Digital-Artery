@@ -1,16 +1,15 @@
-import { Dialog } from "./dialog/dialog";
+import requests from "../../../api/requests";
 import React, { useEffect, useState } from "react";
 import { createChats } from "../../../../assets/chat/chats";
 import { Chat } from "./Chat/Chat";
 import classes from "./Chats.module.scss";
 import { useDispatch } from "react-redux";
-import { actions } from "../../../redux/actions";
+
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 export const chats = createChats(); // Создаем все чаты кастомной функцией
 
 export const Chats = () => {
-  const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState(3); // id пользователя, с которым переписка
   const userId = useSelector((state) => state.user.id); // Получаем id текущего пользователя(авторизованного)
 
@@ -26,7 +25,7 @@ export const Chats = () => {
         <Chat lastMessage={messages[messages.length - 1]} user={user} key={i} />
       </div>
     ) : (
-      <NavLink to={`chats/${i}`} key = {i}>
+      <NavLink to={`chats/${i}`} key={i}>
         <div onClick={() => changeChat(i)}>
           <Chat
             lastMessage={messages[messages.length - 1]}

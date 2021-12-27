@@ -1,5 +1,5 @@
 .userAccount {
-    opacity: .8;
+  opacity: 0.8;
   font-size: 15px;
   color: white;
   margin-top: -18px;
@@ -9,19 +9,5 @@
 
   &__balance {
     margin-right: 10px;
-  }
-
-  &__open {
-    animation: openMenu 0.5s forwards;
-  }
-}
-
-@keyframes openMenu {
-  from {
-    right: 7%;
-  }
-  to {
-    opacity: 0.7;
-    right: 15%;
   }
 }

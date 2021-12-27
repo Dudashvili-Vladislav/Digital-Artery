@@ -7,7 +7,6 @@
   .modal {
     position: absolute;
     top: 50%;
-    animation: openMenu 0.4s forwards;
 
     &__link {
       opacity: 0.9;
@@ -27,15 +26,41 @@
   }
 }
 
+.cross {
+  cursor: pointer;
+  z-index: 100;
+  position: fixed;
+  width: 40px;
+  top: 40px;
+  right: 20px;
+  animation: cross 0.5s forwards;
+  & span {
+    position: relative;
 
-
-@keyframes openMenu {
-  from {
-    right: 0;
-    opacity: 0;
+    &::before {
+      content: "";
+      width: 30px;
+      height: 3px;
+      background-color: rgb(141, 141, 141);
+      position: absolute;
+      transform: rotate(45deg);
+    }
+    &::after {
+      content: "";
+      width: 30px;
+      height: 3px;
+      background-color: rgb(141, 141, 141);
+      position: absolute;
+      transform: rotate(-45deg);
+    }
   }
-  to {
-    opacity: 0.7;
-    right: 7%;
+}
+
+@keyframes cross {
+  0% {
+    top: -30px;
+  }
+  100% {
+    top: 40px;
   }
 }

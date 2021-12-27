@@ -205,9 +205,6 @@ class ImgArray extends React.Component {
     }
 
     if (JSON.parse(elem.getAttribute("is-liked"))) {
-      text.innerText = text.innerText - 1;
-      toggleLike("reverse");
-      elem.setAttribute("is-liked", false);
       return;
     }
     text.innerText = parseInt(text.innerText) + 1;

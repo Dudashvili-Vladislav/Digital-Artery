@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+
 import styled from "styled-components";
 import classes from "./Navbar.module.scss";
 import img from "../../../assets/notUser.png";
-import { useDispatch } from "react-redux";
-import { actions } from "../../redux/actions";
+
 import { Account } from "./account/account";
+import RightNav from "./RightNav";
 const Nav = styled.nav`
   width: 100%;
   height: 67px;
@@ -60,11 +60,12 @@ function scrollToTop() {
 const Navbar = () => {
   const userId = useSelector((state) => state.user.id);
   const [openAuthModal, setOpenAuthModal] = useState(false);
-  const dispatch = useDispatch();
-  const logOut = () => {
-    dispatch(actions.setUser(""));
-    setOpenAuthModal(false);
-    localStorage.removeItem("token");
+  const closeModal = (e) => {
+    if (
+      e.target.classList.contains("logout") ||
+      e.target.classList.contains("login")
+    )
+      setOpenAuthModal(false);
   };
 
   return (
@@ -72,28 +73,10 @@ const Navbar = () => {
       <div onClick={() => scrollToTop()}>
         <img className="logo" src="../assets/logo/logo.jpg" />
       </div>
+      <div onClick={closeModal}>
+        <RightNav open={openAuthModal} isAuth={!!userId} />
+      </div>
 
-      {openAuthModal && (
-        <div className={classes.modal__wrapper}>
-          <div className={classes.modal}>
-            {!userId ? (
-              <div className={classes.modal__links}>
-                <NavLink
-                  className={classes.modal__link}
-                  to="/auth/authorisation"
-                  onClick={() => setOpenAuthModal(false)}
-                >
-                  Sign in
-                </NavLink>
-              </div>
-            ) : (
-              <div className={classes.modal__link} onClick={logOut}>
-                Log out
-              </div>
-            )}
-          </div>
-        </div>
-      )}
       {userId && (
         <div className={classes.userAccount}>
           <Account id={userId} isOpenModal={openAuthModal} />
@@ -106,6 +89,11 @@ const Navbar = () => {
           onClick={() => setOpenAuthModal(!openAuthModal)}
         />
       </div>
+      {openAuthModal && (
+        <div className={classes.cross} onClick={() => setOpenAuthModal(false)}>
+          <span></span>
+        </div>
+      )}
     </Nav>
   );
 };
