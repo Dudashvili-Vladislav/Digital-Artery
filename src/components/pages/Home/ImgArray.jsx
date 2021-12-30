@@ -165,9 +165,12 @@ function srcset(image, size, rows = 1, cols = 1) {
   };
 }
 
-const getImages = async () => console.log(await requests.feed.get(1));
+const getImages = async () => console.log(await requests.feed.get(2));
 
 class ImgArray extends React.Component {
+  componentDidMount() {
+    this.images = getImages();
+  }
   constructor() {
     super();
     this.timeout = 0;
@@ -225,33 +228,40 @@ class ImgArray extends React.Component {
   }
 
   render() {
-    // const img_json1 = getImages();
-    const itemData = img_json.map((item, index) => {
-      return {
-        img: format("../assets/img_arr/{0}", item["name"]),
-        title: "title",
-      };
-    });
+    if (this.images ) {
+      console.log(this.images);
+      const itemData = this.images.map((item, index) => {
+        return {
+          img: format("../assets/img_arr/{0}", item["name"]),
+          title: "title",
+        };
+      });
 
-    return (
-      <ImageList>
-        {itemData.map((item, index) => (
-          <ImageListItem className={format("item{0}", index % 6)} key={index}>
-            <div className="text">{getRandomInt(1000) + 1}</div>
-            <Image {...srcset(item.img, 121)} alt={item.title} loading="lazy" />
+      return (
+        <ImageList>
+          {itemData.map((item, index) => (
+            <ImageListItem className={format("item{0}", index % 6)} key={index}>
+              <div className="text">{getRandomInt(1000) + 1}</div>
+              <Image
+                {...srcset(item.img, 121)}
+                alt={item.title}
+                loading="lazy"
+              />
 
-            <img
-              {...srcset("../assets/icons/heart-icon.png", 121)}
-              className="sub-image"
-              onAnimationEnd={this.cleanAnimate}
-              is-liked="false"
-              onClick={this.handleClick.bind(this)}
-              data-id={index}
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    );
+              <img
+                {...srcset("../assets/icons/heart-icon.png", 121)}
+                className="sub-image"
+                onAnimationEnd={this.cleanAnimate}
+                is-liked="false"
+                onClick={this.handleClick.bind(this)}
+                data-id={index}
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      );
+    }
+    return <div>loading...</div>;
   }
 }
 

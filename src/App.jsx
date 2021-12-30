@@ -61,10 +61,8 @@ function App() {
   const checkToken = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-
+    
     setDefaultHeaders(token);
-
-    dispatch(actions.setUser(token));
   };
   const dispatch = useDispatch();
 

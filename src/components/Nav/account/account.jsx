@@ -13,10 +13,11 @@ export const Account = ({ id, isOpenModal }) => {
         console.log(error);
       });
   };
- 
-  if (id != 'test') {
+
+  if (id != "test") {
     getAccountBalance(id);
   }
+
   return (
     <div
       className={`${classes.userAccount} ${
