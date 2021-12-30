@@ -7,46 +7,27 @@ export const Message = ({ time, owner, text, ourMessage }) => {
 
   return (
     <div
-      className={classes.message}
-      style={{
-        width: isPC ? "100%" : "80%",
-        left: ourMessage ? (isPC ? "40%" : "15%") : isPC ? "10%" : "5%",
-      }}
+      className={classes.message__wrap}
+      style={{ justifyContent: ourMessage ? "end" : "start" }}
     >
-      {!ourMessage ? (
+      <div className={classes.message}>
         <img
           src={`../${image}`}
-          alt=""
+          alt="user image"
           className={classes.message__img}
-          style={{ left: ourMessage && isPC ? "100%" : "-10%", top: 10 }}
+          style={{left: ourMessage ? '104%': '-40px'}}
         />
-      ) : (
-        ""
-      )}
-      <div className={classes.message__text}>
-        <div
-          className={classes.message__title}
-          style={{ fontSize: isPC ? "100%" : "90%" }}
-        >
-          {text}
-        </div>
-        <div
-          className={classes.message__time}
-          style={{ left: ourMessage && isPC ? "90%" : "0%" }}
-        >
-          {time}
+        
+        <div className={classes.message__text}>
+          <div
+            className={classes.message__title}
+            style={{ fontSize: isPC ? "100%" : "90%" }}
+          >
+            {text}
+          </div>
+          <div className={classes.message__time}>{time}</div>
         </div>
       </div>
-      {ourMessage ? (
-        <img
-          src={`../${image}`}
-          alt=""
-          className={classes.message__img}
-          style={{ left: ourMessage && isPC ? "103%" : "-10%", bottom: 10 }}
-        />
-      ) : (
-        ""
-      )}
     </div>
   );
 };

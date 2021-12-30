@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { createChats } from "../../../../assets/chat/chats";
 import { Chat } from "./Chat/Chat";
 import classes from "./Chats.module.scss";
-import { useDispatch } from "react-redux";
+import { Dialog } from "./dialog/dialog";
 
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -12,7 +12,7 @@ export const chats = createChats(); // Создаем все чаты касто
 export const Chats = () => {
   const [currentUser, setCurrentUser] = useState(3); // id пользователя, с которым переписка
   const userId = useSelector((state) => state.user.id); // Получаем id текущего пользователя(авторизованного)
-
+  const [ourID, setOurId] = useState(3)
   const changeChat = (id) => {
     setCurrentUser(id);
   };
@@ -49,7 +49,7 @@ export const Chats = () => {
           </div>
           {isPC ? (
             <div className={classes.dialog}>
-              <Dialog messages={chats[currentUser].messages} id={userId} />
+              <Dialog messages={chats[currentUser].messages} id={ourID} />
             </div>
           ) : (
             ""

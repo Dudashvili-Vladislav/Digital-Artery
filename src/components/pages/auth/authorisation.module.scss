@@ -1,14 +1,13 @@
 @font-face {
-  font-family: "Montserrat-Black.ttf";
-  src: url(@/src/fonts/Montserrat-Black.ttf) format("truetype");
-  font-weight: 400;
+  font-family: "Montserrat";
+  src: url("../../../fonts/Montserrat-Black.ttf") format("ttf");
+  font-weight: normal;
   font-style: normal;
 }
 
 .button {
   position: relative;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Arial, sans-serif;
   color: rgb(235, 235, 235);
   text-align: center;
   font-weight: 600;
@@ -16,8 +15,9 @@
   padding: 15px;
   background-color: #2d81ff;
   max-width: 25%;
-  width: 100%;
   display: block;
+  width: 100%;
+  max-width: 400px;
   cursor: pointer;
   margin: 20px auto;
   border-radius: 30px;
@@ -36,7 +36,7 @@
   max-width: 90%;
   &__title {
     margin-top: 50px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Arial, sans-serif;
     font-size: 28px;
     color: white;
     font-weight: 600;
@@ -44,10 +44,11 @@
   }
 
   &__subtitle {
-    max-width: 40%;
+    max-width: 450px;
+    width: 100%;
     margin: 30px auto;
     text-align: center;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Arial, sans-serif;
 
     font-size: 20px;
     color: rgb(80, 80, 80);

@@ -4,6 +4,7 @@ import { format } from "react-string-format";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import img_json from "../../../../assets/img_arr.json";
+import requests from "../../../api/requests";
 
 const ImageList = styled.ul`
   background-color: #070406;
@@ -164,6 +165,8 @@ function srcset(image, size, rows = 1, cols = 1) {
   };
 }
 
+const getImages = async () => console.log(await requests.feed.get(1));
+
 class ImgArray extends React.Component {
   constructor() {
     super();
@@ -222,6 +225,7 @@ class ImgArray extends React.Component {
   }
 
   render() {
+    // const img_json1 = getImages();
     const itemData = img_json.map((item, index) => {
       return {
         img: format("../assets/img_arr/{0}", item["name"]),

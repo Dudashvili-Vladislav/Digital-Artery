@@ -19,10 +19,10 @@ export const AuthPage = () => {
   const onClickConnect = async () => {
     const { ethereum } = window;
 
-    const account = (
-      await ethereum.request({ method: "eth_requestAccounts" })
-    )[0];
     try {
+      const account = (
+        await ethereum.request({ method: "eth_requestAccounts" })
+      )[0];
       const token = await requests.auth.create(account);
       dispatch(actions.setUser(token));
       localStorage.setItem("token", token);

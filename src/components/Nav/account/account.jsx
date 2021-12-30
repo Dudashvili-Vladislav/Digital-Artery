@@ -13,7 +13,8 @@ export const Account = ({ id, isOpenModal }) => {
         console.log(error);
       });
   };
-  if (id) {
+ 
+  if (id != 'test') {
     getAccountBalance(id);
   }
   return (
