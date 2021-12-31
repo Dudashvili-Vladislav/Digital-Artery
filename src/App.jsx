@@ -17,6 +17,10 @@ import { AuthPage } from "./components/pages/auth/authorisation";
 import { useDispatch } from "react-redux";
 import { actions } from "./redux/actions";
 import "materialize-css";
+import requests from "./api/requests";
+import { setToken } from "./utils/setToken";
+import { useState } from "react";
+import { Spinner } from "./components/spinner/spinner";
 
 const Tabs = styled.ul`
 
@@ -58,13 +62,30 @@ const showLoader = () => loader.classList.remove("preloader");
 const addClass = () => loader.classList.add("loader-hide");
 
 function App() {
-  const checkToken = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-    
-    setDefaultHeaders(token);
-  };
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const checkToken = async () => {
+    setLoading(true);
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      try {
+        const token = (await requests.auth.create()).data.token;
+        setDefaultHeaders(token);
+
+        localStorage.setItem("token", token);
+        setLoading(false);
+        return;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    setDefaultHeaders(token);
+    const hash = localStorage.getItem("hash");
+
+    if (!!hash) return dispatch(actions.setUser(hash));
+    setLoading(false);
+  };
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -73,12 +94,14 @@ function App() {
   useEffect(() => {
     showLoader();
     addClass();
-    checkToken(dispatch);
+    checkToken();
   }, []);
 
   let msg_qty = getRandomInt(10) + 1;
 
-  return (
+  return loading ? (
+    ""
+  ) : (
     <Router>
       <div>
         <Navbar />

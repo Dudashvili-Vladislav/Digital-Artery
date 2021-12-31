@@ -1,15 +1,16 @@
-import axios from "../instanse";
+import axios from "axios";
 
 export default {
   get() {
     return axios.get(" http://127.0.0.1:8000/api/user/detail/default/");
   },
 
-  create(token) {
+  create(username = 'default', password = "HLhm*Ppsv2q!AXG") {
+    console.log(username, password)
     try {
       return axios.post(`http://127.0.0.1:8000/api/user/token/ `, {
-        username: 'default',
-        password: "HLhm*Ppsv2q!AXG",
+        username,
+        password,
       });
     } catch (e) {
       return e;

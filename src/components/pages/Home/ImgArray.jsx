@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import img_json from "../../../../assets/img_arr.json";
 import requests from "../../../api/requests";
+import { useEffect } from "react";
+import { Spinner } from "../../spinner/spinner";
 
 const ImageList = styled.ul`
   background-color: #070406;
@@ -165,39 +167,43 @@ function srcset(image, size, rows = 1, cols = 1) {
   };
 }
 
-const getImages = async () => console.log(await requests.feed.get(2));
+export const ImgArray = ({ history }) => {
+  const [images, setImages] = useState();
+  const [loading, setLoading] = useState(false);
+  const getImages = async () => {
+    setLoading(true);
+    try {
+      const res = (await requests.feed.get(5));
+      if(res) setImages(res.data);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-class ImgArray extends React.Component {
-  componentDidMount() {
-    this.images = getImages();
-  }
-  constructor() {
-    super();
-    this.timeout = 0;
-  }
-  handleClick(e) {
-    if (this.timeout === 0) {
-      this.timeout = setTimeout(
-        function () {
-          this.props.history.push(
-            `/images/${e.target.getAttribute("data-id")}`
-          );
-          this.timeout = 0;
-        }.bind(this),
-        250
-      );
+  let timeout = 0;
+  useEffect(() => {
+    getImages();
+  }, []);
+  function handleClick(e) {
+    if (timeout === 0) {
+      timeout = setTimeout(function () {
+        history.push(`/images/${e.target.getAttribute("data-id")}`);
+        timeout = 0;
+      }, 250);
     } else {
-      this.setLike(e);
-      clearTimeout(this.timeout);
-      this.timeout = 0;
+      setLike(e);
+      clearTimeout(timeout);
+      timeout = 0;
     }
   }
-  cleanAnimate(e) {
+
+  function cleanAnimate(e) {
     const elem = e.currentTarget.parentNode.querySelector(".sub-image");
     elem.style.animationName = "";
     elem.style.animationDirection = "";
   }
-  setLike(event) {
+  function setLike(event) {
     const parent = event.currentTarget.parentNode;
 
     const text = parent.querySelector(".text");
@@ -227,42 +233,39 @@ class ImgArray extends React.Component {
     }
   }
 
-  render() {
-    if (this.images ) {
-      console.log(this.images);
-      const itemData = this.images.map((item, index) => {
-        return {
-          img: format("../assets/img_arr/{0}", item["name"]),
-          title: "title",
-        };
-      });
+  // const itemData = images.map((item, index) => {
+  //   console.log(item.images[0].file);
+  //   return {
+  //     img: format(item.images[0].file),
+  //     title: "title",
+  //   };
+  // });
 
-      return (
-        <ImageList>
-          {itemData.map((item, index) => (
-            <ImageListItem className={format("item{0}", index % 6)} key={index}>
-              <div className="text">{getRandomInt(1000) + 1}</div>
-              <Image
-                {...srcset(item.img, 121)}
-                alt={item.title}
-                loading="lazy"
-              />
+  return loading || !images ? (
+    <Spinner />
+  ) : (
+    <ImageList>
+      {images.map((item, index) => (
+        <ImageListItem className={format("item{0}", index % 6)} key={index}>
+          <div className="text">{getRandomInt(1000) + 1}</div>
+          <Image
+            {...srcset(item.images[0].file, 121)}
+            alt={item.title}
+            loading="lazy"
+          />
 
-              <img
-                {...srcset("../assets/icons/heart-icon.png", 121)}
-                className="sub-image"
-                onAnimationEnd={this.cleanAnimate}
-                is-liked="false"
-                onClick={this.handleClick.bind(this)}
-                data-id={index}
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      );
-    }
-    return <div>loading...</div>;
-  }
-}
+          <img
+            {...srcset("../assets/icons/heart-icon.png", 121)}
+            className="sub-image"
+            onAnimationEnd={cleanAnimate}
+            is-liked="false"
+            onClick={handleClick}
+            data-id={index}
+          />
+        </ImageListItem>
+      ))}
+    </ImageList>
+  );
+};
 
 export default withRouter(ImgArray);

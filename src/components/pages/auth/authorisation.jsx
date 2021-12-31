@@ -23,11 +23,10 @@ export const AuthPage = () => {
       const account = (
         await ethereum.request({ method: "eth_requestAccounts" })
       )[0];
-      const token = (await requests.auth.create(account)).data.token;
+      const token = (await requests.auth.create()).data.token;
       dispatch(actions.setUser(account));
       localStorage.setItem("token", token);
-      // dispatch(actions.setUser(account));
-      // localStorage.setItem("token", account);
+      localStorage.setItem("hash", account);
       const provider = await detectEthereumProvider();
       M.toast({ html: "auth succes", classes: "succes" });
       if (provider) ethereum.enable();

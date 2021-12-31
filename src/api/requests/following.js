@@ -1,4 +1,4 @@
-import axios from "../instanse"
+import axios from "axios"
 
 export default {
     get(user) {

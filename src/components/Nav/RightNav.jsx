@@ -65,6 +65,7 @@ const RightNav = ({ open, isAuth }) => {
   const dispatch = useDispatch();
   const logOut = () => {
     dispatch(actions.setUser(""));
+    localStorage.removeItem("hash");
     localStorage.removeItem("token");
   };
   return (
