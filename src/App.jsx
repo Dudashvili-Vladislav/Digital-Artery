@@ -71,20 +71,22 @@ function App() {
     if (!token) {
       try {
         const token = (await requests.auth.create()).data.token;
-        setDefaultHeaders(token);
+        axios.defaults.headers.Authorization = `Token ${token}`;
 
         localStorage.setItem("token", token);
         setLoading(false);
         return;
       } catch (e) {
-        console.log(e);
+        
       }
     }
     setDefaultHeaders(token);
     const hash = localStorage.getItem("hash");
 
-    if (!!hash) return dispatch(actions.setUser(hash));
-    setLoading(false);
+    if (!!hash) {
+      setLoading(false);
+      return dispatch(actions.setUser(hash));
+    }
   };
 
   function getRandomInt(max) {

@@ -35,7 +35,7 @@ const SearchPage = () => {
         ))
       : "";
   };
-  console.log(matchMedia("(min-width: 767px)").matches);
+  (matchMedia("(min-width: 767px)").matches);
   checkViewport(320, 7);
   checkViewport(350, 9);
   checkViewport(400, 10);

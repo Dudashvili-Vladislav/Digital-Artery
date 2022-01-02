@@ -1,9 +1,8 @@
 import React, { useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+
 import { format } from "react-string-format";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
-import img_json from "../../../../assets/img_arr.json";
 import requests from "../../../api/requests";
 import { useEffect } from "react";
 import { Spinner } from "../../spinner/spinner";
@@ -168,47 +167,75 @@ function srcset(image, size, rows = 1, cols = 1) {
 }
 
 export const ImgArray = ({ history }) => {
-  const [images, setImages] = useState();
+  const [images, setImages] = useState([]);
+
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(0);
   const getImages = async () => {
-    setLoading(true);
-    try {
-      const res = (await requests.feed.get(5));
-      if(res) setImages(res.data);
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
+    if (loading) {
+      try {
+        const res = await requests.feed.get(page);
+        setImages([...images, ...res.data]);
+        setPage((prevState) => prevState + 1);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
   let timeout = 0;
+  let lastDate = 0;
+  const scrollHandler = (e) => {
+    let nowDate = Date.now();
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+        5 &&
+      lastDate + 500 < nowDate
+    ) {
+      lastDate = Date.now();
+      setLoading(true);
+    }
+  };
   useEffect(() => {
     getImages();
+  }, [loading]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", scrollHandler);
+    return function () {
+      window.removeEventListener("scroll", scrollHandler);
+    };
   }, []);
+
   function handleClick(e) {
-    if (timeout === 0) {
-      timeout = setTimeout(function () {
-        history.push(`/images/${e.target.getAttribute("data-id")}`);
+    if (e.target.classList.contains("sub-image")) {
+      if (timeout === 0) {
+        timeout = setTimeout(function () {
+          history.push(`/images/${e.target.getAttribute("data-id")}`);
+          timeout = 0;
+        }, 250);
+      } else {
+        setLike(e.target);
+        clearTimeout(timeout);
         timeout = 0;
-      }, 250);
-    } else {
-      setLike(e);
-      clearTimeout(timeout);
-      timeout = 0;
+      }
     }
   }
 
   function cleanAnimate(e) {
-    const elem = e.currentTarget.parentNode.querySelector(".sub-image");
+    const elem = e.target;
     elem.style.animationName = "";
     elem.style.animationDirection = "";
   }
   function setLike(event) {
-    const parent = event.currentTarget.parentNode;
+    const parent = event.parentNode;
 
     const text = parent.querySelector(".text");
 
-    const elem = event.currentTarget.parentNode.querySelector(".sub-image");
+    const elem = event.parentNode.querySelector(".sub-image");
 
     function toggleLike(direction) {
       elem.style.animationName = "pulse";
@@ -233,38 +260,29 @@ export const ImgArray = ({ history }) => {
     }
   }
 
-  // const itemData = images.map((item, index) => {
-  //   console.log(item.images[0].file);
-  //   return {
-  //     img: format(item.images[0].file),
-  //     title: "title",
-  //   };
-  // });
+  return (
+    <div onClick={handleClick} onAnimationEnd={cleanAnimate}>
+      <ImageList>
+        {images.map((item, index) => (
+          <ImageListItem className={format("item{0}", index % 6)} key={index}>
+            <div className="text">{getRandomInt(1000) + 1}</div>
+            <Image
+              {...srcset(item.images[0].file, 121)}
+              alt={item.title}
+              loading="lazy"
+            />
 
-  return loading || !images ? (
-    <Spinner />
-  ) : (
-    <ImageList>
-      {images.map((item, index) => (
-        <ImageListItem className={format("item{0}", index % 6)} key={index}>
-          <div className="text">{getRandomInt(1000) + 1}</div>
-          <Image
-            {...srcset(item.images[0].file, 121)}
-            alt={item.title}
-            loading="lazy"
-          />
-
-          <img
-            {...srcset("../assets/icons/heart-icon.png", 121)}
-            className="sub-image"
-            onAnimationEnd={cleanAnimate}
-            is-liked="false"
-            onClick={handleClick}
-            data-id={index}
-          />
-        </ImageListItem>
-      ))}
-    </ImageList>
+            <img
+              {...srcset("../assets/icons/heart-icon.png", 121)}
+              className="sub-image"
+              is-liked="false"
+              data-id={index}
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+      {loading ? <Spinner /> : ""}
+    </div>
   );
 };
 
