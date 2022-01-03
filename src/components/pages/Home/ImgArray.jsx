@@ -170,7 +170,7 @@ export const ImgArray = ({ history }) => {
   const [images, setImages] = useState([]);
 
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const getImages = async () => {
     if (loading) {
       try {
@@ -192,8 +192,8 @@ export const ImgArray = ({ history }) => {
     if (
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
-        5 &&
-      lastDate + 500 < nowDate
+        100 &&
+      lastDate + 2000 < nowDate
     ) {
       lastDate = Date.now();
       setLoading(true);
@@ -259,7 +259,6 @@ export const ImgArray = ({ history }) => {
         'url("../assets/icons/heart_background_white.png")';
     }
   }
-
   return (
     <div onClick={handleClick} onAnimationEnd={cleanAnimate}>
       <ImageList>

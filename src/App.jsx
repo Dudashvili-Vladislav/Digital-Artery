@@ -18,8 +18,9 @@ import { useDispatch } from "react-redux";
 import { actions } from "./redux/actions";
 import "materialize-css";
 import requests from "./api/requests";
-import { setToken } from "./utils/setToken";
+
 import { useState } from "react";
+import axios from "axios";
 import { Spinner } from "./components/spinner/spinner";
 
 const Tabs = styled.ul`
@@ -71,13 +72,16 @@ function App() {
     if (!token) {
       try {
         const token = (await requests.auth.create()).data.token;
+        console.log(token);
         axios.defaults.headers.Authorization = `Token ${token}`;
 
         localStorage.setItem("token", token);
-        setLoading(false);
+
         return;
       } catch (e) {
-        
+        return console.log(e);
+      } finally {
+        setLoading(false);
       }
     }
     setDefaultHeaders(token);
@@ -87,6 +91,7 @@ function App() {
       setLoading(false);
       return dispatch(actions.setUser(hash));
     }
+    setLoading(false);
   };
 
   function getRandomInt(max) {
@@ -102,7 +107,7 @@ function App() {
   let msg_qty = getRandomInt(10) + 1;
 
   return loading ? (
-    ""
+    <Spinner />
   ) : (
     <Router>
       <div>

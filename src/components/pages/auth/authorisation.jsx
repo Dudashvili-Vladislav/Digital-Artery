@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 import img from "../../../../assets/wallets icons/meta.svg";
 import requests from "../../../api/requests";
 export const AuthPage = () => {
-  
   const dispatch = useDispatch();
   const history = useHistory();
   const isMetaMaskInstalled = () => {
