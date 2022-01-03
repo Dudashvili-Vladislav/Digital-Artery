@@ -50,8 +50,11 @@ class FeedAPIView(ListAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self) -> QuerySet:
-        page = self.request.data.get('page', 1)
-        page = int(page)
+        page = self.request.query_params.get('page', None)
+        if page:
+            page = int(page[0])
+        else:
+            page = 1
         n_items = 20
         user = self.request.user
         followers = user.following
