@@ -175,6 +175,7 @@ export const ImgArray = ({ history }) => {
     if (loading) {
       try {
         const res = await requests.feed.get(page);
+
         setImages([...images, ...res.data]);
         setPage((prevState) => prevState + 1);
       } catch (e) {
@@ -259,6 +260,7 @@ export const ImgArray = ({ history }) => {
         'url("../assets/icons/heart_background_white.png")';
     }
   }
+
   return (
     <div onClick={handleClick} onAnimationEnd={cleanAnimate}>
       <ImageList>
