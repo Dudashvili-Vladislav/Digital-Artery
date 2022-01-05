@@ -1,0 +1,41 @@
+.users {
+  margin-top: 20px;
+}
+
+.user {
+  max-width: 100%;
+  text-align: center;
+
+  &__name {
+    max-width: 100%;
+    font-size: 15px;
+    margin-top: 10px;
+    color: rgb(161, 161, 161);
+  }
+
+  &__avatar {
+    background-color: white;
+    cursor: pointer;
+  }
+}
+
+.posts {
+  display: grid;
+  margin-top: 20px;
+  width: 100%;
+  cursor: pointer;
+  grid-template-columns: repeat(5, 1fr);
+  .post {
+    position: relative;
+    &__img {
+      width: 100%;
+    }
+
+    &__likes {
+      position: absolute;
+      color: white;
+      right: 10px;
+      top: 10px;
+    }
+  }
+}

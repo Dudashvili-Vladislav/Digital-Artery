@@ -22,6 +22,7 @@ import requests from "./api/requests";
 import { useState } from "react";
 import axios from "axios";
 import { Spinner } from "./components/spinner/spinner";
+import { Category } from "./components/pages/category/category";
 
 const Tabs = styled.ul`
 
@@ -171,6 +172,7 @@ function App() {
             <Route path="/stats" component={Stats} />
             <Route path="/chats/:id/" component={Dialog} />
             <Route path="/auth/authorisation" component={AuthPage} />
+            <Route path="/category/:id" component={Category} />
           </CacheSwitch>
         </div>
       </div>

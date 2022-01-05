@@ -277,7 +277,7 @@ export const ImgArray = ({ history }) => {
               {...srcset("../assets/icons/heart-icon.png", 121)}
               className="sub-image"
               is-liked="false"
-              data-id={index}
+              data-id={item.id}
             />
           </ImageListItem>
         ))}

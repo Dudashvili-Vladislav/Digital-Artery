@@ -78,8 +78,10 @@ const RightNav = ({ open, isAuth }) => {
       <li>Settings</li>
       <li>About Us</li>
       {!isAuth ? (
-        <li >
-          <NavLink to="/auth/authorisation" className="login">Sign In</NavLink>
+        <li>
+          <NavLink to="/auth/authorisation" className="login">
+            Sign In
+          </NavLink>
         </li>
       ) : (
         <li onClick={logOut} className="logout">
