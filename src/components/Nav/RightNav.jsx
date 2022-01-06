@@ -4,6 +4,7 @@ import { RemoveScroll } from "react-remove-scroll";
 import { useDispatch } from "react-redux";
 import { actions } from "../../redux/actions";
 import { NavLink } from "react-router-dom";
+import { Account } from "./account/account";
 
 const Ul = styled.ul`
   list-style: none;

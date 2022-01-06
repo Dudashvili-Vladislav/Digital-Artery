@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect } from "react";
 import { Spinner } from "../../spinner/spinner";
 import { NavLink } from "react-router-dom";
+import { Posts } from "../SearchPage/post/post";
 export const Category = ({ match }) => {
   const id = match.params.id;
   const [isLoading, setLoading] = useState(false);
@@ -14,7 +15,7 @@ export const Category = ({ match }) => {
     setLoading(true);
     try {
       const users = await requests.usersCategory.get(`test${id}`);
-      const posts = await requests.posts.get(`test${id}`);
+      const posts = await requests.CategoryPosts.get(`test${id}`);
       setUsers(users.data);
       setPosts(posts.data);
     } catch (e) {
@@ -26,7 +27,7 @@ export const Category = ({ match }) => {
   useEffect(() => {
     getUsers();
   }, []);
-  console.log(posts);
+
   return isLoading ? (
     <Spinner />
   ) : (
@@ -67,16 +68,8 @@ export const Category = ({ match }) => {
           ))}
         </Swiper>
       </div>
-      <div className={classes.posts}>
-        {posts.map(({ images, num_vote_up, id }, i) => (
-          <div className={classes.post} key={i}>
-            <div className={classes.post__likes}>{num_vote_up}</div>
-            <NavLink to={`/image/${id}`}>
-              <img src={images[0].file} className={classes.post__img} />
-            </NavLink>
-          </div>
-        ))}
-      </div>
+
+      <Posts posts={posts} />
     </div>
   );
 };

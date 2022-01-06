@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { Categories } from "./categories/Categories";
 import { Spinner } from "../../spinner/spinner";
 import { Users } from "./users/users";
+import { useHistory } from "react-router-dom";
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -54,7 +55,7 @@ const SearchPage = () => {
   const [tags, setTags] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-
+  const history = useHistory();
   const changeHandler = (e) => {
     setSearchValue(e.target.value);
   };
@@ -69,6 +70,10 @@ const SearchPage = () => {
       setLoading(false);
     }
   };
+  const submitForm = async (e) => {
+    e.preventDefault();
+    history.push(`/results/${searchValue}`);
+  };
 
   useEffect(() => {
     getAllTags();
@@ -77,6 +82,7 @@ const SearchPage = () => {
   const clickOnTag = (e) => {
     if (e.target.classList.contains("tag")) {
       setSearchValue(e.target.innerText);
+      history.push(`/results/${e.target.innerText}`);
     }
   };
 
@@ -106,14 +112,16 @@ const SearchPage = () => {
 
   return (
     <div>
-      <StyledDiv className="filter-list">
-        <input
-          type="search"
-          placeholder="Search Artist, Style or Collection"
-          value={searchValue}
-          onChange={changeHandler}
-        />
-      </StyledDiv>
+      <form action="" onSubmit={submitForm}>
+        <StyledDiv className="filter-list">
+          <input
+            type="search"
+            placeholder="Search Artist, Style or Collection"
+            value={searchValue}
+            onChange={changeHandler}
+          />
+        </StyledDiv>
+      </form>
       <Users />
       <div className={classes.tags} onClick={clickOnTag}>
         {isLoading ? (

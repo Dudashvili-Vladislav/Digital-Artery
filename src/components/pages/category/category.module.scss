@@ -18,24 +18,3 @@
     cursor: pointer;
   }
 }
-
-.posts {
-  display: grid;
-  margin-top: 20px;
-  width: 100%;
-  cursor: pointer;
-  grid-template-columns: repeat(5, 1fr);
-  .post {
-    position: relative;
-    &__img {
-      width: 100%;
-    }
-
-    &__likes {
-      position: absolute;
-      color: white;
-      right: 10px;
-      top: 10px;
-    }
-  }
-}

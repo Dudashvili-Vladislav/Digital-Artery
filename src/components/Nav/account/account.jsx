@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./account.module.scss";
 export const Account = ({ id, isOpenModal }) => {
   const [userBalance, setUserBalance] = useState();
@@ -14,9 +14,9 @@ export const Account = ({ id, isOpenModal }) => {
       });
   };
 
-  if (id != "test") {
+  useEffect(() => {
     getAccountBalance(id);
-  }
+  }, []);
 
   return (
     <div

@@ -266,7 +266,7 @@ export const ImgArray = ({ history }) => {
       <ImageList>
         {images.map((item, index) => (
           <ImageListItem className={format("item{0}", index % 6)} key={index}>
-            <div className="text">{getRandomInt(1000) + 1}</div>
+            <div className="text">{item.num_vote_up}</div>
             <Image
               {...srcset(item.images[0].file, 121)}
               alt={item.title}

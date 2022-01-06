@@ -23,6 +23,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Spinner } from "./components/spinner/spinner";
 import { Category } from "./components/pages/category/category";
+import { SearchRes } from "./components/pages/SearchPage/result/result";
 
 const Tabs = styled.ul`
 
@@ -173,6 +174,7 @@ function App() {
             <Route path="/chats/:id/" component={Dialog} />
             <Route path="/auth/authorisation" component={AuthPage} />
             <Route path="/category/:id" component={Category} />
+            <Route path="/results/:str" component={SearchRes} />
           </CacheSwitch>
         </div>
       </div>

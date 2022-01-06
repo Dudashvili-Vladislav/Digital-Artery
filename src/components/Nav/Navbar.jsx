@@ -74,10 +74,10 @@ const Navbar = () => {
         <img className="logo" src="../assets/logo/logo.jpg" />
       </div>
       <div onClick={closeModal}>
-        <RightNav open={openAuthModal} isAuth={!!userId} />
+        <RightNav open={openAuthModal} isAuth={userId} />
       </div>
 
-      {userId && (
+      {userId && matchMedia("(min-width: 600px)").matches && (
         <div className={classes.userAccount}>
           <Account id={userId} isOpenModal={openAuthModal} />
         </div>

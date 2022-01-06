@@ -6,24 +6,27 @@ import React from "react";
 import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import requests from "../../../../api/requests";
-export const Users = () => {
+export const Users = ({ searchStr }) => {
   const [isLoading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
-  const getAllUsers = async () => {
-    setLoading(true);
-    try {
-      const res = await requests.users.get();
-
-      setUsers(res.data);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
+    let cleanupFunction = false;
+    const getAllUsers = async () => {
+      if (!cleanupFunction) setLoading(true);
+      try {
+        const res = await requests.users.get(searchStr || "");
+
+        if (!cleanupFunction) setUsers(res.data);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        if (!cleanupFunction) setLoading(false);
+      }
+    };
+
     getAllUsers();
+    return () => (cleanupFunction = true);
   }, []);
 
   return isLoading ? (
@@ -49,20 +52,26 @@ export const Users = () => {
           },
         }}
       >
-        {users.map(({ name, picture, username }, i) => (
-          <SwiperSlide key={i}>
-            <div className={classes.user}>
-              <img
-                src={picture}
-                alt="user avatar"
-                className={classes.user__avatar}
-              />
-              <div className={classes.user__name}>
-                {name || username.substring(0, 10)}
+        {users.length > 0 ? (
+          users.map(({ name, picture, username }, i) => (
+            <SwiperSlide key={i}>
+              <div className={classes.user}>
+                <img
+                  src={picture}
+                  alt="user avatar"
+                  className={classes.user__avatar}
+                />
+                <div className={classes.user__name}>
+                  {name || username.substring(0, 10)}
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          ))
+        ) : (
+          <div className={classes.searchStr}>
+            По запросу {searchStr} пользователи не найдены
+          </div>
+        )}
       </Swiper>
     </div>
   );

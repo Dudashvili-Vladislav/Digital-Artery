@@ -5,8 +5,9 @@ import trending from "./home/trending"
 import topPosts from './home/topPosts'
 import tags from "./search/tags"
 import users from "./search/users"
-import posts from './search/posts'
+import CategoryPosts from './search/categoryPosts'
 import usersCategory from "./search/usersCategory"
+import posts from "./search/posts"
 export default {
     auth,
     feed,
@@ -16,5 +17,6 @@ export default {
     tags,
     users,
     usersCategory,
+    CategoryPosts,
     posts
 }

@@ -1,0 +1,44 @@
+.posts {
+  display: grid;
+  margin-top: 20px;
+  width: 100%;
+  cursor: pointer;
+  grid-template-columns: repeat(5, 1fr);
+  .post {
+    position: relative;
+    &__img {
+      width: 100%;
+    }
+
+    &__likes {
+      text-align: right;
+      padding: 2px 5px;
+      padding-right: 7px;
+      padding-top: 0px;
+      height: 18px;
+      width: 45px;
+      top: 0px;
+      right: 0px;
+      position: absolute;
+
+      background-size: cover;
+      font-size: 14px;
+      font-family: GeosansLight;
+      color: #c5c5c5;
+      background-image: url("../assets/icons/heart_background_black.png");
+    }
+  }
+}
+
+.empty{
+  font-size: 15px;
+  color: #c5c5c5;
+  margin-top: 20px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .posts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
