@@ -12,7 +12,7 @@ const ImageList = styled.ul`
   margin-top: 0px;
   gap: 5px;
   display: grid;
-  overflow-y: auto;
+  overflow-y: hidden;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 0px;

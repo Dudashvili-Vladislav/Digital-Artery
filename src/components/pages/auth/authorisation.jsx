@@ -22,7 +22,9 @@ export const AuthPage = () => {
       const account = (
         await ethereum.request({ method: "eth_requestAccounts" })
       )[0];
-      const token = (await requests.auth.create()).data.token;
+      // const token = (await requests.auth.create()).data.token;
+      console.log(account);
+      const token = (await requests.auth.create(account, "1234")).data.token;
       dispatch(actions.setUser(account));
       localStorage.setItem("token", token);
       localStorage.setItem("hash", account);

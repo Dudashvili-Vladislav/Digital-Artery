@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "GeosansLight";
+  src: url("../../../../fonts/GeosansLight.ttf"), format("ttf");
+  font-style: normal;
+  font-size: normal;
+}
+
 .title {
   color: white;
   padding: 10px 10px;
@@ -7,10 +14,7 @@
   margin-top: 10px;
   transition: all 0.3s;
   animation: tag 0.3s forwards;
-  .active {
-    font-size: 30px;
-    color: green;
-  }
+  font-family: "GeosansLight";
 }
 
 @keyframes tag {

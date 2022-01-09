@@ -4,31 +4,76 @@ import requests from "../../../api/requests";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect } from "react";
 import { Spinner } from "../../spinner/spinner";
-import { NavLink } from "react-router-dom";
 import { Posts } from "../SearchPage/post/post";
+import { Users } from "../SearchPage/users/users";
 export const Category = ({ match }) => {
   const id = match.params.id;
-  const [isLoading, setLoading] = useState(false);
+  const [isUserLoading, setuserLoading] = useState(false);
+  const [isPostLoading, setPostLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
+  let lastDate = 0;
   const getUsers = async () => {
-    setLoading(true);
+    setuserLoading(true);
     try {
       const users = await requests.usersCategory.get(`test${id}`);
       const posts = await requests.CategoryPosts.get(`test${id}`);
-      setUsers(users.data);
       setPosts(posts.data);
-    } catch (e) {
-      console.log(e);
+      setUsers(users.data);
+    } catch (error) {
+      console.log(error);
     } finally {
-      setLoading(false);
+      setuserLoading(false);
     }
   };
+
+  const getPosts = async () => {
+    if (isPostLoading) {
+      try {
+        const posts = await requests.CategoryPosts.get(`test${id}`, page);
+        if (posts.data.length == 0) {
+          setPostLoading(false);
+          return;
+        }
+        setPosts((prev) => [...prev, ...posts.data]);
+        setPage((prev) => prev + 1);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setPostLoading(false);
+      }
+    }
+  };
+  const scrollHandler = (e) => {
+    let nowDate = Date.now();
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+        100 &&
+      lastDate + 2000 < nowDate
+    ) {
+      lastDate = Date.now();
+      setPostLoading(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", scrollHandler);
+    return function () {
+      window.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    getPosts();
+  }, [isPostLoading]);
+
   useEffect(() => {
     getUsers();
   }, []);
 
-  return isLoading ? (
+  return isUserLoading ? (
     <Spinner />
   ) : (
     <div className={classes.page}>
@@ -52,24 +97,12 @@ export const Category = ({ match }) => {
             },
           }}
         >
-          {users.map(({ name, picture, username }, i) => (
-            <SwiperSlide key={i}>
-              <div className={classes.user}>
-                <img
-                  src={picture}
-                  alt="user avatar"
-                  className={classes.user__avatar}
-                />
-                <div className={classes.user__name}>
-                  {name || username.substring(0, 10)}
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
+          {<Users users={users} />}
         </Swiper>
       </div>
 
       <Posts posts={posts} />
+      {isPostLoading ? <Spinner /> : ""}
     </div>
   );
 };

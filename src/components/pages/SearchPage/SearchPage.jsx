@@ -10,6 +10,7 @@ import { Categories } from "./categories/Categories";
 import { Spinner } from "../../spinner/spinner";
 import { Users } from "./users/users";
 import { useHistory } from "react-router-dom";
+import { colors } from "../../../../assets/tags/colors";
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -56,9 +57,11 @@ const SearchPage = () => {
   const [isLoading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const history = useHistory();
+
   const changeHandler = (e) => {
     setSearchValue(e.target.value);
   };
+
   const getAllTags = async () => {
     setLoading(true);
     try {
@@ -70,6 +73,7 @@ const SearchPage = () => {
       setLoading(false);
     }
   };
+
   const submitForm = async (e) => {
     e.preventDefault();
     history.push(`/results/${searchValue}`);
@@ -84,6 +88,11 @@ const SearchPage = () => {
       setSearchValue(e.target.innerText);
       history.push(`/results/${e.target.innerText}`);
     }
+  };
+  const getRandomColor = () => {
+    const randomNum = Math.floor(Math.random() * (colors.length - 1));
+    
+    return colors[randomNum];
   };
 
   // const checkViewport = (query, quantity) => {
@@ -122,12 +131,14 @@ const SearchPage = () => {
           />
         </StyledDiv>
       </form>
-      <Users />
+
       <div className={classes.tags} onClick={clickOnTag}>
         {isLoading ? (
           <Spinner />
         ) : (
-          tags.map((el, i) => <Tag key={i} title={el} />)
+          tags.map((el, i) => (
+            <Tag key={i} title={el} color={getRandomColor()} />
+          ))
         )}
       </div>
       <Categories />

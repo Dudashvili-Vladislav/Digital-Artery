@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import SwiperTrending from "./Home/SwiperTrending";
+import { SwiperTrending } from "./Home/SwiperTrending";
 import SwiperTop from "./Home/SwiperTop";
 import ImgArray from "./Home/ImgArray";
-import SwiperArtist from "./Home/SwiperArtist";
 import Indices from "./Home/Indices";
 import Marquee from "react-fast-marquee";
-function Home() {
+import SwiperArtist from "./Home/SwiperArtist";
+import React from "react";
+export const Home = () => {
   return (
     <div>
-      <SwiperArtist i_max={30} />
+      <SwiperArtist />
       <Indices />
-      <SwiperTop i_max={10} />
+      <SwiperTop />
+
       <Marquee
         speed={40}
         gradientColor={[5, 5, 5]}
@@ -34,6 +35,4 @@ function Home() {
       <ImgArray i_max={500} j_max={100} history={history} />
     </div>
   );
-}
-
-export default Home;
+};

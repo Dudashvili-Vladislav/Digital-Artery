@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Navbar from "./components/Nav/Navbar";
 import SearchPage from "./components/pages/SearchPage/SearchPage";
 import { Chats } from "./components/pages/Chats/Chats";
-import Home from "./components/pages/Home";
+import { Home } from "./components/pages/Home";
 import Actions from "./components/pages/Actions";
 import Stats from "./components/pages/Stats";
 
@@ -21,7 +21,7 @@ import requests from "./api/requests";
 
 import { useState } from "react";
 import axios from "axios";
-import { Spinner } from "./components/spinner/spinner";
+
 import { Category } from "./components/pages/category/category";
 import { SearchRes } from "./components/pages/SearchPage/result/result";
 
@@ -109,7 +109,7 @@ function App() {
   let msg_qty = getRandomInt(10) + 1;
 
   return loading ? (
-    <Spinner />
+    ""
   ) : (
     <Router>
       <div>

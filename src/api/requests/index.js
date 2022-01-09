@@ -8,6 +8,7 @@ import users from "./search/users"
 import CategoryPosts from './search/categoryPosts'
 import usersCategory from "./search/usersCategory"
 import posts from "./search/posts"
+import usersDefault from "./home/users"
 export default {
     auth,
     feed,
@@ -18,5 +19,6 @@ export default {
     users,
     usersCategory,
     CategoryPosts,
-    posts
+    posts,
+    usersDefault
 }

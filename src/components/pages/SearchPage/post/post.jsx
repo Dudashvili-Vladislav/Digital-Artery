@@ -14,6 +14,6 @@ export const Posts = ({ posts, reqStr }) => {
       ))}
     </div>
   ) : (
-    <div className={classes.empty}>Посты по запросу {reqStr} не найдены</div>
+    <div className={classes.empty}>posts for request {reqStr} not found</div>
   );
 };

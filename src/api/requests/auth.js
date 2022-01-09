@@ -6,14 +6,11 @@ export default {
   },
 
   create(username = 'default', password = "HLhm*Ppsv2q!AXG") {
-    
-    try {
-      return axios.post(`http://127.0.0.1:8000/api/user/token/ `, {
-        username,
-        password,
-      });
-    } catch (e) {
-      return e;
-    }
+
+    return axios.post(`http://127.0.0.1:8000/api/user/token/ `, {
+      username,
+      password,
+    });
+
   },
 };

@@ -1,37 +1,11 @@
-import { useState } from "react";
-import { Spinner } from "../../../spinner/spinner";
 import classes from "./users.module.scss";
 
 import React from "react";
-import { useEffect } from "react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
-import requests from "../../../../api/requests";
-export const Users = ({ searchStr }) => {
-  const [isLoading, setLoading] = useState(false);
-  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    let cleanupFunction = false;
-    const getAllUsers = async () => {
-      if (!cleanupFunction) setLoading(true);
-      try {
-        const res = await requests.users.get(searchStr || "");
-
-        if (!cleanupFunction) setUsers(res.data);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        if (!cleanupFunction) setLoading(false);
-      }
-    };
-
-    getAllUsers();
-    return () => (cleanupFunction = true);
-  }, []);
-
-  return isLoading ? (
-    <Spinner />
-  ) : (
+export const Users = ({ users, searchStr }) => {
+  return (
     <div className={classes.users}>
       <Swiper
         touchRatio={3}
@@ -69,7 +43,7 @@ export const Users = ({ searchStr }) => {
           ))
         ) : (
           <div className={classes.searchStr}>
-            По запросу {searchStr} пользователи не найдены
+            users for request {searchStr} not found
           </div>
         )}
       </Swiper>
