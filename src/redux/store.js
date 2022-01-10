@@ -1,8 +1,11 @@
 import { createStore, combineReducers } from 'redux'
+import { currentImage } from './reducers/image'
 import { setUser } from './reducers/setUser'
 
+
 const rootReducer = combineReducers({
-    user: setUser
+    user: setUser,
+    image: currentImage
 })
 
 

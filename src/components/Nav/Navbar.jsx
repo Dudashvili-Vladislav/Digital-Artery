@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import classes from "./Navbar.module.scss";
 import img from "../../../assets/notUser.png";
-
+import logo from "../../../assets/logo/logo.jpg";
 import { Account } from "./account/account";
 import RightNav from "./RightNav";
 const Nav = styled.nav`
@@ -71,7 +71,7 @@ const Navbar = () => {
   return (
     <Nav>
       <div onClick={() => scrollToTop()}>
-        <img className="logo" src="../assets/logo/logo.jpg" />
+        <img className="logo" src={logo} />
       </div>
       <div onClick={closeModal}>
         <RightNav open={openAuthModal} isAuth={userId} />

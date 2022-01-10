@@ -24,6 +24,7 @@ import axios from "axios";
 
 import { Category } from "./components/pages/category/category";
 import { SearchRes } from "./components/pages/SearchPage/result/result";
+import { Image } from "./components/pages/detailImage/image";
 
 const Tabs = styled.ul`
 
@@ -175,6 +176,7 @@ function App() {
             <Route path="/auth/authorisation" component={AuthPage} />
             <Route path="/category/:id" component={Category} />
             <Route path="/results/:str" component={SearchRes} />
+            <Route path="/image/:page/:id" component={Image} />
           </CacheSwitch>
         </div>
       </div>

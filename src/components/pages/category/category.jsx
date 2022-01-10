@@ -86,9 +86,6 @@ export const Category = ({ match }) => {
           autoHeight={true}
           loop={false}
           breakpoints={{
-            "@0,5": {
-              slidesPerView: 3,
-            },
             "@0.75": {
               slidesPerView: 5,
             },
@@ -96,6 +93,7 @@ export const Category = ({ match }) => {
               slidesPerView: 10,
             },
           }}
+          
         >
           {<Users users={users} />}
         </Swiper>

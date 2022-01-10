@@ -24,7 +24,13 @@ export const AuthPage = () => {
       )[0];
       // const token = (await requests.auth.create()).data.token;
       console.log(account);
-      const token = (await requests.auth.create(account, "1234")).data.token;
+      const token = (
+        await requests.auth.create(
+          // "vapoltavecs",
+          // // account.substring(account.length / 2, account.length)
+          // "1234"
+        )
+      ).data.token;
       dispatch(actions.setUser(account));
       localStorage.setItem("token", token);
       localStorage.setItem("hash", account);

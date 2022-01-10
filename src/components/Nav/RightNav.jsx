@@ -4,7 +4,7 @@ import { RemoveScroll } from "react-remove-scroll";
 import { useDispatch } from "react-redux";
 import { actions } from "../../redux/actions";
 import { NavLink } from "react-router-dom";
-import { Account } from "./account/account";
+import img_src from "../../../assets/01.jpg";
 
 const Ul = styled.ul`
   list-style: none;
@@ -62,7 +62,6 @@ const Ul = styled.ul`
 `;
 
 const RightNav = ({ open, isAuth }) => {
-  let img_src = "../assets/01.jpg";
   const dispatch = useDispatch();
   const logOut = () => {
     dispatch(actions.setUser(""));

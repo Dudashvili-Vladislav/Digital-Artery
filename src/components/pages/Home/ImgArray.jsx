@@ -6,6 +6,8 @@ import { withRouter } from "react-router-dom";
 import requests from "../../../api/requests";
 import { useEffect } from "react";
 import { Spinner } from "../../spinner/spinner";
+import { useDispatch } from "react-redux";
+import { actions } from "../../../redux/actions";
 
 const ImageList = styled.ul`
   background-color: #070406;
@@ -153,10 +155,6 @@ const Image = styled.img`
   flex-grow: 1;
 `;
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
 function srcset(image, size, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -171,11 +169,12 @@ export const ImgArray = ({ history }) => {
 
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+
   const getImages = async () => {
     if (loading) {
       try {
         const res = await requests.feed.get(page);
-
+        res.data.forEach((el) => (el.page = page));
         setImages([...images, ...res.data]);
         setPage((prevState) => prevState + 1);
       } catch (e) {
@@ -215,7 +214,11 @@ export const ImgArray = ({ history }) => {
     if (e.target.classList.contains("sub-image")) {
       if (timeout === 0) {
         timeout = setTimeout(function () {
-          history.push(`/images/${e.target.getAttribute("data-id")}`);
+          history.push(
+            `/image/${e.target.getAttribute(
+              "data-page"
+            )}/${e.target.getAttribute("data-id")}`
+          );
           timeout = 0;
         }, 250);
       } else {
@@ -278,6 +281,7 @@ export const ImgArray = ({ history }) => {
               className="sub-image"
               is-liked="false"
               data-id={item.id}
+              data-page={item.page}
             />
           </ImageListItem>
         ))}
