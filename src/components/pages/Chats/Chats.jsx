@@ -12,7 +12,7 @@ export const chats = createChats(); // Создаем все чаты касто
 export const Chats = () => {
   const [currentUser, setCurrentUser] = useState(3); // id пользователя, с которым переписка
   const userId = useSelector((state) => state.user.id); // Получаем id текущего пользователя(авторизованного)
-  const [ourID, setOurId] = useState(3)
+  const [ourID, setOurId] = useState(3);
   const changeChat = (id) => {
     setCurrentUser(id);
   };
@@ -56,7 +56,9 @@ export const Chats = () => {
           )}
         </div>
       ) : (
-        <div className={classes.not__auth}>Авторизуйтесь</div>
+        <div className={classes.not__auth}>
+          Please <NavLink to="/auth/authorisation">log in</NavLink>
+        </div>
       )}
     </div>
   );

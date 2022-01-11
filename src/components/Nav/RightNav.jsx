@@ -67,6 +67,7 @@ const RightNav = ({ open, isAuth }) => {
     dispatch(actions.setUser(""));
     localStorage.removeItem("hash");
     localStorage.removeItem("token");
+    window.location.reload();
   };
   return (
     <Ul open={open}>

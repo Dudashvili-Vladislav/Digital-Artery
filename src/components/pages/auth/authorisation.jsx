@@ -17,25 +17,34 @@ export const AuthPage = () => {
 
   const onClickConnect = async () => {
     const { ethereum } = window;
-
+    const account = (
+      await ethereum.request({ method: "eth_requestAccounts" })
+    )[0];
     try {
-      const account = (
-        await ethereum.request({ method: "eth_requestAccounts" })
-      )[0];
       // const token = (await requests.auth.create()).data.token;
-      console.log(account);
-      const token = (await requests.auth.create()).data.token;
-      const userInDb = requests.auth.createUsersInDb(account, account);
+      await requests.auth.createUsersInDb(account, account);
       dispatch(actions.setUser(account));
       localStorage.setItem("token", token);
-      localStorage.setItem("hash", account);
-      const provider = await detectEthereumProvider();
       M.toast({ html: "auth succes", classes: "succes" });
-      if (provider) ethereum.enable();
 
       history.push("/");
     } catch (error) {
-      M.toast({ html: error });
+      try {
+        const token = await (
+          await requests.auth.create(account, account)
+        ).data.token;
+        localStorage.setItem("token", token);
+        dispatch(actions.setUser(account));
+        history.push("/");
+        window.location.reload();
+      } catch (e) {
+        console.log(e);
+        M.toast({ html: error });
+      }
+    } finally {
+      const provider = await detectEthereumProvider();
+      if (provider) ethereum.enable();
+      localStorage.setItem("hash", account);
     }
   };
 

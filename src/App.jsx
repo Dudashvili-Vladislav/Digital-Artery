@@ -82,7 +82,7 @@ function App() {
 
         return;
       } catch (e) {
-        return console.log(e);
+        console.log(e);
       } finally {
         setLoading(false);
       }

@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import requests from "../../../api/requests";
 import { Spinner } from "../../spinner/spinner";
 import { Swiper, SwiperSlide } from "swiper/react";
+import play from "../../../../assets/icons/play.svg";
 import heart from "../../../../assets/icons/heart-icon.png";
 export const Image = ({ match }) => {
   const { page, id } = match.params;
@@ -29,11 +30,17 @@ export const Image = ({ match }) => {
 
   return image ? (
     <div className={classes.image}>
-      <img
-        src={image.images[1].file}
-        alt="gif"
-        className={classes.image__gif}
-      />
+      <div className={classes.gif__wrap} >
+        <a href={image.external_url} target="_block">
+          <img src={play} alt="play" className={classes.gif__wrap_play} />
+        </a>
+
+        <img
+          src={image.images[image.images.length-1].file}
+          alt="gif"
+          className={classes.image__gif}
+        />
+      </div>
       <Swiper
         touchRatio={3}
         speed={1000}
