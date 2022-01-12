@@ -26,6 +26,8 @@ import { Category } from "./components/pages/category/category";
 import { SearchRes } from "./components/pages/SearchPage/result/result";
 import { Image } from "./components/pages/detailImage/image";
 
+import "@/styles/index.scss";
+
 const Tabs = styled.ul`
 
   margin-top: 11px;
@@ -75,7 +77,7 @@ function App() {
     if (!token) {
       try {
         const token = (await requests.auth.create()).data.token;
-        console.log(token);
+       
         axios.defaults.headers.Authorization = `Token ${token}`;
 
         localStorage.setItem("token", token);
@@ -176,7 +178,7 @@ function App() {
             <Route path="/auth/authorisation" component={AuthPage} />
             <Route path="/category/:id" component={Category} />
             <Route path="/results/:str" component={SearchRes} />
-            <Route path="/image/:page/:id" component={Image} />
+            <Route path="/image/:id" component={Image} />
           </CacheSwitch>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
 
 // Import Swiper styles
 import "swiper/css";
@@ -27,7 +27,7 @@ function SwiperTop() {
     };
     getAllUsers();
   }, []);
-  
+
   return (
     <div>
       <Swiper
@@ -62,7 +62,13 @@ function SwiperTop() {
       >
         {images.map((el, i) => (
           <SwiperSlide key={i}>
-            <img src={el.images[1].file} alt="funny GIF" className="img-top" />
+            <NavLink to={`image/${el.id}`}>
+              <img
+                src={el.images[1].file}
+                alt="funny GIF"
+                className="img-top"
+              />
+            </NavLink>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 // Import Swiper React components
 
 // Import Swiper styles
@@ -9,8 +9,8 @@ import "swiper/css/pagination";
 
 import { useEffect } from "react";
 import requests from "../../../api/requests";
-import { Slider } from "./SliderTrending";
-import { Spinner } from "../../spinner/spinner";
+import { Slider } from "./slider/SliderTrending";
+import { Spinner } from "@/components/spinner/spinner";
 
 // install Swiper modules
 
@@ -19,7 +19,7 @@ export const SwiperTrending = () => {
   useEffect(() => {
     const createSliders = (images) => {
       for (let i = 0; i <= 4; i++) {
-        (images.length);
+        images.length;
         setSliders((prevState) => [
           ...prevState,
           images.slice(i * (images.length / 5), i * (images.length / 5) + 20),
@@ -29,7 +29,7 @@ export const SwiperTrending = () => {
     const getAllImages = async () => {
       try {
         const images = await requests.trending.get();
-        
+
         createSliders(images.data);
       } catch (error) {
         console.log(error);

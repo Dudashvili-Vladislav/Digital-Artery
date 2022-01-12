@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./authorisation.module.scss";
+import classes from "@styles/auth/authorisation.module.scss";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { useDispatch } from "react-redux";
 import { actions } from "../../../redux/actions";

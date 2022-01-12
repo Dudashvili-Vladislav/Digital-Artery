@@ -1,10 +1,8 @@
 import { Users } from "../users/users";
 import React, { useEffect, useState } from "react";
 import requests from "../../../../api/requests";
-import classes from "./result.module.scss";
-import { NavLink } from "react-router-dom";
-import { Posts } from "../post/post";
-import { Spinner } from "../../../spinner/spinner";
+import { Spinner } from "@/components/spinner/spinner";
+import { Tape } from "@/components/tape/tape";
 export const SearchRes = ({ match }) => {
   const searchStr = match.params.str;
   const [isUserLoading, setUserLoading] = useState(false);
@@ -49,7 +47,6 @@ export const SearchRes = ({ match }) => {
         }
         setPosts((prev) => [...prev, ...posts.data]);
         setPage((prevState) => prevState + 1);
-        console.log(page);
       } catch (error) {
       } finally {
         setPostLoading(false);
@@ -76,7 +73,7 @@ export const SearchRes = ({ match }) => {
   ) : (
     <div>
       <Users searchStr={searchStr} users={users} />
-      <Posts posts={posts} reqStr={searchStr} />
+      <Tape images={posts} />
       {isPostLoading ? <Spinner /> : ""}
     </div>
   );

@@ -1,6 +1,6 @@
 import { users } from "../../../../../../assets/chat/users";
 import React from "react";
-import classes from "./message.module.scss";
+import classes from "@styles/chats/message/message.module.scss";
 export const Message = ({ time, owner, text, ourMessage }) => {
   const { image } = users.filter(({ id }) => id === owner)[0];
   const isPC = matchMedia("(min-width: 1400px)").matches;

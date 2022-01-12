@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import React, { useState, useEffect } from "react";
-import classes from "./account.module.scss";
+import classes from "@styles/NavBar/account/account.module.scss";
 export const Account = ({ id, isOpenModal }) => {
   const [userBalance, setUserBalance] = useState();
   const getAccountBalance = (account) => {

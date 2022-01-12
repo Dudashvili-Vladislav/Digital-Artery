@@ -1,4 +1,4 @@
-import classes from "./spinner.module.scss";
+import classes from "@styles/spinner/spinner.module.scss";
 import React from "react";
 export const Spinner = () => {
   return (

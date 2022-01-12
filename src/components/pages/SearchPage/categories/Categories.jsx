@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { generateCategories } from "../../../../../assets/categories/categories";
 import { Card } from "./card/Card";
-import classes from "./Categories.module.scss";
+import classes from "@styles/search/categories/Categories.module.scss";
 
 export const Categories = () => {
   const categories = generateCategories(3).map(({ title, img }, i) => (

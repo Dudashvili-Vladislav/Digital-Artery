@@ -1,11 +1,11 @@
-import classes from "./category.module.scss";
+import classes from "@styles/category/category.module.scss";
 import React, { useState } from "react";
 import requests from "../../../api/requests";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper } from "swiper/react";
 import { useEffect } from "react";
-import { Spinner } from "../../spinner/spinner";
-import { Posts } from "../SearchPage/post/post";
+import { Spinner } from "@/components/spinner/spinner";
 import { Users } from "../SearchPage/users/users";
+import { Tape } from "@/components/tape/tape";
 export const Category = ({ match }) => {
   const id = match.params.id;
   const [isUserLoading, setuserLoading] = useState(false);
@@ -93,13 +93,12 @@ export const Category = ({ match }) => {
               slidesPerView: 10,
             },
           }}
-          
         >
           {<Users users={users} />}
         </Swiper>
       </div>
 
-      <Posts posts={posts} />
+      <Tape images={posts} />
       {isPostLoading ? <Spinner /> : ""}
     </div>
   );

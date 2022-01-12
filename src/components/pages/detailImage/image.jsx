@@ -1,26 +1,23 @@
 import "swiper/css";
 import "swiper/css/pagination";
 import React, { useState } from "react";
-import classes from "./image.module.scss";
+import classes from "@styles/image/image.module.scss";
 import { useEffect } from "react";
 import requests from "../../../api/requests";
-import { Spinner } from "../../spinner/spinner";
+import { Spinner } from "@/components/spinner/spinner";
 import { Swiper, SwiperSlide } from "swiper/react";
 import play from "../../../../assets/icons/play.svg";
 import heart from "../../../../assets/icons/heart-icon.png";
 export const Image = ({ match }) => {
-  const { page, id } = match.params;
+  const { id } = match.params;
 
   const [image, setImage] = useState();
   useEffect(() => {
     const getImage = async () => {
       try {
-        const images = await requests.feed.get(page);
-        console.log(images);
-        const image = images.data.filter(
-          ({ id: currentId }) => currentId == id
-        )[0];
-        setImage(image);
+        const { data } = await requests.image.get(id);
+
+        setImage(data);
       } catch (error) {
         console.log(error);
       }
@@ -30,13 +27,13 @@ export const Image = ({ match }) => {
 
   return image ? (
     <div className={classes.image}>
-      <div className={classes.gif__wrap} >
+      <div className={classes.gif__wrap}>
         <a href={image.external_url} target="_block">
           <img src={play} alt="play" className={classes.gif__wrap_play} />
         </a>
 
         <img
-          src={image.images[image.images.length-1].file}
+          src={image.images[image.images.length - 1].file}
           alt="gif"
           className={classes.image__gif}
         />

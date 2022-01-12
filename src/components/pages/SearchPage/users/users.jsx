@@ -1,8 +1,8 @@
-import classes from "./users.module.scss";
-
 import React from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import classes from "@styles/search/users/usersStyles.module.scss";
 
 export const Users = ({ users, searchStr }) => {
   return (

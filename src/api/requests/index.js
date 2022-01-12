@@ -9,6 +9,7 @@ import CategoryPosts from './search/categoryPosts'
 import usersCategory from "./search/usersCategory"
 import posts from "./search/posts"
 import usersDefault from "./home/users"
+import image from "./image"
 export default {
     auth,
     feed,
@@ -20,5 +21,6 @@ export default {
     usersCategory,
     CategoryPosts,
     posts,
-    usersDefault
+    usersDefault,
+    image
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Tag.module.scss";
+import classes from "@styles/search/tag/Tag.module.scss";
 
 export const Tag = ({ title, color }) => {
   

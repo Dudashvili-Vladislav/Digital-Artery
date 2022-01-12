@@ -1,8 +1,7 @@
-import requests from "../../../api/requests";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createChats } from "../../../../assets/chat/chats";
 import { Chat } from "./Chat/Chat";
-import classes from "./Chats.module.scss";
+import classes from "@styles/chats/Chats.module.scss";
 import { Dialog } from "./dialog/dialog";
 
 import { NavLink } from "react-router-dom";

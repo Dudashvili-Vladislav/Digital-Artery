@@ -1,7 +1,7 @@
 import { Message } from "./message/message";
 import React from "react";
 
-import classes from "./dialog.module.scss";
+import classes from "@styles/chats/dialog/dialog.module.scss";
 import { chats } from "../Chats";
 import { users } from "../../../../../assets/chat/users";
 export const Dialog = (props) => {
