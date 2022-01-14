@@ -9,7 +9,7 @@
   margin-inline-end: 0px;
   padding-inline-start: 0px;
   list-style-type: none;
-
+  padding-bottom: 100px;
   @media (max-aspect-ratio: 3/4) {
     grid-template-columns: repeat(3, 1fr);
     .item1 {

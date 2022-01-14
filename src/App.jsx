@@ -133,7 +133,7 @@ function App() {
             </li>
             <li>
               <NavLink
-                to={"/chat"}
+                to={"/chats"}
                 className="nav-tab-link"
                 activeClassName="nav-tab-link-active"
               >
@@ -171,11 +171,11 @@ function App() {
           </Tabs>
           <CacheSwitch>
             <Route path="/search" component={SearchPage} />
-            <Route path="/chat" component={Chats} />
+            <Route path="/chats" component={Chats} />
             <CacheRoute exact path="/" render={Home} />
             <Route path="/actions" component={Actions} />
             <Route path="/stats" component={Stats} />
-            <Route path="/chats/:id/" component={Dialog} />
+            <Route path="/chat/:id/" component={Dialog} />
             <Route path="/auth/authorisation" component={AuthPage} />
             <Route path="/category/:id" component={Category} />
             <Route path="/results/:str" component={SearchRes} />

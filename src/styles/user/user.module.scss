@@ -1,0 +1,82 @@
+@import "@utils/variables.scss";
+.images {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.user {
+  max-width: 1200px;
+  margin: 0 auto;
+  &__title {
+    font-size: 35px;
+    font-weight: 600;
+    margin-top: 20px;
+    color: $text;
+  }
+  &__subtitle {
+    font-size: 18px;
+    margin: 5px 0px 20px;
+    color: $text;
+    font-weight: 600;
+  }
+  &__text {
+    font-size: 18px;
+    color: $text;
+    line-height: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  &__info {
+    font-size: 17px;
+    margin: 3px 0px;
+    color: $text;
+  }
+  &__metrics {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0px;
+  }
+  &__icons img {
+    width: 40px;
+    margin-left: 10px;
+    height: 40px;
+  }
+  &__icons {
+    position: relative;
+    &::before {
+      right: -5px;
+      top: 10px;
+      position: absolute;
+      width: 10px;
+      height: 3px;
+      background-color: white;
+      content: "";
+    }
+    &::after {
+      right: -5px;
+      top: 10px;
+      position: absolute;
+      width: 10px;
+      height: 3px;
+      background-color: white;
+      content: "";
+      transform: rotate(90deg);
+    }
+  }
+}
+
+@media (max-aspect-ratio: 2/3) {
+  .images {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .user {
+    max-width: 90%;
+    &__title {
+      font-size: 28px;
+    }
+  }
+}

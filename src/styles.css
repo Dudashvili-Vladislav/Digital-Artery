@@ -117,3 +117,18 @@ body {
 #toast-container div.succes {
   background-color: #4e9a51;
 }
+
+.page {
+  animation: page 0.3s forwards;
+}
+
+@keyframes page {
+  0% {
+    opacity: 0;
+    transform: translateY(200%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}

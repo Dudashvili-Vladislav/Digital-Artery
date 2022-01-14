@@ -1,42 +1,44 @@
 .image {
+  overflow-y: hidden;
   background-color: #070406;
   height: auto;
-  display: flex;
+
   position: relative;
-  animation: image 1s forwards;
+  animation: image .7s forwards;
 
   cursor: pointer;
   &__text {
     text-align: right;
     padding: 1px 3px;
+
     padding-top: 0px;
     height: 18px;
     width: 45px;
     top: 0px;
-    right: 0px;
+
     position: absolute;
 
     background-size: cover;
     font-size: 14px;
     font-family: GeosansLight;
     color: #c5c5c5;
-    background-image: url("../assets/icons/heart_background_black.png");
+    background-image: url("../../../assets/icons/heart_background_black.png");
   }
 
   &__item {
-    object-fit: cover;
+    overflow-y: hidden;
+    display: block;
     width: 100%;
     height: auto;
-    flex-grow: 1;
   }
 }
 @keyframes image {
   0% {
-    margin-top: 1000px;
+    transform: translateY(200%);
     opacity: 0;
   }
   100% {
-    margin-top: 0;
+    transform: translateY(0%);
     opacity: 1;
   }
 }

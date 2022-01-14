@@ -17,7 +17,7 @@ const Ul = styled.ul`
   line-height: 8vh;
   margin-top: 10px;
   font-family: GeosansLight;
-
+  padding: 0;
   flex-flow: column nowrap;
 
   background-image: linear-gradient(

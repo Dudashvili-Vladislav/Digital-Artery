@@ -3,6 +3,8 @@
   color: $text;
   margin-top: 20px;
   animation: image 0.3s forwards;
+  max-width: 1200px;
+  margin: 0 auto;
   &__gif {
     width: 100%;
   }
@@ -37,6 +39,7 @@
   }
 
   &__author {
+    color: $text;
     margin-top: 30px;
     &_wrap {
       width: 140px;
@@ -50,6 +53,7 @@
       width: 100px;
     }
     &_username {
+      color: $text;
       text-align: center;
       margin-top: 10px;
     }
@@ -93,9 +97,9 @@
 @keyframes image {
   0% {
     opacity: 0;
-   transform: translateX(-100%);
+    transform: translateX(-100%);
   }
- 
+
   100% {
     opacity: 1;
     margin-top: 20px;

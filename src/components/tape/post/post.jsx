@@ -24,7 +24,6 @@ export const Post = ({ image }) => {
         className="sub-image"
         data-id={image.id}
       />
-      ))
     </div>
   );
 };

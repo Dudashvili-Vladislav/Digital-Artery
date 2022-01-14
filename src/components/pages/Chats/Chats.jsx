@@ -24,7 +24,7 @@ export const Chats = () => {
         <Chat lastMessage={messages[messages.length - 1]} user={user} key={i} />
       </div>
     ) : (
-      <NavLink to={`chats/${i}`} key={i}>
+      <NavLink to={`chat/${i}`} key={i}>
         <div onClick={() => changeChat(i)}>
           <Chat
             lastMessage={messages[messages.length - 1]}
