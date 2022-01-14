@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 import SwiperCore, { Pagination, Lazy } from "swiper";
 import { useEffect } from "react";
 import requests from "../../../api/requests";
+import { NavLink } from "react-router-dom";
 
 // install Swiper modules
 SwiperCore.use([Pagination]);
@@ -82,11 +83,12 @@ function SwiperArtist() {
       >
         {users.map((el, i) => (
           <SwiperSlide key={i}>
-            <Avatar>
-              <img src={el.picture} alt="funny GIF" className="img-artist" />
-              <div className="text">{el.name || el.username}</div>
-            </Avatar>
-            )
+            <NavLink to={`/user/detail/${el.username}`}>
+              <Avatar>
+                <img src={el.picture} alt="funny GIF" className="img-artist" />
+                <div className="text">{el.name || el.username}</div>
+              </Avatar>
+            </NavLink>
           </SwiperSlide>
         ))}
       </Swiper>

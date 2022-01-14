@@ -1,5 +1,5 @@
 import React from "react";
-
+import { NavLink } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import classes from "@styles/search/users/usersStyles.module.scss";
@@ -29,16 +29,18 @@ export const Users = ({ users, searchStr }) => {
         {users.length > 0 ? (
           users.map(({ name, picture, username }, i) => (
             <SwiperSlide key={i}>
-              <div className={classes.user}>
-                <img
-                  src={picture}
-                  alt="user avatar"
-                  className={classes.user__avatar}
-                />
-                <div className={classes.user__name}>
-                  {name || username.substring(0, 10)}
+              <NavLink to={`/user/detail/${username}`}>
+                <div className={classes.user}>
+                  <img
+                    src={picture}
+                    alt="user avatar"
+                    className={classes.user__avatar}
+                  />
+                  <div className={classes.user__name}>
+                    {name || username.substring(0, 10)}
+                  </div>
                 </div>
-              </div>
+              </NavLink>
             </SwiperSlide>
           ))
         ) : (

@@ -8,6 +8,7 @@ import { Spinner } from "@/components/spinner/spinner";
 import { Swiper, SwiperSlide } from "swiper/react";
 import play from "../../../../assets/icons/play.svg";
 import heart from "../../../../assets/icons/heart-icon.png";
+import { NavLink } from "react-router-dom";
 export const Image = ({ match }) => {
   const { id } = match.params;
 
@@ -77,16 +78,18 @@ export const Image = ({ match }) => {
         <div className={classes.image__description}>{image.caption}</div>
         <div className={classes.image__author}>
           <div className={classes.image__author_title}>Authors:</div>
-          <div className={classes.image__author_wrap}>
-            <img
-              src={image.user.picture}
-              alt="user image"
-              className={classes.image__author_img}
-            />
-            <div className={classes.image__author_username}>
-              {image.user.name || image.user.username}
+          <NavLink to={`/user/detail/${image.user.username}`}>
+            <div className={classes.image__author_wrap}>
+              <img
+                src={image.user.picture}
+                alt="user image"
+                className={classes.image__author_img}
+              />
+              <div className={classes.image__author_username}>
+                {image.user.name || image.user.username}
+              </div>
             </div>
-          </div>
+          </NavLink>
         </div>
         <div className={classes.image__tags}>
           <div>tags: </div>
