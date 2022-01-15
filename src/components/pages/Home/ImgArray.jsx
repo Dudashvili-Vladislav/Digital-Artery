@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Spinner } from "@/components/spinner/spinner";
 import { Tape } from "@/components/tape/tape";
 
-export const ImgArray = ({ history }) => {
+export const ImgArray = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -31,7 +31,7 @@ export const ImgArray = ({ history }) => {
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
         100 &&
-      lastDate + 2000 < nowDate
+      lastDate + 500 < nowDate
     ) {
       lastDate = Date.now();
       setLoading(true);

@@ -11,6 +11,9 @@ import { Categories } from "./categories/Categories";
 import { Spinner } from "@/components/spinner/spinner";
 import { useHistory } from "react-router-dom";
 import { colors } from "../../../../assets/tags/colors";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const SearchPage = () => {
   const [tags, setTags] = useState([]);
@@ -72,9 +75,13 @@ const SearchPage = () => {
         {isLoading ? (
           <Spinner />
         ) : (
-          tags.map((el, i) => (
-            <Tag key={i} title={el} color={getRandomColor()} />
-          ))
+          <Swiper slidesPerView="auto">
+            {tags.map((el, i) => (
+              <SwiperSlide style={{ width: "auto" }}>
+                <Tag key={i} title={el} color={getRandomColor()} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         )}
       </div>
       <Categories />

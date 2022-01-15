@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
+import { actions } from "../../../redux/actions";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,6 +14,7 @@ import SwiperCore, { Pagination, Lazy } from "swiper";
 import { useEffect } from "react";
 import requests from "../../../api/requests";
 import { NavLink } from "react-router-dom";
+
 
 // install Swiper modules
 SwiperCore.use([Pagination]);
@@ -50,7 +52,7 @@ function SwiperArtist() {
     };
     getAllUsers();
   }, []);
-
+  
   return (
     <div>
       <Swiper

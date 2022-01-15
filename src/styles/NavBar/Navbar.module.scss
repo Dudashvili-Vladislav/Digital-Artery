@@ -26,6 +26,12 @@
   }
 }
 
+.user__logo{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
 .cross {
   cursor: pointer;
   z-index: 100;
@@ -55,6 +61,8 @@
     }
   }
 }
+
+
 
 @keyframes cross {
   0% {

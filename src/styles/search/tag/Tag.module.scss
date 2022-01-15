@@ -11,10 +11,11 @@
   border-radius: 40px;
   cursor: pointer;
   font-size: 20px;
-  margin-top: 10px;
+  
   transition: all 0.3s;
   animation: tag 0.3s forwards;
   font-family: "GeosansLight";
+  display: block;
 }
 
 @keyframes tag {

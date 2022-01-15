@@ -10,6 +10,7 @@ import logo from "../../../assets/logo/logo.jpg";
 
 import { Account } from "./account/account";
 import RightNav from "./RightNav";
+import { useLocation } from "react-router-dom";
 
 function scrollToTop() {
   window.scrollTo({
@@ -21,6 +22,7 @@ function scrollToTop() {
 const Navbar = () => {
   const userId = useSelector((state) => state.user.id);
   const [openAuthModal, setOpenAuthModal] = useState(false);
+  const { logoUser } = useSelector((state) => state.currentUser);
   const closeModal = (e) => {
     if (
       e.target.classList.contains("logout") ||
@@ -28,11 +30,15 @@ const Navbar = () => {
     )
       setOpenAuthModal(false);
   };
-
+  const location = useLocation();
   return (
     <nav className="nav">
       <div onClick={() => scrollToTop()}>
-        <img className="logo" src={logo} />
+        {location.pathname.indexOf("/user/detail") === -1 || !logoUser ? (
+          <img className="logo" src={logo} />
+        ) : (
+          <img className="user__logo" src={logoUser} alt="user logo" />
+        )}
       </div>
       <div onClick={closeModal}>
         <RightNav open={openAuthModal} isAuth={userId} />
