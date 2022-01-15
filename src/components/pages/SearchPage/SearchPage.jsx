@@ -59,7 +59,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className={classes.container}>
       <form action="" onSubmit={submitForm}>
         <div className="input">
           <input
@@ -71,11 +71,11 @@ const SearchPage = () => {
         </div>
       </form>
 
-      <div className={classes.tags} onClick={clickOnTag}>
+      <div className="tags" onClick={clickOnTag}>
         {isLoading ? (
           <Spinner />
         ) : (
-          <Swiper slidesPerView="auto">
+          <Swiper slidesPerView="auto" className={classes.tags__wrap}>
             {tags.map((el, i) => (
               <SwiperSlide style={{ width: "auto" }}>
                 <Tag key={i} title={el} color={getRandomColor()} />

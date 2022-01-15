@@ -10,6 +10,7 @@
 .user {
   max-width: 1200px;
   margin: 0 auto;
+
   &__title {
     font-size: 35px;
     font-weight: 600;
@@ -78,5 +79,11 @@
     &__title {
       font-size: 28px;
     }
+  }
+}
+
+@media (max-width: 1300px) {
+  .user {
+    padding: 0px 20px;
   }
 }
