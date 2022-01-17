@@ -14,10 +14,7 @@ import SwiperCore, { Pagination, Lazy } from "swiper";
 import { useEffect } from "react";
 import requests from "../../../api/requests";
 import { NavLink } from "react-router-dom";
-
-
-// install Swiper modules
-SwiperCore.use([Pagination]);
+import { settings } from "../../slider/sliderSettings";
 
 const Avatar = styled.div`
   position: relative;
@@ -52,37 +49,10 @@ function SwiperArtist() {
     };
     getAllUsers();
   }, []);
-  
+
   return (
     <div>
-      <Swiper
-        modules={[Lazy]}
-        lazy={{
-          loadOnTransitionStart: true,
-          loadPrevNext: true,
-          loadPrevNextAmount: 2,
-        }}
-        //freeMode={{
-        //  enabled:true,
-        //  sticky:true,
-        //}}
-        touchRatio={3}
-        speed={1000}
-        slidesPerView={5}
-        spaceBetween={5}
-        autoHeight={true}
-        loop={false}
-        grabCursor={true}
-        className="swiper-artist"
-        breakpoints={{
-          "@0.75": {
-            slidesPerView: 5,
-          },
-          "@1.25": {
-            slidesPerView: 10,
-          },
-        }}
-      >
+      <Swiper {...settings}>
         {users.map((el, i) => (
           <SwiperSlide key={i}>
             <NavLink to={`/user/detail/${el.username}`}>

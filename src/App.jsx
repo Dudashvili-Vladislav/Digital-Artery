@@ -27,42 +27,10 @@ import { SearchRes } from "./components/pages/SearchPage/result/result";
 import { Image } from "./components/pages/detailImage/image";
 
 import "@/styles/index.scss";
+import "@styles/app/app.scss"
 import { User } from "@/components/pages/user/user";
 
-const Tabs = styled.ul`
 
-  margin-top: 11px;
-  margin-bottom: 0px;
-  margin-left: 0;
-  padding-left: 0;
-  color: var(--black)
-  font-color: white;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  text-align: center;
-  list-style: none;
-  gap: 5px;
-  width: 100%;
-  font-size: 18px;
-
-  sup {
-    color: white;
-    font-size: 10px;
-  }
-
-  .nav-tab-link {
-	text-decoration: none;
-	color: #888888;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-  }
-
-  .nav-tab-link-active {
-	text-decoration: none;
-	color: white;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-  }
-
-`;
 
 const loader = document.querySelector(".preloader");
 const showLoader = () => loader.classList.remove("preloader");
@@ -70,6 +38,7 @@ const addClass = () => loader.classList.add("loader-hide");
 
 function App() {
   const [loading, setLoading] = useState(true);
+  axios.defaults.baseURL = "http://127.0.0.1:8000/api/";
   const dispatch = useDispatch();
   const checkToken = async () => {
     setLoading(true);
@@ -121,7 +90,7 @@ function App() {
         <div className="first-row" />
 
         <div>
-          <Tabs className="navbar-tabs">
+          <div className="navbar-tabs">
             <li>
               <NavLink
                 to={"/search"}
@@ -168,7 +137,7 @@ function App() {
                 stats
               </NavLink>
             </li>
-          </Tabs>
+          </div>
           <CacheSwitch>
             <Route path="/search" component={SearchPage} />
             <Route path="/chats" component={Chats} />

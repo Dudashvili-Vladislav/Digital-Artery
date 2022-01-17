@@ -3,40 +3,14 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import classes from "@styles/home/slider/Slider.module.scss";
-import SwiperCore, { Pagination, Lazy } from "swiper";
+import SwiperCore, { Pagination } from "swiper";
 import heartIcon from "../../../../../assets/icons/heart-icon.png";
 import { NavLink } from "react-router-dom";
+import { settings } from "../../../slider/sliderSettings";
 SwiperCore.use([Pagination]);
 export const Slider = ({ slides }) => {
   return (
-    <Swiper
-      modules={[Lazy]}
-      lazy={{
-        loadOnTransitionStart: true,
-        loadPrevNext: true,
-        loadPrevNextAmount: 2,
-      }}
-      //freeMode={{
-      //  enabled:true,
-      //  sticky:true,
-      //}}
-      touchRatio={3}
-      speed={1000}
-      slidesPerView={5}
-      spaceBetween={5}
-      autoHeight={true}
-      loop={false}
-      grabCursor={true}
-      className="swiper-i"
-      breakpoints={{
-        "@0.75": {
-          slidesPerView: 5,
-        },
-        "@1.25": {
-          slidesPerView: 10,
-        },
-      }}
-    >
+    <Swiper {...settings}>
       {slides.map((el, i) => (
         <SwiperSlide key={i}>
           <NavLink to={`/image/${el.id}`}>

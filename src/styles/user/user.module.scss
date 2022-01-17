@@ -6,7 +6,9 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  padding: 0 10px;
 }
+
 .user {
   max-width: 1200px;
   margin: 0 auto;
@@ -82,8 +84,8 @@
   }
 }
 
-@media (max-width: 1300px) {
-  .user {
-    padding: 0px 20px;
+@media (min-width: 1200px) {
+  .images {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -2,6 +2,8 @@
   background-color: green;
 }
 
-.tags .swiper-wrapper {
-  justify-content: center;
+@media (min-width: 1200px) {
+  .tags .swiper-wrapper {
+    justify-content: center;
+  }
 }

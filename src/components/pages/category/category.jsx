@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Spinner } from "@/components/spinner/spinner";
 import { Users } from "../SearchPage/users/users";
 import { Tape } from "@/components/tape/tape";
+import { settings } from "@components/slider/sliderSettings.js";
 export const Category = ({ match }) => {
   const id = match.params.id;
   const [isUserLoading, setuserLoading] = useState(false);
@@ -78,23 +79,8 @@ export const Category = ({ match }) => {
   ) : (
     <div className={classes.page}>
       <div className={classes.users}>
-        <Swiper
-          touchRatio={3}
-          speed={1000}
-          slidesPerView={10}
-          spaceBetween={5}
-          autoHeight={true}
-          loop={false}
-          breakpoints={{
-            "@0.75": {
-              slidesPerView: 5,
-            },
-            "@1.25": {
-              slidesPerView: 10,
-            },
-          }}
-        >
-          {<Users users={users} />}
+        <Swiper {...settings}>
+          <Users users={users} />
         </Swiper>
       </div>
 

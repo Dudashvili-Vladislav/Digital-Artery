@@ -77,8 +77,8 @@ const SearchPage = () => {
         ) : (
           <Swiper slidesPerView="auto" className={classes.tags__wrap}>
             {tags.map((el, i) => (
-              <SwiperSlide style={{ width: "auto" }}>
-                <Tag key={i} title={el} color={getRandomColor()} />
+              <SwiperSlide style={{ width: "auto" }} key={i}>
+                <Tag title={el} color={getRandomColor()} />
               </SwiperSlide>
             ))}
           </Swiper>

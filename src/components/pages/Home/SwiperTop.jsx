@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Lazy, Autoplay } from "swiper";
 import requests from "../../../api/requests";
+import { settings } from "../../slider/sliderSettings";
 
 // install Swiper modules
 SwiperCore.use([Pagination]);
@@ -31,30 +32,11 @@ function SwiperTop() {
   return (
     <div>
       <Swiper
-        modules={[Lazy, Autoplay]}
-        lazy={{
-          loadOnTransitionStart: true,
-          loadPrevNext: true,
-          loadPrevNextAmount: 2,
-        }}
-        //freeMode={{
-        //  enabled:true,
-        //  sticky:true,
-        //}}
-        touchRatio={4}
-        speed={500}
+        {...settings}
         slidesPerView={1}
-        spaceBetween={3}
-        autoHeight={true}
+        modules={[Lazy, Autoplay]}
         loop={true}
-        grabCursor={true}
-        autoplay={{ delay: 3000 }}
-        loopAdditionalSlides={2}
-        className="swiper-top"
         breakpoints={{
-          "@0.75": {
-            slidesPerView: 1,
-          },
           "@1.25": {
             slidesPerView: 3,
           },
