@@ -24,11 +24,7 @@ const Navbar = () => {
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const { logoUser } = useSelector((state) => state.currentUser);
   const closeModal = (e) => {
-    if (
-      e.target.classList.contains("logout") ||
-      e.target.classList.contains("login")
-    )
-      setOpenAuthModal(false);
+    setOpenAuthModal(false);
   };
   const location = useLocation();
   return (

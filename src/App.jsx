@@ -27,10 +27,9 @@ import { SearchRes } from "./components/pages/SearchPage/result/result";
 import { Image } from "./components/pages/detailImage/image";
 
 import "@/styles/index.scss";
-import "@styles/app/app.scss"
+import "@styles/app/app.scss";
 import { User } from "@/components/pages/user/user";
-
-
+import { CreatePost } from "./components/pages/createPost/createPost";
 
 const loader = document.querySelector(".preloader");
 const showLoader = () => loader.classList.remove("preloader");
@@ -150,6 +149,7 @@ function App() {
             <Route path="/results/:str" component={SearchRes} />
             <Route path="/image/:id" component={Image} />
             <Route exact path="/user/detail/:username/" component={User} />
+            <Route exact path="/post/create/" component={CreatePost} />
           </CacheSwitch>
         </div>
       </div>

@@ -1,0 +1,125 @@
+@import "../../utils/variables.scss";
+.form__wrapper {
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.form {
+  &__title {
+    color: $text;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  &__input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    color: $text;
+    background: rgb(26, 28, 31);
+    resize: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  &__file {
+    height: auto;
+    display: block;
+    &_wrap {
+     
+      display: block;
+      height: auto;
+      position: relative;
+      &::before {
+        content: "";
+        width: 50px;
+        height: 4px;
+        top: 50%;
+        margin-top: -2px;
+        left: 50%;
+        margin-left: -25px;
+        background-color: $text;
+        position: absolute;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        height: 50px;
+        background-color: $text;
+        width: 4px;
+        margin-top: -25px;
+        top: 50%;
+        left: 50%;
+        margin-left: -2px;
+      }
+    }
+
+    & input {
+      font-size: 0;
+      background-color: black;
+      z-index: -1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      height: 90px;
+    }
+  }
+
+  &__button {
+    display: block;
+    width: 100%;
+    margin: 40px auto 0;
+    border-radius: 30px;
+    background-color: rgb(26, 28, 31);
+    border: none;
+    outline: none;
+    font-size: 20px;
+    padding: 15px;
+
+    color: rgb(134, 134, 134);
+  }
+  &__uploaded {
+    margin-top: 30px;
+  }
+  &__group {
+    position: relative;
+    margin-top: 40px;
+    color: $text;
+
+    & label {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      transition: all 0.3s;
+    }
+
+    & input:focus ~ label,
+    input:valid ~ label {
+      top: -30px;
+      left: 3px;
+    }
+
+    & textarea:focus ~ label,
+    textarea:valid ~ label {
+      top: -30px;
+      left: 3px;
+    }
+  }
+}
+
+.img__wrap {
+  position: relative;
+  & .cross {
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    overflow: hidden;
+  }
+}

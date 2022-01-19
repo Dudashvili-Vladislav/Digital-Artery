@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { actions } from "../../../redux/actions";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 

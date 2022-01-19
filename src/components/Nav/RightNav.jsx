@@ -78,6 +78,9 @@ const RightNav = ({ open, isAuth }) => {
       <li>Finances</li>
       <li>Settings</li>
       <li>About Us</li>
+      <li>
+        <NavLink to="/post/create/">Create Post</NavLink>
+      </li>
       {!isAuth ? (
         <li>
           <NavLink to="/auth/authorisation" className="login">
