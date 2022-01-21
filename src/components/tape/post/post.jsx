@@ -22,7 +22,7 @@ export const Post = ({ image }) => {
         {...srcset(
           location.pathname.includes("/user/detail")
             ? image.images[image.images.length - 1].file
-            : image.images[0].file,
+            : image.images[0]?.file,
           121
         )}
         alt={image.title}

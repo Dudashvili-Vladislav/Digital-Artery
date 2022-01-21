@@ -28,7 +28,7 @@ export const Slider = ({ slides }) => {
             <div className={classes.image__wrap}>
               <div className={classes.text}>{el.num_vote_up}</div>
               <img
-                src={el.images[0].file}
+                src={el.images[0]?.file}
                 alt="slider image"
                 className={classes.image}
               />
