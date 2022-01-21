@@ -1,6 +1,7 @@
 import classes from "@/styles/tape/post.module.scss";
 import React from "react";
 import { useLocation } from "react-router-dom";
+import heart from '../../../../assets/icons/heart-icon.png'
 function srcset(image, size, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -15,7 +16,7 @@ export const Post = ({ image }) => {
   
   return (
     <div className={classes.image}>
-      <div className={classes.image__text}>{image.num_vote_up}</div>
+      <p className={`${classes.image__text} text`}>{image.num_vote_up}</p>
       <img
         className={classes.image__item}
         {...srcset(
@@ -28,7 +29,7 @@ export const Post = ({ image }) => {
         loading="lazy"
       />
       <img
-        {...srcset("../assets/icons/heart-icon.png", 121)}
+        {...srcset(heart, 121)}
         className="sub-image"
         data-id={image.id}
       />

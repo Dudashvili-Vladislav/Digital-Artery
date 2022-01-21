@@ -5,10 +5,7 @@ export default {
         return axios.get(`post/detail/${id}/`)
     },
     create(data) {
-        return axios.post('/post/create/', {
-            data,
-
-        })
+        return axios.post('/post/create/',data)
 
     }
 }

@@ -10,7 +10,18 @@ import { settings } from "../../../slider/sliderSettings";
 SwiperCore.use([Pagination]);
 export const Slider = ({ slides }) => {
   return (
-    <Swiper {...settings}>
+    <Swiper
+      {...settings}
+      breakpoints={{
+        "@1": {
+          slidesPerView: 3,
+        },
+        "@1.25": {
+          slidesPerView: 10,
+        },
+      }}
+      slidesPerView={3}
+    >
       {slides.map((el, i) => (
         <SwiperSlide key={i}>
           <NavLink to={`/image/${el.id}`}>

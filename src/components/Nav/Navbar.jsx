@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import classes from "@styles/NavBar/NavBar.module.scss";
+import classes from "@styles/NavBar/Navbar.module.scss";
 import "@styles/NavBar/NavBar.scss";
 
 import img from "../../../assets/notUser.png";

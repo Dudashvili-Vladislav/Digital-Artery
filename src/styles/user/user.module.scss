@@ -7,6 +7,10 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   padding: 0 10px;
+  & p {
+    top: 40px !important;
+  }
+  grid-gap: 10px;
 }
 
 .user {
@@ -44,6 +48,7 @@
     margin: 20px 0px;
   }
   &__icons img {
+    opacity: 0.5;
     width: 40px;
     margin-left: 10px;
     height: 40px;
@@ -56,7 +61,7 @@
       position: absolute;
       width: 10px;
       height: 3px;
-      background-color: white;
+      background-color: $text;
       content: "";
     }
     &::after {
@@ -65,7 +70,7 @@
       position: absolute;
       width: 10px;
       height: 3px;
-      background-color: white;
+      background-color: $text;
       content: "";
       transform: rotate(90deg);
     }
@@ -75,9 +80,17 @@
 @media (max-aspect-ratio: 2/3) {
   .images {
     grid-template-columns: repeat(1, 1fr);
+    & img {
+      margin-top: 40px;
+      height: 500px !important;
+    }
+    & p {
+      top: 40px !important;
+    }
   }
   .user {
     max-width: 90%;
+
     &__title {
       font-size: 28px;
     }
@@ -87,5 +100,9 @@
 @media (min-width: 1200px) {
   .images {
     grid-template-columns: repeat(3, 1fr);
+    & img {
+      margin-top: 40px;
+      height: 500px !important;
+    }
   }
 }

@@ -1,6 +1,6 @@
 import classes from "@styles/user/user.module.scss";
 import { Post } from "@components/tape/post/post";
-import { Spinner } from "@components/Spinner/Spinner";
+import { Spinner } from "@components/spinner/spinner";
 import { useEffect } from "react";
 import { useState } from "react";
 import requests from "../../../api/requests";

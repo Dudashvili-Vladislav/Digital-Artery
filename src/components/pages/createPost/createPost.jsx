@@ -16,12 +16,13 @@ export const CreatePost = () => {
   const token = useSelector((token) => token.user.id);
 
   const onSubmit = async (data) => {
-      console.log(files)
+    console.log({ ...data, files: [...files] });
     try {
       const res = await requests.image.create({
         ...data,
-        files:[...files],
+        files: uploaded,
       });
+      console.log(res);
     } catch (e) {
       console.log(e);
     }
@@ -61,8 +62,8 @@ export const CreatePost = () => {
           <div className={classes.form__group}>
             <input
               className={classes.form__input}
-              required
               {...register("name")}
+              required
             />
             <span className={classes.form__bar}></span>
             <label>Game name</label>
@@ -71,9 +72,9 @@ export const CreatePost = () => {
           <div className={classes.form__group}>
             <input
               className={classes.form__input}
-              required
               type="text"
               {...register("external_url")}
+              required
             />
             <span className={classes.form__bar}></span>
             <label>Game Url</label>
@@ -81,9 +82,9 @@ export const CreatePost = () => {
           <div className={classes.form__group}>
             <input
               className={classes.form__input}
-              required
               type="text"
               {...register("tags")}
+              required
             />
             <span className={classes.form__bar}></span>
             <label>Tags</label>
@@ -91,9 +92,9 @@ export const CreatePost = () => {
           <div className={classes.form__group}>
             <input
               className={classes.form__input}
-              required
               type="text"
               {...register("category")}
+              required
             />
             <span className={classes.form__bar}></span>
             <label>Categories</label>
@@ -101,16 +102,16 @@ export const CreatePost = () => {
           <div className={classes.form__group}>
             <textarea
               className={classes.form__input}
-              required
               type="text"
               {...register("caption")}
+              required
             />
             <span className={classes.form__bar}></span>
             <label>Caption</label>
           </div>
 
           <div className={classes.form__uploaded}>
-            <Swiper {...settings} slidesPerView={3}>
+            <Swiper {...settings} slidesPerView={3} >
               {uploaded.map((el, i) => (
                 <SwiperSlide key={i}>
                   <div className={classes.img__wrap}>
@@ -138,6 +139,7 @@ export const CreatePost = () => {
                       multiple
                       className={classes.upload}
                       style={{ height: uploaded.length > 0 ? "100%" : "90px" }}
+                      required
                     />
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "@styles/search/card/card.module.scss";
+import classes from "@styles/search/card/Card.module.scss";
 export const Card = ({ img, title }) => {
   return (
     <div className={classes.card}>

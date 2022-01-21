@@ -10,7 +10,7 @@ import Stats from "./components/pages/Stats";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import CacheRoute, { CacheSwitch } from "react-router-cache-route";
 import { setDefaultHeaders } from "./api/instanse";
-import styled from "styled-components";
+
 
 import { Dialog } from "./components/pages/Chats/dialog/dialog";
 import { AuthPage } from "./components/pages/auth/authorisation";
@@ -30,6 +30,7 @@ import "@/styles/index.scss";
 import "@styles/app/app.scss";
 import { User } from "@/components/pages/user/user";
 import { CreatePost } from "./components/pages/createPost/createPost";
+import history from "./components/history";
 
 const loader = document.querySelector(".preloader");
 const showLoader = () => loader.classList.remove("preloader");
@@ -83,7 +84,7 @@ function App() {
   return loading ? (
     ""
   ) : (
-    <Router>
+    <Router history={history}>
       <div>
         <Navbar />
         <div className="first-row" />
