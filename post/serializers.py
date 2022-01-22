@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from post.models import Post, Image
 from user.serializers import UserListSerializer
+from typing import Dict, Any
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -14,6 +15,13 @@ class ImageListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = ['file']
+
+
+def PostFastListSerializer(post: Post) -> Dict[str, Any]:
+    return {
+        'id': post.id,
+        'external_url': post.external_url
+    }
 
 
 class PostListSerializer(serializers.ModelSerializer):
@@ -61,4 +69,4 @@ class PostSerializer(serializers.ModelSerializer):
 class PostModifySerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['user', 'name', 'caption', 'external_url']
+        fields = ['user', 'name', 'caption', 'external_url', 'tags', 'category']

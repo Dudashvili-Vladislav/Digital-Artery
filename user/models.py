@@ -29,11 +29,12 @@ class User(AbstractUser):
         (PUBLIC, 'Public'),
     ]
 
-    email: str = models.EmailField(_('email address'), unique=True)
+    email: str = models.EmailField(_('email address'), null=True, blank=True)
     private: bool = models.BooleanField(default=PUBLIC, choices=VISIBILITY_CHOICES)
     bio: str = models.CharField(
         max_length=250, null=True, blank=True, help_text='About the user.'
     )
+
     picture = models.ImageField(
         null=True,
         blank=True,
@@ -41,12 +42,19 @@ class User(AbstractUser):
         upload_to='profile_pictures',
         verbose_name=_('profile picture'),
     )
+    logo = models.ImageField(
+        null=True,
+        blank=True,
+        default='default.png',
+        upload_to='profile_logo',
+        verbose_name=_('profile logo'),
+    )
 
     _follows = models.ManyToManyField('User', blank=True, related_name='followed_by')
 
     objects = UserManager()
 
-    REQUIRED_FIELDS = ['email', 'password']
+    REQUIRED_FIELDS = ['password'] #['email', 'password']
 
     def bookmark(self, post: Post) -> Optional[Bookmark]:
         if post.user in self.following:

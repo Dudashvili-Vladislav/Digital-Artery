@@ -37,6 +37,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
             'bio',
             'name',
             'picture',
+            'logo',
             'private',
             'username',
             'post_count',
