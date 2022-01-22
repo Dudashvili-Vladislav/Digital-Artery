@@ -16,6 +16,7 @@ export const SearchRes = ({ match }) => {
     try {
       const res = await requests.posts.get(searchStr);
       const users = await requests.users.get(searchStr);
+
       setPosts(res.data);
       setUsers(users.data);
     } catch (e) {
@@ -42,7 +43,9 @@ export const SearchRes = ({ match }) => {
     if (isPostLoading) {
       try {
         const posts = await requests.posts.get(searchStr, page);
+        console.log(posts);
         if (posts.data.length == 0) {
+          window.removeEventListener("scroll", scrollHandler);
           return setPostLoading(false);
         }
         setPosts((prev) => [...prev, ...posts.data]);

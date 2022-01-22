@@ -3,29 +3,12 @@ import { NavLink } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import classes from "@styles/search/users/usersStyles.module.scss";
+import { settings } from "../../../slider/sliderSettings";
 
 export const Users = ({ users, searchStr }) => {
   return (
     <div className={classes.users}>
-      <Swiper
-        touchRatio={3}
-        speed={1000}
-        slidesPerView={10}
-        spaceBetween={5}
-        autoHeight={true}
-        loop={false}
-        breakpoints={{
-          "@0,5": {
-            slidesPerView: 3,
-          },
-          "@0.75": {
-            slidesPerView: 5,
-          },
-          "@1.25": {
-            slidesPerView: 10,
-          },
-        }}
-      >
+      <Swiper {...settings} slidesPerView={3}>
         {users.length > 0 ? (
           users.map(({ name, picture, username }, i) => (
             <SwiperSlide key={i}>

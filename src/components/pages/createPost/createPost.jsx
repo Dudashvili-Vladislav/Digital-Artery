@@ -16,13 +16,13 @@ export const CreatePost = () => {
   const token = useSelector((token) => token.user.id);
 
   const onSubmit = async (data) => {
-    console.log({ ...data, files: [...files] });
+    
     try {
       const res = await requests.image.create({
         ...data,
-        files: uploaded,
+        files: [...files],
       });
-      console.log(res);
+      console.log(files);
     } catch (e) {
       console.log(e);
     }
@@ -41,6 +41,7 @@ export const CreatePost = () => {
       let reader = new FileReader();
       reader.addEventListener("load", handleFile);
       reader.readAsDataURL(el);
+      
     });
   };
   const handleFile = (e) => {
