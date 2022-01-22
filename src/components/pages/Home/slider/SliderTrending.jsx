@@ -32,6 +32,7 @@ export const Slider = ({ slides }) => {
                 alt="slider image"
                 className={classes.image}
               />
+
               <img src={heartIcon} className={classes.sub_image} />
             </div>
           </NavLink>

@@ -12,7 +12,7 @@ export default {
                 data[i].forEach(el => formData.append('images', el))
             else formData.append(i, data[i])
         }
-
+        
         return axios.post('/post/create/', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'

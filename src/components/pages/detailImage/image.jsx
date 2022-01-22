@@ -109,7 +109,8 @@ export const Image = ({ match }) => {
                 className={classes.image__author_img}
               />
               <div className={classes.image__author_username}>
-                {image.user.name || image.user.username}
+                {image.user.name ||
+                  image.user.username.substring(0, 20) + "..."}
               </div>
             </div>
           </NavLink>

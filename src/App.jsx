@@ -11,7 +11,6 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import CacheRoute, { CacheSwitch } from "react-router-cache-route";
 import { setDefaultHeaders } from "./api/instanse";
 
-
 import { Dialog } from "./components/pages/Chats/dialog/dialog";
 import { AuthPage } from "./components/pages/auth/authorisation";
 import { useDispatch } from "react-redux";

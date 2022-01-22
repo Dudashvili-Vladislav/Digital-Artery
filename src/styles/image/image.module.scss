@@ -50,8 +50,9 @@
       font-size: 18px;
     }
     &_img {
+      background-color: white;
       display: block;
-      margin: 10px auto;
+      margin: 20px auto;
       width: 100px;
     }
     &_username {
@@ -131,6 +132,26 @@
         height: 100%;
         object-fit: cover;
       }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .image {
+    &__gif {
+      height: 400px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .gif__wrap {
+    max-height: 500px;
+    height: 100%;
+  }
+  .image {
+    &__gif {
+      height: 100%;
     }
   }
 }

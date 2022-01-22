@@ -9,22 +9,26 @@ import React from "react";
 import cross from "../../../../assets/icons/cross.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { settings } from "../../slider/sliderSettings";
+import { NavLink, useHistory } from "react-router-dom";
+
 export const CreatePost = () => {
   const { register, handleSubmit } = useForm();
   const [uploaded, setUploaded] = useState([]);
   const [files, setFiles] = useState([]);
   const token = useSelector((token) => token.user.id);
+  const history = useHistory();
 
   const onSubmit = async (data) => {
-    
     try {
       const res = await requests.image.create({
         ...data,
         files: [...files],
       });
-      console.log(files);
+
+      M.toast({ html: "post succes created", classes: "succes" });
+      history.push(`/image/${res.data.id}`);
     } catch (e) {
-      console.log(e);
+      M.toast({ html: e.response.data.error, classes: "error" });
     }
   };
 
@@ -41,7 +45,6 @@ export const CreatePost = () => {
       let reader = new FileReader();
       reader.addEventListener("load", handleFile);
       reader.readAsDataURL(el);
-      
     });
   };
   const handleFile = (e) => {
@@ -112,7 +115,7 @@ export const CreatePost = () => {
           </div>
 
           <div className={classes.form__uploaded}>
-            <Swiper {...settings} slidesPerView={3} >
+            <Swiper {...settings} slidesPerView={3}>
               {uploaded.map((el, i) => (
                 <SwiperSlide key={i}>
                   <div className={classes.img__wrap}>
@@ -148,11 +151,16 @@ export const CreatePost = () => {
             </Swiper>
           </div>
 
-          <button className={classes.form__button}>Задать вопрос</button>
+          <button className={classes.form__button}>Create Post</button>
         </form>
       </div>
     </div>
   ) : (
-    "Авторизуйтесь"
+    <div className={classes.not__auth}>
+      to create post{" "}
+      <NavLink className={classes.not__auth_link} to={"/auth/authorization"}>
+        sign in
+      </NavLink>
+    </div>
   );
 };

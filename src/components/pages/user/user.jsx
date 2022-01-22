@@ -48,10 +48,11 @@ export const User = ({ match }) => {
       <div className={`page ${classes.user__page}`}>
         <div className={classes.user}>
           <div className={classes.user__title}>
-            {userData.userData.name || userData.userData.username}
+            {userData.userData.name ||
+              userData.userData.username.substring(0, 20)}
           </div>
           <div className={classes.user__subtitle}>
-            {userData.userData.name ? userData.userData.username : ""}
+            {userData.userData.name ? userData.userData.username.substring(0, 30) : ""}
           </div>
           <div className={classes.user__text}>
             {userData.userData.bio || "user hasn`t description"}

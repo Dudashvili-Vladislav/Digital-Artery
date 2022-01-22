@@ -16,6 +16,7 @@
   .categories {
     grid-gap: 10px;
     grid-template-columns: repeat(2, 1fr);
+    
   }
 }
 
@@ -30,4 +31,11 @@
   .categories {
     grid-template-columns: repeat(5, 1fr);
   }
+}
+
+@media (min-width:1000px) {
+  .categories{
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
 }

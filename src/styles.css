@@ -114,6 +114,12 @@ body {
   color: white !important;
 }
 
+@media (max-width: 724px) {
+  #toast-container div {
+    width: auto;
+  }
+}
+
 #toast-container div.succes {
   background-color: #4e9a51;
 }
