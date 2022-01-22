@@ -13,6 +13,9 @@ class Post(VoteModel, models.Model):
     name: str = models.CharField(max_length=100)
     caption: str = models.CharField(max_length=1000, null=True, blank=True)
     external_url: str = models.URLField(max_length=200)
+    tags: str = models.CharField(max_length=200, blank=True)
+    category: str = models.CharField(max_length=100, blank=True)
+
     user = models.ForeignKey(
         'user.User', on_delete=models.CASCADE, related_name='posts',
     )

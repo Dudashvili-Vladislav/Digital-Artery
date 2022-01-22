@@ -2,9 +2,12 @@ import time
 
 from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
+from django.core.handlers.wsgi import WSGIRequest
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework.generics import (
     ListAPIView,
     CreateAPIView,
@@ -55,6 +58,20 @@ class UserPostListAPIView(ListAPIView):
             )
         else:
             raise PermissionDenied('Follow user to see their posts.')
+
+
+class UserMetricsAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request: WSGIRequest, username) -> Response:
+        username = request.query_params.get('username', 'default')
+        res = Post.objects.filter(user__username__iexact=username).prefetch_related("user", "images").order_by('-timestamp').values_list('num_vote_down', flat=True)
+        metrics = {
+            "prelike_success_rate": sum(res) / len(res),
+            "like_success_rate": sum(res) / len(res)
+        }
+
+        return Response(metrics)
 
 
 def user_follow_list_view_factory(following: bool = True):

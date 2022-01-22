@@ -9,6 +9,7 @@ from user.views import (
     UserRegistrationAPIView,
     UserFollowingListAPIView,
     UserFollowersListAPIView,
+    UserMetricsAPIView,
 )
 
 app_name = 'user'
@@ -19,6 +20,7 @@ urlpatterns = [
     path('posts/<slug:username>/', UserPostListAPIView.as_view(), name='posts'),
     path('update/<slug:username>/', UserUpdateAPIView.as_view(), name='update'),
     path('detail/<slug:username>/', UserDetailAPIView.as_view(), name='detail'),
+    path('metrics/<slug:username>/', UserMetricsAPIView.as_view(), name='metrics'),
     path(
         'following/<slug:username>/',
         UserFollowingListAPIView.as_view(),

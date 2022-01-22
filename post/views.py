@@ -1,15 +1,21 @@
 from django.core.handlers.wsgi import WSGIRequest
-
 from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.generics import DestroyAPIView
+from rest_framework.generics import DestroyAPIView, RetrieveAPIView
+from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from post.models import Post
+from post.serializers import ImageSerializer, PostModifySerializer, PostSerializer
 from user.permissions import UserIsOwner
-from post.serializers import ImageSerializer, PostSerializer, PostModifySerializer
+
+
+class DetailPostAPIView(RetrieveAPIView):
+    lookup_url_kwarg = 'pk'
+    queryset = Post.objects.all()
+    lookup_field = 'id__iexact'
+    serializer_class = PostSerializer
 
 
 class DeletePostAPIView(DestroyAPIView):
@@ -19,7 +25,6 @@ class DeletePostAPIView(DestroyAPIView):
 
 
 class UpdatePostAPIView(APIView):
-
     permission_classes = (IsAuthenticated,)
     parser_classes = (MultiPartParser, FormParser)
 
@@ -86,10 +91,16 @@ class UpdatePostAPIView(APIView):
                     )
             else:
                 # Everything has gone right so far and a sanitary update of caption is left.
-                if request.POST.get('caption', False) or request.POST.get('name', False) or request.POST.get('external_url', False):
+                if request.POST.get('caption', False) \
+                        or request.POST.get('name', False) \
+                        or request.POST.get('external_url', False) \
+                        or request.POST.get('tags', False) \
+                        or request.POST.get('category', False):
                     post.caption = request.POST['caption']
                     post.name = request.POST['name']
                     post.url = request.POST['external_url']
+                    post.tags = request.POST['tags']
+                    post.category = request.POST['category']
                     post.save()
                 return Response({'success': 'Updated.'}, status=status.HTTP_200_OK)
         else:
@@ -97,50 +108,58 @@ class UpdatePostAPIView(APIView):
 
 
 class CreatePostAPIView(APIView):
+    parser_classes = (MultiPartParser,)
 
-    permission_classes = (IsAuthenticated,)
-    parser_classes = (MultiPartParser, FormParser)
+    def post(self, request, *args, **kwargs):
+        images = request.FILES.getlist('images')
 
-    @staticmethod
-    def post(request: WSGIRequest):
+        response = {'error': self.validate(len(images))}
+        post = PostModifySerializer(
+            data=dict(
+                user=request.user.id,
+                name=request.POST.get('name', ''),
+                caption=request.POST.get('caption', ''),
+                external_url=request.POST.get('external_url', ''),
+                tags=request.POST.get('tags', ''),
+                category=request.POST.get('category', ''),
+            )
+        )
 
-        resp = {'error': ''}
+        if not post.is_valid():
+            response['error'].append('Invalid post data.')
+            return self.error(response)
 
-        if len(request.FILES.getlist('images')) == 0:
-            resp['error'] = 'Requires at least one image.'
+        post = post.save()
+        for image in images:
+            image_serializer = ImageSerializer(
+                data={'file': image, 'post': post.id}
+            )
+
+            if not image_serializer.is_valid():
+                response['error'].append('Invalid image data.')
+                break
+            image_serializer.save()
         else:
-            images = request.FILES.getlist('images')
-            if len(images) > 5:
-                resp['error'] = 'Can only accept upto five images.'
-            else:
-                post = PostModifySerializer(
-                    data=dict(
-                        user=request.user.id,
-                        name=request.POST.get('name', ''),
-                        caption=request.POST.get('caption', ''),
-                        external_url=request.POST.get('external_url', ''),
-                    )
-                )
-                if post.is_valid():
-                    post = post.save()
-                    for image in images:
-                        image_serializer = ImageSerializer(
-                            data={'file': image, 'post': post.id}
-                        )
-                        if image_serializer.is_valid():
-                            image_serializer.save()
-                        else:
-                            resp['error'] = 'Invalid image data.'
-                            break
-                    else:
-                        del resp['error']
-                        resp = PostSerializer(post).data
-                else:
-                    resp['error'] = 'Invalid post data.'
+            del response['error']
+            response = PostSerializer(post).data
 
         return Response(
-            resp,
-            status=status.HTTP_406_NOT_ACCEPTABLE
-            if 'error' in resp.keys()
-            else status.HTTP_201_CREATED,
+            response,
+            status=status.HTTP_406_NOT_ACCEPTABLE if 'error' in response else status.HTTP_201_CREATED,
+        )
+
+    def validate(self, len_images):
+        error = []
+
+        if len_images == 0:
+            error.append('Requires at least one image.')
+        elif len_images > 5:
+            error.append('Can only accept upto five images.')
+
+        return error
+
+    def error(self, response, status=status.HTTP_406_NOT_ACCEPTABLE):
+        return Response(
+            response,
+            status=status
         )
