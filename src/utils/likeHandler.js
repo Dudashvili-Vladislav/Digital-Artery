@@ -1,8 +1,7 @@
 
 const setLike = (e) => {
-    const parent = e.target.parentNode
-    const text = parent.querySelector(".text");
-    const elem = e.target.parentNode.querySelector(".sub-image");
+    const text = e.target.parentNode.querySelector(".text");
+    const elem = e.target
 
     function toggleLike(direction) {
         elem.style.animationName = "pulse";

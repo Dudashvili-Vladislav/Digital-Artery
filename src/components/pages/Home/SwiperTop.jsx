@@ -17,11 +17,16 @@ import requests from "../../../api/requests";
 import { settings } from "../../slider/sliderSettings";
 
 import heart from "../../../../assets/icons/heart-icon.png";
+import { useRef } from "react";
+import { useLike } from "../../../hooks/useLike";
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
 function SwiperTop() {
   const [images, setImages] = useState([]);
+  const ref = useRef(null);
+  console.log(ref);
+  useLike(ref);
   useEffect(() => {
     const getAllUsers = async () => {
       try {
@@ -33,10 +38,9 @@ function SwiperTop() {
     };
     getAllUsers();
   }, []);
-  const history = useHistory();
 
-  return images.length > 0 ? (
-    <div onClick={(e) => likeHandler(e, history)}>
+  return (
+    <div ref={ref}>
       <Swiper
         {...settings}
         slidesPerView={1}
@@ -48,6 +52,7 @@ function SwiperTop() {
             slidesPerView: 3,
           },
         }}
+        className="swiper-top"
       >
         {images.map((el, i) => (
           <SwiperSlide key={i}>
@@ -71,8 +76,6 @@ function SwiperTop() {
         ))}
       </Swiper>
     </div>
-  ) : (
-    <Spinner />
   );
 }
 
