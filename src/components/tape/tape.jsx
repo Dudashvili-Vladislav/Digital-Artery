@@ -1,14 +1,14 @@
 import { Post } from "@/components/tape/post/post";
 import classes from "@/styles/tape/tape.module.scss";
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { likeHandler } from "@utils/likeHandler";
+import React, { useRef } from "react";
+import { useLike } from "../../hooks/useLikes";
+
 
 export const Tape = ({ images }) => {
-  const history = useHistory();
-
+  const tape = useRef();
+  useLike(tape)
   return (
-    <div className={classes.images} onClick={(e) => likeHandler(e, history)}>
+    <div className={classes.images} ref={tape}>
       {images.map((el, i) => (
         <Post image={el} key={i} />
       ))}

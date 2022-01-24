@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 // Import Swiper React components
-
+import { useLike } from "../../../hooks/useLikes";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,12 +10,13 @@ import "swiper/css/pagination";
 import { useEffect } from "react";
 import requests from "../../../api/requests";
 import { Slider } from "./slider/SliderTrending";
-import { Spinner } from "@/components/spinner/spinner";
+
 
 // install Swiper modules
 
 export const SwiperTrending = () => {
   const [sliders, setSliders] = useState([]);
+  
   useEffect(() => {
     const createSliders = (images) => {
       for (let i = 0; i <= 4; i++) {
@@ -37,14 +38,14 @@ export const SwiperTrending = () => {
     };
     getAllImages();
   }, []);
-
+  const ref = useRef()
+  console.log(ref)
+  useLike(ref)
   return (
-    <div>
-      {sliders.length > 0 ? (
-        sliders.map((el, i) => <Slider slides={el} key={i} />)
-      ) : (
-        <Spinner />
-      )}
+    <div className="test" ref = {ref}>
+      {sliders.map((el, i) => (
+        <Slider slides={el} key={i} />
+      ))}
     </div>
   );
 };

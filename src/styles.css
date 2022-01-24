@@ -42,7 +42,10 @@ body {
   object-fit: cover;
   aspect-ratio: 1;
 }
-
+.swiper-slide .sub-image{
+  width: 50%;
+  height: 50%;
+}
 .first-row {
   padding-top: 60px;
 }

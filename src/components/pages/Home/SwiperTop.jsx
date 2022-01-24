@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,6 +17,7 @@ import requests from "../../../api/requests";
 import { settings } from "../../slider/sliderSettings";
 
 import heart from "../../../../assets/icons/heart-icon.png";
+import { useLike } from "../../../hooks/useLikes";
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
@@ -33,10 +34,10 @@ function SwiperTop() {
     };
     getAllUsers();
   }, []);
-  const history = useHistory();
-
-  return images.length > 0 ? (
-    <div onClick={(e) => likeHandler(e, history)}>
+  const slider = useRef();
+  useLike(slider);
+  return (
+    <div ref={slider}>
       <Swiper
         {...settings}
         slidesPerView={1}
@@ -71,8 +72,6 @@ function SwiperTop() {
         ))}
       </Swiper>
     </div>
-  ) : (
-    <Spinner />
   );
 }
 
