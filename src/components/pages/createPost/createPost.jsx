@@ -115,7 +115,7 @@ export const CreatePost = () => {
           </div>
 
           <div className={classes.form__uploaded}>
-            <Swiper {...settings} slidesPerView={3}>
+            <Swiper {...settings} slidesPerView={3} className="swiper-create">
               {uploaded.map((el, i) => (
                 <SwiperSlide key={i}>
                   <div className={classes.img__wrap}>
@@ -158,7 +158,7 @@ export const CreatePost = () => {
   ) : (
     <div className={classes.not__auth}>
       to create post{" "}
-      <NavLink className={classes.not__auth_link} to={"/auth/authorization"}>
+      <NavLink className={classes.not__auth_link} to={"/auth/authorisation"}>
         sign in
       </NavLink>
     </div>
