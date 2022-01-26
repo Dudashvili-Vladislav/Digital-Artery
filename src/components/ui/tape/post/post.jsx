@@ -15,7 +15,7 @@ export const Post = ({ image, i }) => {
   const location = useLocation();
 
   return (
-    <div className={`image item${i ? i % 6 : ""}`}>
+    <div className={`image item${i%6}`}>
       <p className="text">{image.num_vote_up}</p>
       <img
         className="image__item"

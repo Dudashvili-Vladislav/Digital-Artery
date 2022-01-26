@@ -37,7 +37,7 @@ export const SwiperTrending = () => {
     };
     getAllImages();
   }, []);
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   useLike(ref);
 

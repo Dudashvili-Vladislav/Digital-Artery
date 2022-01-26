@@ -19,7 +19,7 @@ export const Users = ({ users }) => {
                 className={classes.user__avatar}
               />
               <div className={classes.user__name}>
-                {el.name|| el.username.substring(0,20)} 
+                {el.name|| el.username.substring(0,10)} 
               </div>
             </NavLink>
           </SwiperSlide>

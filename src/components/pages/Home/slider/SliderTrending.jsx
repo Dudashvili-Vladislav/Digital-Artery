@@ -2,11 +2,11 @@ import React, { useRef } from "react";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import classes from "@styles/home/slider/Slider.module.scss";
+
 import SwiperCore, { Pagination } from "swiper";
-import heartIcon from "../../../../../assets/icons/heart-icon.png";
+
 import { settings } from "../../../slider/sliderSettings";
-import { useLike } from "../../../../hooks/useLikes";
+
 import { Post } from "../../../ui/tape/post/post";
 
 SwiperCore.use([Pagination]);

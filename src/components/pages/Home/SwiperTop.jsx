@@ -32,7 +32,7 @@ function SwiperTop() {
     };
     getAllUsers();
   }, []);
-  const slider = useRef();
+  const slider = useRef(undefined);
   useLike(slider);
   return (
     <div ref={slider}>
