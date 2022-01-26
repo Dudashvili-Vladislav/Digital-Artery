@@ -38,9 +38,12 @@ export const useLike = (el) => {
     const handler = (e) => {
 
         if (e.target.classList.contains('sub-image')) {
-
             if (timeout === 0) {
-                timeout = setTimeout(() => history.push(`/image/${e.target.getAttribute("data-id")}`), 250);
+                timeout = setTimeout(() => {
+                    timeout = 0
+                    history.push(`/image/${e.target.getAttribute("data-id")}`)
+                }
+                    , 250);
             } else {
                 setLike(e);
                 clearTimeout(timeout);
@@ -51,10 +54,11 @@ export const useLike = (el) => {
 
 
     useEffect(() => {
+        console.log(el)
         if (el.current) {
             el.current.addEventListener('click', handler) // Вешаем обработчик на клик по обертке картинок
-            return () => el.current ? el.current.removeEventListener('click', handler) : ''
         }
-    }, [])
+        return () => el.current.removeEventListener('click', handler)
+    }, [el])
 
 } 
