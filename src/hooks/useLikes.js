@@ -58,7 +58,7 @@ export const useLike = (el) => {
         if (el.current) {
             el.current.addEventListener('click', handler) // Вешаем обработчик на клик по обертке картинок
         }
-        return () => el.current.removeEventListener('click', handler)
+        return () => el.current ?  el.current.removeEventListener('click', handler) : ''
     }, [el])
 
 } 

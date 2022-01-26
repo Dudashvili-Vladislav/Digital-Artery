@@ -37,7 +37,7 @@ const addClass = () => loader.classList.add("loader-hide");
 
 function App() {
   const [loading, setLoading] = useState(true);
-  axios.defaults.baseURL = "http://127.0.0.1:8000/api/";
+  axios.defaults.baseURL = "http://92.255.109.134/api/";
   const dispatch = useDispatch();
   const checkToken = async () => {
     setLoading(true);
