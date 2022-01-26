@@ -21,7 +21,7 @@ export const Post = ({ image, i }) => {
         className="image__item"
         {...srcset(
           location.pathname.includes("/user/detail")
-            ? image.images[image.images.length - 1].file
+            ? image.images[image.images.length - 1]?.file
             : image.images[0]?.file,
           121
         )}

@@ -5,6 +5,7 @@ import { useLike } from "../../../hooks/useLikes";
 
 
 export const Tape = ({ images }) => {
+  console.log(images)
   const tape = useRef(undefined);
   useLike(tape)
   return (

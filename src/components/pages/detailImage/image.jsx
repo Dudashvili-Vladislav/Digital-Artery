@@ -10,6 +10,7 @@ import play from "../../../../assets/icons/play.svg";
 import heart from "../../../../assets/icons/heart-icon.png";
 import { NavLink } from "react-router-dom";
 import "@styles/image/image.scss";
+import { Tape } from "../../ui/tape/tape";
 export const Image = ({ match }) => {
   const { id } = match.params;
 
@@ -26,7 +27,7 @@ export const Image = ({ match }) => {
     };
     getImage();
   }, []);
-
+  console.log(image);
   return image ? (
     <div className={classes.image}>
       <div className={classes.image__wrap}>
@@ -42,7 +43,7 @@ export const Image = ({ match }) => {
           />
         </div>
 
-        <div>
+        <div className={classes.image__wrapper}>
           {matchMedia("(min-width:1200px)").matches ? (
             <div className={classes.image__tape}>
               {image.images.map((el, i) =>
@@ -50,9 +51,9 @@ export const Image = ({ match }) => {
                   ""
                 ) : (
                   <img
-                    className={`${classes.image__tape_item} image__item-${
-                      i + 1
-                    }`}
+                    className={`${classes.image__tape_item} ${
+                      image.images.length > 4 ? classes.h100 : classes.hA
+                    } image__item-${i + 1}`}
                     src={el.file}
                     key={i}
                   />
