@@ -1,8 +1,9 @@
-import { Users } from "../users/users";
+
 import React, { useEffect, useState } from "react";
 import requests from "../../../../api/requests";
-import { Spinner } from "@/components/spinner/spinner";
-import { Tape } from "@/components/tape/tape";
+import { Spinner } from "@/components/ui/spinner/spinner";
+import { Tape } from "@/components/ui/tape/tape";
+import { Users } from "../../../ui/users/users";
 export const SearchRes = ({ match }) => {
   const searchStr = match.params.str;
   const [isUserLoading, setUserLoading] = useState(false);
@@ -43,7 +44,7 @@ export const SearchRes = ({ match }) => {
     if (isPostLoading) {
       try {
         const posts = await requests.posts.get(searchStr, page);
-        console.log(posts);
+
         if (posts.data.length == 0) {
           window.removeEventListener("scroll", scrollHandler);
           return setPostLoading(false);
@@ -71,11 +72,12 @@ export const SearchRes = ({ match }) => {
   useEffect(() => {
     getAllPosts();
   }, []);
+
   return isUserLoading ? (
     <Spinner />
   ) : (
     <div>
-      <Users searchStr={searchStr} users={users} />
+      <Users users={users}/>
       <Tape images={posts} />
       {isPostLoading ? <Spinner /> : ""}
     </div>

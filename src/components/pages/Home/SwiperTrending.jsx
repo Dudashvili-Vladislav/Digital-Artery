@@ -11,12 +11,11 @@ import { useEffect } from "react";
 import requests from "../../../api/requests";
 import { Slider } from "./slider/SliderTrending";
 
-
 // install Swiper modules
 
 export const SwiperTrending = () => {
   const [sliders, setSliders] = useState([]);
-  
+
   useEffect(() => {
     const createSliders = (images) => {
       for (let i = 0; i <= 4; i++) {
@@ -38,11 +37,12 @@ export const SwiperTrending = () => {
     };
     getAllImages();
   }, []);
-  const ref = useRef()
-  console.log(ref)
-  useLike(ref)
+  const ref = useRef();
+
+  useLike(ref);
+
   return (
-    <div className="test" ref = {ref}>
+    <div ref={ref}>
       {sliders.map((el, i) => (
         <Slider slides={el} key={i} />
       ))}

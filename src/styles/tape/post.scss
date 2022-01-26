@@ -1,0 +1,86 @@
+.image {
+  background-color: #070406;
+  height: auto;
+  display: flex;
+  position: relative;
+  animation: image 0.4s forwards;
+  cursor: pointer;
+  &__item {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    flex-grow: 1;
+  }
+
+  .text {
+    text-align: right;
+    padding: 1px 3px;
+    padding-top: 0px;
+    height: 18px;
+    width: 45px;
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    margin-block-start: 0;
+
+    background-size: cover;
+    font-size: 14px;
+    font-family: GeosansLight;
+    color: #c5c5c5;
+    background-image: url("../../../assets/icons/heart_background_black.png");
+  }
+
+  .sub-image {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    opacity: 0;
+    width: 50%;
+    height: 50%;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.25;
+    }
+    20% {
+      opacity: 0.5;
+    }
+    30% {
+      opacity: 0.65;
+    }
+    40% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 0.85;
+    }
+    60% {
+      opacity: 0.75;
+    }
+    70% {
+      opacity: 0.65;
+    }
+    80% {
+      opacity: 0.5;
+    }
+    90% {
+      opacity: 0.25;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes image {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -3,18 +3,24 @@ import React, { useState } from "react";
 import requests from "../../../api/requests";
 import { Swiper } from "swiper/react";
 import { useEffect } from "react";
-import { Spinner } from "@/components/spinner/spinner";
-import { Users } from "../SearchPage/users/users";
-import { Tape } from "@/components/tape/tape";
+import { Spinner } from "@/components/ui/spinner/spinner";
+import { Users } from "@components/ui/users/users";
+import { Tape } from "@/components/ui/tape/tape";
 import { settings } from "@components/slider/sliderSettings.js";
+
 export const Category = ({ match }) => {
   const id = match.params.id;
+
   const [isUserLoading, setuserLoading] = useState(false);
   const [isPostLoading, setPostLoading] = useState(false);
+
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
+
   const [page, setPage] = useState(1);
+
   let lastDate = 0;
+
   const getUsers = async () => {
     setuserLoading(true);
     try {
@@ -46,6 +52,7 @@ export const Category = ({ match }) => {
       }
     }
   };
+
   const scrollHandler = (e) => {
     let nowDate = Date.now();
     if (

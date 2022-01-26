@@ -1,7 +1,7 @@
-import classes from "@/styles/tape/post.module.scss";
+import "@styles/tape/post.scss";
 import React from "react";
 import { useLocation } from "react-router-dom";
-import heart from '../../../../assets/icons/heart-icon.png'
+import heart from "../../../../../assets/icons/heart-icon.png";
 function srcset(image, size, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -11,14 +11,14 @@ function srcset(image, size, rows = 1, cols = 1) {
   };
 }
 
-export const Post = ({ image }) => {
+export const Post = ({ image, i }) => {
   const location = useLocation();
-  
+
   return (
-    <div className={classes.image}>
-      <p className={`${classes.image__text} text`}>{image.num_vote_up}</p>
+    <div className={`image item${i ? i % 6 : ""}`}>
+      <p className="text">{image.num_vote_up}</p>
       <img
-        className={classes.image__item}
+        className="image__item"
         {...srcset(
           location.pathname.includes("/user/detail")
             ? image.images[image.images.length - 1].file
@@ -28,11 +28,7 @@ export const Post = ({ image }) => {
         alt={image.title}
         loading="lazy"
       />
-      <img
-        {...srcset(heart, 121)}
-        className="sub-image"
-        data-id={image.id}
-      />
+      <img {...srcset(heart, 121)} className="sub-image" data-id={image.id} />
     </div>
   );
 };

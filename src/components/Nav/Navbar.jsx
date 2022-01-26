@@ -23,7 +23,7 @@ const Navbar = () => {
   const userId = useSelector((state) => state.user.id);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const { logoUser } = useSelector((state) => state.currentUser);
-  const closeModal = (e) => {
+  const closeModal = () => {
     setOpenAuthModal(false);
   };
   const location = useLocation();

@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import requests from "../../../api/requests";
-import { Tag } from "./tag/Tag";
+import { Tag } from "@components/ui/search/tag/Tag";
 
 import "@styles/search/index.scss";
 import classes from "@styles/search/searchpage.module.scss";
 import "@styles/search/input.scss";
 
 import { Categories } from "./categories/Categories";
-import { Spinner } from "@/components/spinner/spinner";
+import { Spinner } from "@/components/ui/spinner/spinner";
 import { useHistory } from "react-router-dom";
 import { colors } from "../../../../assets/tags/colors";
 import { Swiper, SwiperSlide } from "swiper/react";

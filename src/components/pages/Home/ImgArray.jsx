@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import requests from "../../../api/requests";
 import { useEffect } from "react";
-import { Spinner } from "@/components/spinner/spinner";
-import { Tape } from "@/components/tape/tape";
+import { Spinner } from "@/components/ui/spinner/spinner";
+import { Tape } from "@/components/ui/tape/tape";
 
 export const ImgArray = () => {
   const [images, setImages] = useState([]);

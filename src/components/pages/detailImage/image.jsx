@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import classes from "@styles/image/image.module.scss";
 import { useEffect } from "react";
 import requests from "../../../api/requests";
-import { Spinner } from "@/components/spinner/spinner";
+import { Spinner } from "@/components/ui/spinner/spinner";
 import { Swiper, SwiperSlide } from "swiper/react";
 import play from "../../../../assets/icons/play.svg";
 import heart from "../../../../assets/icons/heart-icon.png";

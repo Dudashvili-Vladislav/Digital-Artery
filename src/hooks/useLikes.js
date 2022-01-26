@@ -36,7 +36,7 @@ export const useLike = (el) => {
 
 
     const handler = (e) => {
-        
+
         if (e.target.classList.contains('sub-image')) {
 
             if (timeout === 0) {
@@ -54,8 +54,8 @@ export const useLike = (el) => {
         console.log(el)
         if (el.current) {
             el.current.addEventListener('click', handler) // Вешаем обработчик на клик по обертке картинок
+            return () => el.current.removeEventListener('click', handler)
         }
-        return () => el.current.removeEventListener('click', handler)
     }, [el])
 
 } 

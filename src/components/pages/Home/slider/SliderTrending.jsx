@@ -7,7 +7,7 @@ import SwiperCore, { Pagination } from "swiper";
 import heartIcon from "../../../../../assets/icons/heart-icon.png";
 import { settings } from "../../../slider/sliderSettings";
 import { useLike } from "../../../../hooks/useLikes";
-import { Post } from "../../../tape/post/post";
+import { Post } from "../../../ui/tape/post/post";
 
 SwiperCore.use([Pagination]);
 export const Slider = ({ slides }) => {
@@ -20,7 +20,7 @@ export const Slider = ({ slides }) => {
             slidesPerView: 3,
           },
           "@1.25": {
-            slidesPerView: 10,
+            slidesPerView: 6,
           },
         }}
         slidesPerView={3}

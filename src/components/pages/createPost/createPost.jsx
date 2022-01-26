@@ -157,8 +157,8 @@ export const CreatePost = () => {
     </div>
   ) : (
     <div className={classes.not__auth}>
-      to create post{" "}
-      <NavLink className={classes.not__auth_link} to={"/auth/authorization"}>
+      to create post
+      <NavLink className={classes.not__auth_link} to={"/auth/authorisation"}>
         sign in
       </NavLink>
     </div>
