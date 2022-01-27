@@ -46,7 +46,6 @@ export const User = ({ match }) => {
     getUserData();
   }, []);
 
-  
   return userData.posts ? (
     <div>
       <div className={`page ${classes.user__page}`}>
@@ -55,7 +54,7 @@ export const User = ({ match }) => {
             <div className={classes.user__info}>
               <div className={classes.user__title}>
                 {userData.userData.name ||
-                  userData.userData.username.substring(0, 20)}
+                  userData.userData.username.substring(0, 10)}
               </div>
               <div className={classes.user__subtitle}>
                 {userData.userData.name
@@ -69,11 +68,15 @@ export const User = ({ match }) => {
                 Number of posts: {userData.userData.post_count}
               </div>
               <div className={classes.user__info}>
-                Number of followers: {userData.userData.follower_count}
+                Number of followers: {userData.userData.follower_count} 
               </div>
             </div>
             <div className={classes.user__avatar}>
-              <img src={userData.userData.picture} alt="avatar" />
+              <img
+                src={userData.userData.picture}
+                alt="avatar"
+                style={{ background: "white" }}
+              />
             </div>
           </div>
 
@@ -95,8 +98,8 @@ export const User = ({ match }) => {
           </div>
         </div>
 
-        <div className={classes.images} >
-          <UserTape images={userData.posts}/>
+        <div className={classes.images}>
+          <UserTape images={userData.posts} />
         </div>
       </div>
     </div>
