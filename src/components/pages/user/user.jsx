@@ -54,7 +54,7 @@ export const User = ({ match }) => {
             <div className={classes.user__info}>
               <div className={classes.user__title}>
                 {userData.userData.name ||
-                  userData.userData.username.substring(0, 10)}
+                  userData.userData.username.substring(0, 12)}
               </div>
               <div className={classes.user__subtitle}>
                 {userData.userData.name
