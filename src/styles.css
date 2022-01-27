@@ -7,7 +7,9 @@
 * {
   box-sizing: border-box;
 }
-
+*::selection{
+  background: rgba(255, 255, 255, 0.062);
+}
 :root {
   --black: #070406;
   --white: #fff;

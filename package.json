@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "vite --host --open",
+    "start": "vite --host --open --port 80",
     "dev": "vite --host",
     "build": "vite build"
   },

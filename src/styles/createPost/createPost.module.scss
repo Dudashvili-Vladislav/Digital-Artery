@@ -23,6 +23,19 @@
     border-radius: 8px;
     font-size: 18px;
     font-weight: 500;
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px rgb(26, 28, 31) inset !important;
+      -webkit-text-fill-color: $text !important;
+      border: 1px solid black !important;
+      -webkit-rtl-ordering: none !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      -webkit-writing-mode: none !important;
+    }
   }
   &__file {
     height: auto;
@@ -91,8 +104,8 @@
     margin-top: 30px;
   }
   &__group {
-    animation: animateInput  0.7s forwards;
-    
+    animation: animateInput 0.7s forwards;
+
     position: relative;
     margin-top: 40px;
     color: $text;
@@ -115,6 +128,9 @@
       top: -30px;
       left: 3px;
     }
+  }
+  &__label {
+    color: inherit;
   }
 }
 

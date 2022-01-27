@@ -27,7 +27,10 @@ export const Account = ({ id, isOpenModal }) => {
       <div className={classes.userAccount__token}>
         Wallet: {id.substring(0, 6)}...
       </div>
-      <div className={classes.userAccount__balance}>Balance: {userBalance}</div>
+      <div className={classes.userAccount__balance}>
+        Balance:{" "}
+        {userBalance && userBalance.substring(0, userBalance.indexOf(".") + 3)}
+      </div>
     </div>
   );
 };

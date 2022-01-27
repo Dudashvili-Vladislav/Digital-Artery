@@ -1,14 +1,5 @@
 @import "@utils/variables.scss";
-.images {
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
 
-  grid-gap: 10px;
-}
 
 .user {
   max-width: 1200px;
@@ -22,14 +13,14 @@
   }
   &__avatar img {
     height: 150px;
-
+    margin-left: 10px;
     width: 150px;
   }
 
   &__title {
     font-size: 35px;
     font-weight: 600;
-  
+
     color: $text;
   }
   &__subtitle {
@@ -86,34 +77,16 @@
   }
 }
 
-@media (min-width: 1200px) {
-  .images {
-    grid-template-columns: repeat(3, 1fr);
-    & img {
-      height: 386px !important;
-    }
-  }
-}
+
 
 @media (max-width: 1200px) {
   .user {
     padding: 0 20px;
   }
-  .images {
-    grid-template-columns: repeat(3, 1fr) !important;
-    & img {
-      height: 280px;
-    }
-  }
+  
 }
 
 @media (max-width: 700px) {
-  .images {
-    grid-template-columns: repeat(1, 1fr) !important;
-    & img {
-      height: 375px !important;
-    }
-  }
   .user {
     max-width: 90%;
 
@@ -123,10 +96,3 @@
   }
 }
 
-@media (max-width: 900px) {
-  .images {
-    & img {
-      height: 240px;
-    }
-  }
-}

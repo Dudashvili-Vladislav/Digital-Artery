@@ -1,7 +1,6 @@
 import classes from "@styles/user/user.module.scss";
-import { Post } from "@components/ui/tape/post/post";
-import { Spinner } from "@components/ui/spinner/spinner";
-import { useEffect } from "react";
+import { Tape } from "../../ui/tape/tape";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import requests from "../../../api/requests";
 import React from "react";
@@ -10,6 +9,8 @@ import subscribe from "../../../../assets/icons/subscribe.svg";
 import mail from "../../../../assets/icons/mail.svg";
 import { useDispatch } from "react-redux";
 import { actions } from "@redux/actions";
+import { useLike } from "../../../hooks/useLikes";
+import { UserTape } from "./imageTape/tape";
 
 export const User = ({ match }) => {
   const { username } = match.params;
@@ -27,7 +28,7 @@ export const User = ({ match }) => {
         setUserData((prev) => {
           return { ...prev, userData };
         });
-        dispatch(actions.setCurrentImage(userData.picture));
+        dispatch(actions.setCurrentImage(userData.logo));
         const metrics = (await requests.metrics.get(username)).data;
         setUserData((prev) => {
           return { ...prev, metrics };
@@ -45,9 +46,8 @@ export const User = ({ match }) => {
     getUserData();
   }, []);
 
-  return isLoading ? (
-    <Spinner />
-  ) : userData.posts ? (
+  
+  return userData.posts ? (
     <div>
       <div className={`page ${classes.user__page}`}>
         <div className={classes.user}>
@@ -95,10 +95,8 @@ export const User = ({ match }) => {
           </div>
         </div>
 
-        <div className={classes.images}>
-          {userData.posts.map((el) => (
-            <Post image={el} key={el.id} />
-          ))}
+        <div className={classes.images} >
+          <UserTape images={userData.posts}/>
         </div>
       </div>
     </div>

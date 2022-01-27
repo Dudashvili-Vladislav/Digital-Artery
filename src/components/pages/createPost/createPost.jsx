@@ -53,6 +53,13 @@ export const CreatePost = () => {
     setUploaded((prevState) => [...prevState, content]);
     // You can set content in state and show it in render.
   };
+  const handleInputClick = (e) => {
+    console.log(e.target)
+    if (e.target.classList.contains(classes.form__label)) {
+     
+      e.target.parentNode.querySelector('input').focus()
+    }
+  };
 
   return token ? (
     <div className={classes.page}>
@@ -61,6 +68,7 @@ export const CreatePost = () => {
           action=""
           className={classes.form}
           onSubmit={handleSubmit(onSubmit)}
+          onClick={handleInputClick}
         >
           <div className={classes.form__title}>Post game</div>
           <div className={classes.form__group}>
@@ -70,7 +78,7 @@ export const CreatePost = () => {
               required
             />
             <span className={classes.form__bar}></span>
-            <label>Game name</label>
+            <label className={classes.form__label}>Game name</label>
           </div>
 
           <div className={classes.form__group}>
@@ -81,7 +89,7 @@ export const CreatePost = () => {
               required
             />
             <span className={classes.form__bar}></span>
-            <label>Game Url</label>
+            <label className={classes.form__label}>Game Url</label>
           </div>
           <div className={classes.form__group}>
             <input
@@ -91,7 +99,7 @@ export const CreatePost = () => {
               required
             />
             <span className={classes.form__bar}></span>
-            <label>Tags</label>
+            <label className={classes.form__label}>Tags</label>
           </div>
           <div className={classes.form__group}>
             <input
@@ -101,7 +109,7 @@ export const CreatePost = () => {
               required
             />
             <span className={classes.form__bar}></span>
-            <label>Categories</label>
+            <label className={classes.form__label}>Categories</label>
           </div>
           <div className={classes.form__group}>
             <textarea
@@ -157,7 +165,7 @@ export const CreatePost = () => {
     </div>
   ) : (
     <div className={classes.not__auth}>
-      to create post
+      to create post{" "}
       <NavLink className={classes.not__auth_link} to={"/auth/authorisation"}>
         sign in
       </NavLink>
