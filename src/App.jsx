@@ -30,6 +30,7 @@ import "@styles/app/app.scss";
 import { User } from "@/components/pages/user/user";
 import { CreatePost } from "./components/pages/createPost/createPost";
 import history from "./components/history";
+import { Edit } from "./components/pages/edit/edit";
 
 const loader = document.querySelector(".preloader");
 const showLoader = () => loader.classList.remove("preloader");
@@ -37,6 +38,7 @@ const addClass = () => loader.classList.add("loader-hide");
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isEditing, setEditing] = useState(false);
   axios.defaults.baseURL = "http://92.255.109.134:3000/api/";
   const dispatch = useDispatch();
   const checkToken = async () => {
@@ -150,6 +152,7 @@ function App() {
             <Route path="/image/:id" component={Image} />
             <Route exact path="/user/detail/:username/" component={User} />
             <Route exact path="/post/create/" component={CreatePost} />
+            <Route exact path="/edit/:id/" component={Edit} />
           </CacheSwitch>
         </div>
       </div>

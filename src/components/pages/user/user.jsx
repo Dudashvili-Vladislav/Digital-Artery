@@ -1,5 +1,4 @@
 import classes from "@styles/user/user.module.scss";
-import { Tape } from "../../ui/tape/tape";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 import requests from "../../../api/requests";
@@ -9,7 +8,6 @@ import subscribe from "../../../../assets/icons/subscribe.svg";
 import mail from "../../../../assets/icons/mail.svg";
 import { useDispatch } from "react-redux";
 import { actions } from "@redux/actions";
-import { useLike } from "../../../hooks/useLikes";
 import { UserTape } from "./imageTape/tape";
 
 export const User = ({ match }) => {
@@ -46,6 +44,17 @@ export const User = ({ match }) => {
     getUserData();
   }, []);
 
+
+  const subscribeHandler = async () => {
+    try{
+      const sub = await requests.subscribe.create(userData.userData.id)
+      
+    }catch(e){
+      console.log(e)
+    }
+    
+  }
+
   return userData.posts ? (
     <div>
       <div className={`page ${classes.user__page}`}>
@@ -54,7 +63,7 @@ export const User = ({ match }) => {
             <div className={classes.user__info}>
               <div className={classes.user__title}>
                 {userData.userData.name ||
-                  userData.userData.username.substring(0, 12)}
+                  userData.userData.username.substring(0, 10)}
               </div>
               <div className={classes.user__subtitle}>
                 {userData.userData.name
@@ -68,7 +77,7 @@ export const User = ({ match }) => {
                 Number of posts: {userData.userData.post_count}
               </div>
               <div className={classes.user__info}>
-                Number of followers: {userData.userData.follower_count} 
+                Number of followers: {userData.userData.follower_count}
               </div>
             </div>
             <div className={classes.user__avatar}>
@@ -93,7 +102,12 @@ export const User = ({ match }) => {
               <NavLink to={`/chat/${0}`}>
                 <img src={mail} alt="send message" />
               </NavLink>
-              <img src={subscribe} alt="subscribe" />
+              <img
+                src={subscribe}
+                alt="subscribe"
+                style={{ cursor: "pointer" }}
+                onClick={subscribeHandler}
+              />
             </div>
           </div>
         </div>

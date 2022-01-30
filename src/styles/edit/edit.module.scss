@@ -1,0 +1,88 @@
+@import "../../utils/variables.scss";
+.images {
+  margin-top: 40px;
+}
+
+.form {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.image__item {
+  width: 100%;
+}
+.form {
+  &__title {
+    color: $text;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  &__input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    color: $text;
+    background: rgb(26, 28, 31);
+    resize: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px rgb(26, 28, 31) inset !important;
+      -webkit-text-fill-color: $text !important;
+      border: 1px solid black !important;
+      -webkit-rtl-ordering: none !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      -webkit-writing-mode: none !important;
+    }
+  }
+
+  &__button {
+    display: block;
+    width: 100%;
+    margin: 40px auto 0;
+    border-radius: 30px;
+    background-color: rgb(26, 28, 31);
+    border: none;
+    outline: none;
+    font-size: 20px;
+    padding: 15px;
+    cursor: pointer;
+    color: rgb(134, 134, 134);
+    transition: all 0.3s;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__group {
+    animation: animateInput 0.7s forwards;
+
+    position: relative;
+    margin-top: 40px;
+    color: $text;
+
+    & label {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      transition: all 0.3s;
+      font-size: 16px;
+    }
+
+    & input:focus ~ label {
+      display: none;
+    }
+  }
+  &__label {
+    color: inherit;
+  }
+}

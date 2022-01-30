@@ -23,11 +23,22 @@
       margin-right: 10px;
     }
     display: flex;
-    margin-top: 10px;
+    
     font-weight: 600;
     align-items: center;
 
     font-size: 24px;
+  }
+  &__icons{
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+  &__pencil{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
   }
 
   &__description {

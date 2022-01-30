@@ -13,6 +13,9 @@ import image from "./image"
 import user from "./user/user"
 import metrics from "./user/metrics"
 import userPost from './user/posts'
+import edit from "./edit"
+import likes from "./likes"
+import subscribe from "./subscribe"
 export default {
     auth,
     feed,
@@ -28,5 +31,8 @@ export default {
     image,
     user,
     metrics,
-    userPost
+    userPost,
+    edit,
+    likes,
+    subscribe
 }

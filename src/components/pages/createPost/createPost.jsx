@@ -54,10 +54,12 @@ export const CreatePost = () => {
     // You can set content in state and show it in render.
   };
   const handleInputClick = (e) => {
-    console.log(e.target)
     if (e.target.classList.contains(classes.form__label)) {
-     
-      e.target.parentNode.querySelector('input').focus()
+      const input =
+        e.target.parentNode.querySelector("input") ||
+        e.target.parentNode.querySelector("textarea");
+
+      input.focus();
     }
   };
 
@@ -119,7 +121,7 @@ export const CreatePost = () => {
               required
             />
             <span className={classes.form__bar}></span>
-            <label>Caption</label>
+            <label className={classes.form__label}>Caption</label>
           </div>
 
           <div className={classes.form__uploaded}>

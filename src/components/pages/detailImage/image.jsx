@@ -10,10 +10,12 @@ import play from "../../../../assets/icons/play.svg";
 import heart from "../../../../assets/icons/heart-icon.png";
 import { NavLink } from "react-router-dom";
 import "@styles/image/image.scss";
-import { Tape } from "../../ui/tape/tape";
+import pencil from "../../../../assets/icons/pencil.svg";
+import { useSelector } from "react-redux";
+
 export const Image = ({ match }) => {
   const { id } = match.params;
-
+  const token = useSelector(state => state)
   const [image, setImage] = useState();
   useEffect(() => {
     const getImage = async () => {
@@ -94,9 +96,20 @@ export const Image = ({ match }) => {
       </div>
       <div className={classes.image__text}>{image.name}</div>
       <div className={classes.image__container}>
-        <div className={classes.image__likes}>
-          <img src={heart} alt="" />
-          <div>{image.num_vote_up}</div>
+        <div className={classes.image__icons}>
+          <div className={classes.image__likes}>
+            <img src={heart} alt="heart" />
+            <div>{image.num_vote_up}</div>
+          </div>
+          {!!token && (
+            <NavLink to={`/edit/${id}`}>
+              <img
+                src={pencil}
+                alt="pencil"
+                className={classes.image__pencil}
+              />
+            </NavLink>
+          )}
         </div>
 
         <div className={classes.image__description}>{image.caption}</div>

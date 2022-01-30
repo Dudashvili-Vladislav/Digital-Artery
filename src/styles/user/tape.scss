@@ -14,7 +14,7 @@
   overflow: hidden;
   display: grid;
 
-  grid-gap: 10px;
+  grid-gap: 5px;
 }
 
 @media (max-width: 500px) {
@@ -22,6 +22,7 @@
     display: block;
     .image__item {
       height: 375px;
+      margin-top: 5px;
     }
   }
 }
@@ -30,6 +31,7 @@
   .tape {
     .image__item {
       height: 375px;
+      margin-top: 5px;
     }
   }
 }
@@ -39,6 +41,7 @@
     grid-template-columns: repeat(3, 1fr);
     .image__item {
       height: 280px;
+      margin-top: 5px;
     }
   }
 }
@@ -47,6 +50,7 @@
   .tape {
     .image__item {
       height: 380px;
+      margin-top: 5px;
     }
   }
 }
