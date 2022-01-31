@@ -1,5 +1,5 @@
 import classes from "@styles/user/user.module.scss";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import requests from "../../../api/requests";
 import React from "react";
@@ -9,23 +9,31 @@ import mail from "../../../../assets/icons/mail.svg";
 import { useDispatch } from "react-redux";
 import { actions } from "@redux/actions";
 import { UserTape } from "./imageTape/tape";
+import subscribed from "../../../../assets/icons/subscribed.svg";
+import { useRef } from "react";
 
 export const User = ({ match }) => {
   const { username } = match.params;
 
   const [userData, setUserData] = useState({});
-  const [isLoading, setLoading] = useState(false);
+  
+  const [isSubscribed, setSubscribe] = useState();
 
   const dispatch = useDispatch();
 
+  const subscribedImg = useRef();
+  const subscribeImg = useRef();
+
   useEffect(() => {
     const getUserData = async () => {
-      setLoading(true);
       try {
         const userData = (await requests.user.get(username)).data;
+
+
         setUserData((prev) => {
           return { ...prev, userData };
         });
+        setSubscribe(userData.being_followed);
         dispatch(actions.setCurrentImage(userData.logo));
         const metrics = (await requests.metrics.get(username)).data;
         setUserData((prev) => {
@@ -37,23 +45,47 @@ export const User = ({ match }) => {
         });
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
     };
     getUserData();
   }, []);
 
-
   const subscribeHandler = async () => {
-    try{
-      const sub = await requests.subscribe.create(userData.userData.id)
-      
-    }catch(e){
-      console.log(e)
+    try {
+      const sub = await requests.subscribe.create(userData.userData.id);
+    } catch (e) {
+      console.log(e);
     }
-    
-  }
+  };
+
+  const subscribeAnimate = (e) => {
+    const toggleAnim = (e, direction) => {
+      return e.animate(
+        [
+          {
+            opacity: 0.5,
+          },
+          {
+            opacity: "0",
+          },
+        ],
+        {
+          fill: "forwards",
+          duration: 300,
+          direction,
+        }
+      );
+    };
+    if (e.target == subscribeImg.current) {
+      subscribeHandler();
+      toggleAnim(e.target).addEventListener("finish", (evt) => {
+        e.target.classList.remove(classes.active);
+        subscribeImg.current.classList.add(classes.icon);
+        subscribedImg.current.classList.add(classes.active);
+        toggleAnim(subscribedImg.current, "reverse");
+      });
+    }
+  };
 
   return userData.posts ? (
     <div>
@@ -102,12 +134,25 @@ export const User = ({ match }) => {
               <NavLink to={`/chat/${0}`}>
                 <img src={mail} alt="send message" />
               </NavLink>
+
               <img
-                src={subscribe}
-                alt="subscribe"
-                style={{ cursor: "pointer" }}
-                onClick={subscribeHandler}
+                src={subscribed}
+                alt=""
+                className={isSubscribed ? classes.active : classes.icon}
+                ref={subscribedImg}
+                onClick={subscribeAnimate}
               />
+
+              <div className={!isSubscribed ? classes.subscribe : classes.icon}>
+                <img
+                  src={subscribe}
+                  alt="subscribe"
+                  style={{ cursor: "pointer" }}
+                  className={isSubscribed ? classes.icon : classes.active}
+                  ref={subscribeImg}
+                  onClick={subscribeAnimate}
+                />
+              </div>
             </div>
           </div>
         </div>

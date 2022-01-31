@@ -28,7 +28,8 @@ export const Post = ({ image, i }) => {
         alt={image.title}
         loading="lazy"
       />
-      <img {...srcset(heart, 121)} className="sub-image" data-id={image.id} />
+      <img {...srcset(heart, 121)} className="sub-image" data-id={image.id} data-is-liked={image.is_liked}/>
+      
     </div>
   );
 };

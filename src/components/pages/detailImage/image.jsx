@@ -11,17 +11,17 @@ import heart from "../../../../assets/icons/heart-icon.png";
 import { NavLink } from "react-router-dom";
 import "@styles/image/image.scss";
 import pencil from "../../../../assets/icons/pencil.svg";
-import { useSelector } from "react-redux";
 
 export const Image = ({ match }) => {
   const { id } = match.params;
-  const token = useSelector(state => state)
+  const [ourPost, setOurPost] = useState();
   const [image, setImage] = useState();
   useEffect(() => {
     const getImage = async () => {
       try {
         const { data } = await requests.image.get(id);
-
+        // setOurPost(currentUser.username === data.user.username);
+        setOurPost(data.user.username === localStorage.getItem("hash"));
         setImage(data);
       } catch (error) {
         console.log(error);
@@ -29,7 +29,8 @@ export const Image = ({ match }) => {
     };
     getImage();
   }, []);
-  console.log(image);
+
+  console.log(ourPost);
   return image ? (
     <div className={classes.image}>
       <div className={classes.image__wrap}>
@@ -101,7 +102,7 @@ export const Image = ({ match }) => {
             <img src={heart} alt="heart" />
             <div>{image.num_vote_up}</div>
           </div>
-          {!!token && (
+          {ourPost ? (
             <NavLink to={`/edit/${id}`}>
               <img
                 src={pencil}
@@ -109,6 +110,8 @@ export const Image = ({ match }) => {
                 className={classes.image__pencil}
               />
             </NavLink>
+          ) : (
+            ""
           )}
         </div>
 

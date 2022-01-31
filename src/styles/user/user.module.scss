@@ -1,6 +1,5 @@
 @import "@utils/variables.scss";
 
-
 .user {
   max-width: 1200px;
   margin: 0 auto;
@@ -54,36 +53,21 @@
     height: 40px;
   }
   &__icons {
-    position: relative;
-    &::before {
-      right: -5px;
-      top: 10px;
-      position: absolute;
-      width: 10px;
-      height: 3px;
-      background-color: $text;
-      content: "";
-    }
-    &::after {
-      right: -5px;
-      top: 10px;
-      position: absolute;
-      width: 10px;
-      height: 3px;
-      background-color: $text;
-      content: "";
-      transform: rotate(90deg);
-    }
+    display: flex;
+  }
+
+  .icon {
+    display: none;
+  }
+  .active {
+    display: block;
   }
 }
-
-
 
 @media (max-width: 1200px) {
   .user {
     padding: 0 20px;
   }
-  
 }
 
 @media (max-width: 700px) {
@@ -95,4 +79,3 @@
     }
   }
 }
-

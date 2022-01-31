@@ -11,14 +11,19 @@ export const useLike = (el) => {
         const text = e.target.parentNode.querySelector(".text");
         const elem = e.target
 
+
+
+        console.log(elem)
+        if (JSON.parse(elem.getAttribute("is-liked"))) {
+            console.log('liked')
+            elem.offsetParent.children[0].style.backgroundImage =
+                `url(${heart})`
+            return;
+        }
         function toggleLike(direction) {
             elem.style.animationName = "pulse";
             elem.style.animationDuration = "0.75s";
             elem.style.animationDirection = direction;
-        }
-
-        if (JSON.parse(elem.getAttribute("is-liked"))) {
-            return;
         }
 
         try {
