@@ -86,3 +86,17 @@
     color: inherit;
   }
 }
+
+.image {
+  position: relative;
+  &__icon {
+    width: 40px !important;
+    height: 40px !important;
+    opacity: 0.8;
+    position: absolute;
+    cursor: pointer;
+    top: -5px;
+    right: -5px;
+    object-fit: unset !important;
+  }
+}
