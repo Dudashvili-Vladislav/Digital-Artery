@@ -10,16 +10,21 @@ import cross from "../../../../assets/icons/cross.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { settings } from "../../slider/sliderSettings";
 import { NavLink, useHistory } from "react-router-dom";
+import { useRef } from "react";
+import { useUploadFiles } from "../../../hooks/uploadFiles";
 
 export const CreatePost = () => {
   const { register, handleSubmit } = useForm();
-  const [uploaded, setUploaded] = useState([]);
-  const [files, setFiles] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const token = useSelector((token) => token.user.id);
   const history = useHistory();
 
+  const input = useRef();
+  const [files, uiFiles, removeFile] = useUploadFiles(input);
+
   const onSubmit = async (data) => {
     try {
+      setLoading(true);
       const res = await requests.image.create({
         ...data,
         files: [...files],
@@ -29,30 +34,11 @@ export const CreatePost = () => {
       history.push(`/image/${res.data.id}`);
     } catch (e) {
       M.toast({ html: e.response.data.error, classes: "error" });
+    } finally {
+      setLoading(false);
     }
   };
 
-  const removeFile = (index) => {
-    setFiles((prev) => prev.filter((el) => el !== prev[index]));
-    setUploaded((prev) => prev.filter((el) => el !== prev[index]));
-  };
-
-  const changeFilesHandler = (e) => {
-    [...e.target.files].forEach((el) => {
-      if (files.filter((element) => el.name === element.name).length !== 0)
-        return;
-      setFiles((prev) => [...prev, el]);
-      let reader = new FileReader();
-      reader.addEventListener("load", handleFile);
-      reader.readAsDataURL(el);
-    });
-  };
-  const handleFile = (e) => {
-    const content = e.target.result;
-
-    setUploaded((prevState) => [...prevState, content]);
-    // You can set content in state and show it in render.
-  };
   const handleInputClick = (e) => {
     if (e.target.classList.contains(classes.form__label)) {
       const input =
@@ -126,7 +112,7 @@ export const CreatePost = () => {
 
           <div className={classes.form__uploaded}>
             <Swiper {...settings} slidesPerView={3}>
-              {uploaded.map((el, i) => (
+              {uiFiles.map((el, i) => (
                 <SwiperSlide key={i}>
                   <div className={classes.img__wrap}>
                     <img
@@ -143,16 +129,15 @@ export const CreatePost = () => {
                 <div className={classes.form__file}>
                   <div
                     className={classes.form__file_wrap}
-                    style={{ marginTop: uploaded.length > 0 ? "60px" : "0px" }}
+                    style={{ marginTop: uiFiles.length > 0 ? "60px" : "0px" }}
                   >
                     <input
                       type="file"
-                      {...register("files")}
-                      onChange={changeFilesHandler}
                       accept=".png, .jpg, .gif"
                       multiple
                       className={classes.upload}
-                      style={{ height: uploaded.length > 0 ? "100%" : "90px" }}
+                      style={{ height: uiFiles.length > 0 ? "100%" : "90px" }}
+                      ref={input}
                       required
                     />
                   </div>
@@ -161,7 +146,9 @@ export const CreatePost = () => {
             </Swiper>
           </div>
 
-          <button className={classes.form__button}>Create Post</button>
+          <button className={classes.form__button} disabled={isLoading}>
+            Create Post
+          </button>
         </form>
       </div>
     </div>

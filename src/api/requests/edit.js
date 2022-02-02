@@ -3,23 +3,20 @@ import axios from "axios"
 
 export default {
     put(data, id) {
-
         const body = new FormData()
         for (let i in data) {
-            if (Array.isArray(data[i])) {
-                
-                data[i].forEach(element => {
-                    if (!element.file) {
-                        const filePath = element.substring(element.indexOf("post_images"), element.length)
-                        body.append("to_delete", filePath)
-                    }
-                });
-            }
-            else {
+            if (i === "images") {
+                data[i].forEach(el => body.append('images', el))
+
+            } else if (i === "toDelete") {
+                data[i].forEach(el => body.append('to_delete', el.substring(el.indexOf('post_images'), el.length)))
+
+            } else {
                 body.append(i, data[i])
             }
 
         }
+
 
         return axios.put(`http://92.255.109.134:3000/api/post/update/${id}/`, body, {
             headers: {
