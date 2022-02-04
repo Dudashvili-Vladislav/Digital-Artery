@@ -9,81 +9,104 @@ import mail from "../../../../assets/icons/mail.svg";
 import { useDispatch } from "react-redux";
 import { actions } from "@redux/actions";
 import { UserTape } from "./imageTape/tape";
-import subscribed from "../../../../assets/icons/subscribed.svg";
+import subscribedImage from "../../../../assets/icons/subscribed.svg";
 import { useRef } from "react";
 
 export const User = ({ match }) => {
   const { username } = match.params;
 
   const [userData, setUserData] = useState({});
-  
+
   const [isSubscribed, setSubscribe] = useState();
 
   const dispatch = useDispatch();
 
-  const subscribedImg = useRef();
+  const subscribedParent = useRef();
+  const subscribeParent = useRef();
   const subscribeImg = useRef();
+  const subscribedImg = useRef();
+
+  const getUserData = async () => {
+    try {
+      const userData = (await requests.user.get(username)).data;
+
+      setUserData((prev) => {
+        return { ...prev, userData };
+      });
+      setSubscribe(userData.being_followed);
+      dispatch(actions.setCurrentImage(userData.logo));
+      const metrics = (await requests.metrics.get(username)).data;
+      setUserData((prev) => {
+        return { ...prev, metrics };
+      });
+      const posts = (await requests.userPost.get(username)).data;
+      setUserData((prev) => {
+        return { ...prev, posts };
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const userData = (await requests.user.get(username)).data;
-
-
-        setUserData((prev) => {
-          return { ...prev, userData };
-        });
-        setSubscribe(userData.being_followed);
-        dispatch(actions.setCurrentImage(userData.logo));
-        const metrics = (await requests.metrics.get(username)).data;
-        setUserData((prev) => {
-          return { ...prev, metrics };
-        });
-        const posts = (await requests.userPost.get(username)).data;
-        setUserData((prev) => {
-          return { ...prev, posts };
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getUserData();
   }, []);
+
+  const unsubscribe = async () => {
+    try {
+      await requests.subscribe.delete(userData.userData.id);
+      getUserData();
+    } catch (e) {
+      M.toast({
+        html: "An error occurred while unsubscribing",
+        classes: "error",
+      });
+    }
+  };
 
   const subscribeHandler = async () => {
     try {
       const sub = await requests.subscribe.create(userData.userData.id);
+      getUserData();
     } catch (e) {
       console.log(e);
     }
   };
 
   const subscribeAnimate = (e) => {
-    const toggleAnim = (e, direction) => {
-      return e.animate(
-        [
-          {
-            opacity: 0.5,
-          },
-          {
-            opacity: "0",
-          },
-        ],
-        {
-          fill: "forwards",
-          duration: 300,
-          direction,
-        }
-      );
-    };
+    // const toggleAnim = (e, direction) => {
+    //   return e.animate(
+    //     [
+    //       {
+    //         opacity: 0.5,
+    //       },
+    //       {
+    //         opacity: 0,
+    //       },
+    //     ],
+    //     {
+    //       fill: "forwards",
+    //       duration: 300,
+    //       direction,
+    //     }
+    //   );
+    // };
+
     if (e.target == subscribeImg.current) {
       subscribeHandler();
-      toggleAnim(e.target).addEventListener("finish", (evt) => {
-        e.target.classList.remove(classes.active);
-        subscribeImg.current.classList.add(classes.icon);
-        subscribedImg.current.classList.add(classes.active);
-        toggleAnim(subscribedImg.current, "reverse");
-      });
+      subscribeParent.current.classList.remove(classes.user__icons_active);
+      subscribedParent.current.classList.add(classes.user__icons_active);
+      // toggleAnim(e.target, "reverse").addEventListener("finish", (evt) => {
+      //
+      //   toggleAnim(subscribedParent.current, "reverse");
+      // });
+    } else if (e.target == subscribedImg.current) {
+      unsubscribe();
+      // toggleAnim(e.target, "reverse").addEventListener("finish", (evt) => {
+      subscribedParent.current.classList.remove(classes.user__icons_active);
+      subscribeParent.current.classList.add(classes.user__icons_active);
+      //   toggleAnim(subscribeParent.current, "reverse");
+      // });
     }
   };
 
@@ -135,22 +158,35 @@ export const User = ({ match }) => {
                 <img src={mail} alt="send message" />
               </NavLink>
 
-              <img
-                src={subscribed}
-                alt=""
-                className={isSubscribed ? classes.active : classes.icon}
-                ref={subscribedImg}
+              <div
+                className={`${classes.user__icons_item} ${
+                  isSubscribed ? classes.user__icons_active : ""
+                }`}
                 onClick={subscribeAnimate}
-              />
+                ref={subscribedParent}
+              >
+                <img
+                  src={subscribedImage}
+                  alt="subscribed"
+                  style={{ cursor: "pointer" }}
+                  className={classes.icon}
+                  ref={subscribedImg}
+                />
+              </div>
 
-              <div className={!isSubscribed ? classes.subscribe : classes.icon}>
+              <div
+                className={`${classes.user__icons_item} ${
+                  !isSubscribed ? classes.user__icons_active : ""
+                }`}
+                onClick={subscribeAnimate}
+                ref={subscribeParent}
+              >
                 <img
                   src={subscribe}
                   alt="subscribe"
                   style={{ cursor: "pointer" }}
-                  className={isSubscribed ? classes.icon : classes.active}
+                  className={classes.icon}
                   ref={subscribeImg}
-                  onClick={subscribeAnimate}
                 />
               </div>
             </div>

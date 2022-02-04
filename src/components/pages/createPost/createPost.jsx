@@ -12,6 +12,7 @@ import { settings } from "../../slider/sliderSettings";
 import { NavLink, useHistory } from "react-router-dom";
 import { useRef } from "react";
 import { useUploadFiles } from "../../../hooks/uploadFiles";
+import plus from "../../../../assets/icons/plus.svg";
 
 export const CreatePost = () => {
   const { register, handleSubmit } = useForm();
@@ -111,9 +112,24 @@ export const CreatePost = () => {
           </div>
 
           <div className={classes.form__uploaded}>
-            <Swiper {...settings} slidesPerView={3}>
+            <Swiper
+              {...settings}
+              slidesPerView={5}
+              autoHeight={true  }
+              breakpoints={{
+                "@0.25":{
+                  slidesPerView: 3,
+                },
+                "@0.75": {
+                  slidesPerView: 5,
+                },
+                "@1.25": {
+                  slidesPerView: 5,
+                },
+              }}
+            >
               {uiFiles.map((el, i) => (
-                <SwiperSlide key={i}>
+                <SwiperSlide key={i} >
                   <div className={classes.img__wrap}>
                     <img
                       src={cross}
@@ -125,22 +141,21 @@ export const CreatePost = () => {
                   </div>
                 </SwiperSlide>
               ))}
-              <SwiperSlide>
+              <SwiperSlide style = {{height: "100% "}}>
                 <div className={classes.form__file}>
-                  <div
-                    className={classes.form__file_wrap}
-                    style={{ marginTop: uiFiles.length > 0 ? "60px" : "0px" }}
-                  >
-                    <input
-                      type="file"
-                      accept=".png, .jpg, .gif"
-                      multiple
-                      className={classes.upload}
-                      style={{ height: uiFiles.length > 0 ? "100%" : "90px" }}
-                      ref={input}
-                      required
-                    />
-                  </div>
+                  <img
+                    src={plus}
+                    alt="upload"
+                    className={classes.form__file_img}
+                  />
+                  <input
+                    type="file"
+                    accept=".png, .jpg, .gif"
+                    multiple
+                    className={classes.upload}
+                    ref={input}
+                    required
+                  />
                 </div>
               </SwiperSlide>
             </Swiper>
